@@ -10,6 +10,7 @@
 
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Structure;
+using Autodesk.Revit.UI.Selection;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -226,5 +227,27 @@ public static class CollectorInViewExtension
             elements = elements.Where(predicate);
         }
         return elements;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="view"></param>
+    /// <returns></returns>
+    [DebuggerStepThrough]
+    public static FilteredElementCollector GetSelectableElements(this View view)
+    {
+        return view.GetElements(new SelectableInViewFilter(view.Document, view.Id));
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="view"></param>
+    /// <returns></returns>
+    [DebuggerStepThrough]
+    public static FilteredElementCollector GetVisibleElements(this View view)
+    {
+        return view.GetElements(new VisibleInViewFilter(view.Document, view.Id));
     }
 }
