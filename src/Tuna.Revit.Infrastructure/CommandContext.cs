@@ -9,7 +9,7 @@ namespace Tuna.Revit.Infrastructure;
 /// <summary>
 /// 
 /// </summary>
-public class CommandContext : ICommandContext
+public class CommandContext /*: ICommandContext*/
 {
-    public IExternalEventService ExternalEventService => throw new NotImplementedException();
+    //public IExternalEventService ExternalEventService => throw new NotImplementedException();
 }

@@ -14,5 +14,5 @@ public interface ICommandContext
     /// <summary>
     /// 
     /// </summary>
-    IExternalEventService ExternalEventService { get; }
+    //IExternalEventService ExternalEventService { get; }
 }
