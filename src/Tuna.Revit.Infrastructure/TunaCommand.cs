@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tuna.Revit.Infrastructure
 {
-    internal class CommandBase
+    internal abstract class TunaCommand
     {
     }
 }

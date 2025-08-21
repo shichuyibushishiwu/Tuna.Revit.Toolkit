@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tuna.Revit.Extensions;
+using Tuna.Revit.Infrastructure.ExternalEvent;
 
 namespace Tuna.Revit.Infrastructure;
 
@@ -14,5 +16,5 @@ public interface ICommandContext
     /// <summary>
     /// 
     /// </summary>
-    //IExternalEventService ExternalEventService { get; }
+    IExternalEventService ExternalEventService { get; }
 }

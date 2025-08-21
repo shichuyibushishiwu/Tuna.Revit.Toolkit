@@ -23,15 +23,15 @@ public static class UnitExtension
     /// 将值的单位从 (英尺) 转为 (毫米)
     /// <para>Convert value to millimeters</para>
     /// </summary>
-    /// <param name="value">单位为英尺的值</param>
+    /// <param name="doubleValue">单位为英尺的值</param>
     /// <returns>单位为毫米的值</returns>
     [DebuggerStepThrough]
-    public static double ConvertToMillimeters(this double value)
+    public static double ConvertToMillimeters(this double doubleValue)
     {
 #if Rvt_16 || Rvt_17 || Rvt_18 || Rvt_19 || Rvt_20
-        return UnitUtils.Convert(value, DisplayUnitType.DUT_DECIMAL_FEET, DisplayUnitType.DUT_MILLIMETERS);
+        return UnitUtils.Convert(doubleValue, DisplayUnitType.DUT_DECIMAL_FEET, DisplayUnitType.DUT_MILLIMETERS);
 #else
-        return UnitUtils.Convert(value, UnitTypeId.Feet, UnitTypeId.Millimeters);
+        return UnitUtils.Convert(doubleValue, UnitTypeId.Feet, UnitTypeId.Millimeters);
 #endif
     }
 
@@ -42,7 +42,7 @@ public static class UnitExtension
     /// <param name="value">单位为英尺的值</param>
     /// <returns>单位为毫米的值</returns>
     [DebuggerStepThrough]
-    public static double ConvertToMillimeters(this int value) => ((double)value).ConvertToMillimeters();
+    public static double ConvertToMillimeters(this int value) => ConvertToMillimeters(doubleValue: value);
 
     /// <summary>
     /// 将值的单位从 (英尺) 转为 (毫米)
@@ -51,22 +51,22 @@ public static class UnitExtension
     /// <param name="value">单位为英尺的值</param>
     /// <returns>单位为毫米的值</returns>
     [DebuggerStepThrough]
-    public static double ConvertToMillimeters(this float value) => Convert.ToDouble(value.ToString()).ConvertToMillimeters();
+    public static double ConvertToMillimeters(this float value) => ConvertToMillimeters(doubleValue: value);
 
     /// <summary>
     /// 将值的单位从 (毫米) 转为 (英尺)
     /// <para>Convert millimeters to feet</para>
     /// </summary>
-    /// <param name="value">单位为毫米的值</param>
+    /// <param name="doubleValue">单位为毫米的值</param>
     /// <returns>单位为英尺的值</returns>
     [DebuggerStepThrough]
-    public static double ConvertToFeet(this double value)
+    public static double ConvertToFeet(this double doubleValue)
     {
 #if Rvt_16 || Rvt_17 || Rvt_18 || Rvt_19 || Rvt_20
-        return UnitUtils.Convert(value, DisplayUnitType.DUT_MILLIMETERS, DisplayUnitType.DUT_DECIMAL_FEET);
+        return UnitUtils.Convert(doubleValue, DisplayUnitType.DUT_MILLIMETERS, DisplayUnitType.DUT_DECIMAL_FEET);
 
 #else
-        return UnitUtils.Convert(value, UnitTypeId.Millimeters, UnitTypeId.Feet);
+        return UnitUtils.Convert(doubleValue, UnitTypeId.Millimeters, UnitTypeId.Feet);
 #endif
     }
 
@@ -77,7 +77,7 @@ public static class UnitExtension
     /// <param name="value">单位为毫米的值</param>
     /// <returns>单位为英尺的值</returns>
     [DebuggerStepThrough]
-    public static double ConvertToFeet(this int value) => ((double)value).ConvertToFeet();
+    public static double ConvertToFeet(this int value) => ConvertToFeet(doubleValue: value);
 
     /// <summary>
     /// 将值的单位从 (毫米) 转为 (英尺)
@@ -86,7 +86,7 @@ public static class UnitExtension
     /// <param name="value">单位为毫米的值</param>
     /// <returns>单位为英尺的值</returns>
     [DebuggerStepThrough]
-    public static double ConvertToFeet(this float value) => Convert.ToDouble(value.ToString()).ConvertToFeet();
+    public static double ConvertToFeet(this float value) => ConvertToFeet(doubleValue: value);
 
     /// <summary>
     /// 判断两个数值在允许的公差范围内是否相等
