@@ -38,6 +38,7 @@ public class ExternalEventService : IExternalEventService, IExternalEventHandler
         {
             throw new ArgumentNullException("handle can not be null");
         }
+
         _handle.Invoke(app);
     }
 

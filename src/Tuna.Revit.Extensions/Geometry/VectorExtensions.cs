@@ -52,7 +52,7 @@ public static class VectorExtensions
         ArgumentNullExceptionUtils.ThrowIfNull(point);
         ArgumentNullExceptionUtils.ThrowIfNull(otherPoint);
 
-        double result = point.Normalize().DotProduct(otherPoint);
+        double result = point.Normalize().DotProduct(otherPoint.Normalize());
         return result.AlmostEquals(1, tolerance) || result.AlmostEquals(-1, tolerance);
     }
 
@@ -69,7 +69,7 @@ public static class VectorExtensions
         ArgumentNullExceptionUtils.ThrowIfNull(point);
         ArgumentNullExceptionUtils.ThrowIfNull(otherPoint);
 
-        double result = point.Normalize().DotProduct(otherPoint);
+        double result = point.Normalize().DotProduct(otherPoint.Normalize());
         return result.AlmostEquals(1, tolerance);
     }
 
@@ -86,7 +86,7 @@ public static class VectorExtensions
         ArgumentNullExceptionUtils.ThrowIfNull(point);
         ArgumentNullExceptionUtils.ThrowIfNull(otherPoint);
 
-        double result = point.Normalize().DotProduct(otherPoint);
+        double result = point.Normalize().DotProduct(otherPoint.Normalize());
         return result.AlmostEquals(0, tolerance);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autodesk.Revit.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tuna.Revit.Infrastructure
 {
-    internal abstract class TunaCommand
+    internal abstract class TunaCommand : IExternalCommand, IExternalCommandAvailability
     {
     }
 }

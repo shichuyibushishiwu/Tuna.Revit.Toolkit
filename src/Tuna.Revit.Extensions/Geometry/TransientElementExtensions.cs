@@ -177,6 +177,12 @@ public static class TransientElementExtensions
             .FirstOrDefault(x => x.Name == _displayMethod);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="document"></param>
+    /// <param name="elementId"></param>
+    /// <returns></returns>
     private static bool IsValidTransientElement(Document document, ElementId elementId)
     {
         var element = document.GetElement(elementId);

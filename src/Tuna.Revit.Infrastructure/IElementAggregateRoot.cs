@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autodesk.Revit.DB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,8 @@ namespace Tuna.Revit.Infrastructure;
 /// </summary>
 public interface IElementAggregateRoot
 {
+    public Document Document { get; set; }
+
+    public ElementId ElementId { get; set; }
 
 }
