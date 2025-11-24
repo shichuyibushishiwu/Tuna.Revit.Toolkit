@@ -25,8 +25,7 @@
 			Rvt_26_Debug;Rvt_26_Release;
 		</Configurations>
 		
-		
-		<TunaVer>20.0</TunaVer>
+		<TunaVer>21.0</TunaVer>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_16))'">

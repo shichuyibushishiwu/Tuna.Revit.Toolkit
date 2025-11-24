@@ -26,7 +26,7 @@ namespace Tuna.Revit.Extensions;
 /// </summary>
 public static class TransientElementExtensions
 {
-    private static readonly List<ElementId> _transientElementIds = new List<ElementId>();
+    private static readonly Dictionary<Document, List<ElementId>> _transientElementIds = new Dictionary<Document, List<ElementId>>();
 
     private static readonly string _displayMethod = "SetForTransientDisplay";
 
@@ -57,9 +57,31 @@ public static class TransientElementExtensions
                graphicsStyleId ?? ElementId.InvalidElementId
         })!;
 
-        _transientElementIds.Add(elementId);
+        document.DocumentClosing += Document_DocumentClosing;
+
+
+        if (_transientElementIds.ContainsKey(document))
+        {
+            _transientElementIds[document].Add(elementId);
+        }
+        else
+        {
+            _transientElementIds.Add(document, [elementId]);
+        }
+
         return elementId;
     }
+
+    private static void Document_DocumentClosing(object sender, Autodesk.Revit.DB.Events.DocumentClosingEventArgs e)
+    {
+        if (_transientElementIds.ContainsKey(e.Document))
+        {
+            _transientElementIds.Remove(e.Document);
+        }
+
+        e.Document.DocumentClosing -= Document_DocumentClosing;
+    }
+
 
     /// <summary>
     /// 在项目中创建临时显示的图元，临时图元将不会被保存在项目中，在项目关闭后，临时图元将被删除
@@ -91,23 +113,24 @@ public static class TransientElementExtensions
             return;
         }
 
+        if (!_transientElementIds.ContainsKey(document))
+        {
+            return;
+        }
+
+        List<ElementId> elements = _transientElementIds[document];
         document.NewTransaction(() =>
         {
-            for (int i = _transientElementIds.Count - 1; i >= 0; i--)
+            foreach (var elementId in elements)
             {
-                var elementId = _transientElementIds[i];
                 if (IsValidTransientElement(document, elementId))
                 {
                     document.Delete(elementId);
-
-                }
-
-                if (_transientElementIds.Contains(elementId))
-                {
-                    _transientElementIds.RemoveAt(i);
                 }
             }
         });
+
+        _transientElementIds.Remove(document);
     }
 
     /// <summary>
@@ -118,20 +141,27 @@ public static class TransientElementExtensions
     /// <param name="elementId">要删除的临时元素id</param>
     public static void CleanTransientElement(this Document document, ElementId elementId)
     {
+        if (!_transientElementIds.ContainsKey(document))
+        {
+            return;
+        }
+
+        List<ElementId> elements = _transientElementIds[document];
         if (IsValidTransientElement(document, elementId))
         {
             document.NewTransaction(() =>
             {
                 document.Delete(elementId);
 
-
             });
 
-            if (_transientElementIds.Contains(elementId))
+            if (elements.Contains(elementId))
             {
-                _transientElementIds.Remove(elementId);
+                elements.Remove(elementId);
             }
         }
+
+        _transientElementIds[document] = elements;
     }
 
     /// <summary>

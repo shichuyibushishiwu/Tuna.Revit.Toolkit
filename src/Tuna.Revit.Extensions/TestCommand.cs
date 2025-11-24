@@ -30,11 +30,25 @@ internal class TestCommand : IExternalCommand
         //    var solid = result.Value.ResolveSolids(options => options.DetailLevel = ViewDetailLevel.Fine);
         //    System.Windows.MessageBox.Show(solid.Count.ToString());
         //}
+        //document.TransientDisplay(new List<GeometryObject>()
+        //    {
+        //        Line.CreateBound(XYZ.Zero, XYZ.Zero + new XYZ(20, 20, 20))
+        //    });
 
-        var elems = document.GetGraphicElements();
-        var asd = elems.Count();
+        document.CleanTransientElements();
 
-        System.Windows.MessageBox.Show(asd.ToString());
+
+        //var elems = document.GetGraphicElements();
+        //var asd = elems.Count();
+
+        //StringBuilder stringBuilder = new StringBuilder();
+
+        //foreach (var elem in elems)
+        //{
+        //    stringBuilder.AppendLine($"{elem.Name},{elem.Id}");
+        //}
+
+        //System.Windows.MessageBox.Show(stringBuilder.ToString());
 
 
 

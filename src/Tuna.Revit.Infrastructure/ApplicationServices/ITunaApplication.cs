@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tuna.Revit.Infrastructure.Ribbon.Abstraction;
+namespace Tuna.Revit.Infrastructure.ApplicationServices;
 
-internal interface IRibbonTextBox
+internal interface ITunaApplication
 {
 
 }

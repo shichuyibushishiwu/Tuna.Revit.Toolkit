@@ -488,7 +488,7 @@ public static class CollectorExtension
     {
         var elements = document.GetElements(new ElementIsElementTypeFilter(true))
             .ToElements()
-            .Where(element => element.Category != null && (element.Category.HasMaterialQuantities || IsSystemCurveElement(element.Category)));
+            .Where(element => element.Category != null && (element.Category.HasMaterialQuantities || IsSpecialElement(element.Category)));
 
         if (predicate != null)
         {
@@ -497,30 +497,35 @@ public static class CollectorExtension
 
         return elements;
 
-        static bool IsSystemCurveElement(Category category)
+        static bool IsSpecialElement(Category category)
         {
-            ElementId categoryId = category.Id;
-
-            return SystemCurveElementCategories.Any(id => id == categoryId);
+            return SystemCurveElementCategories.Any(id => id == category.Id);
         }
     }
 
     static List<ElementId> SystemCurveElementCategories { get; } =
     [
+        //Mechanical
         BuiltInCategories.DuctCurves,
         BuiltInCategories.DuctFitting,
         BuiltInCategories.PlaceHolderDucts,
         BuiltInCategories.FlexDuctCurves,
 
+        //Electrical
         BuiltInCategories.CableTray,
         BuiltInCategories.CableTrayFitting,
         BuiltInCategories.Conduit,
         BuiltInCategories.ConduitFitting,
 
+        //Pipe
         BuiltInCategories.PipeCurves,
         BuiltInCategories.PipeFitting,
         BuiltInCategories.FlexPipeCurves,
         BuiltInCategories.PlaceHolderPipes,
+
+        //Architectural
+        BuiltInCategories.CurtaSystem,
+        BuiltInCategories.StairsRailing,
     ];
 
 
