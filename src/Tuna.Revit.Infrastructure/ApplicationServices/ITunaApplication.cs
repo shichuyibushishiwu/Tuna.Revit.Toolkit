@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tuna.Revit.Infrastructure.ApplicationServices;
 
-internal interface ITunaApplication
+public interface ITunaApplication
 {
 
 }
