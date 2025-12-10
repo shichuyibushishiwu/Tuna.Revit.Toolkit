@@ -28,7 +28,7 @@ jobs:
       run: dotnet build --configuration ${{ matrix.version }}
       
     - name: Publish NuGet
-      run: dotnet nuget push src\bin\${{ matrix.version }}\*.nupkg -k ${{secrets.NUGETKEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate
+      run: dotnet nuget push src\tuna.revit.extensions\bin\${{ matrix.version }}\*.nupkg -k ${{secrets.NUGETKEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate
       
    
 
