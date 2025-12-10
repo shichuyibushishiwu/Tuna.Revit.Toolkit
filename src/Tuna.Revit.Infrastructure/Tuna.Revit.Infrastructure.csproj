@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <!--<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Company>Tuna</Company>
     <Authors>Shiwu</Authors>
     <PackageIcon>Tuna.png</PackageIcon>
@@ -9,7 +9,7 @@
     <PackageProjectUrl>https://github.com/shichuyibushishiwu/Tuna.Revit.Toolkit</PackageProjectUrl>
     <RepositoryUrl>https://github.com/shichuyibushishiwu/Tuna.Revit.Toolkit</RepositoryUrl>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>-->
   </PropertyGroup>
 
   <ItemGroup>
