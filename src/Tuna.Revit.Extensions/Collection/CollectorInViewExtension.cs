@@ -245,9 +245,9 @@ public static class CollectorInViewExtension
     /// </summary>
     /// <param name="view"></param>
     /// <returns></returns>
-    [DebuggerStepThrough]
-    public static FilteredElementCollector GetVisibleElements(this View view)
-    {
-        return view.GetElements(new VisibleInViewFilter(view.Document, view.Id));
-    }
+    //[DebuggerStepThrough]
+    //public static FilteredElementCollector GetVisibleElements(this View view)
+    //{
+    //    return view.GetElements(new VisibleInViewFilter(view.Document, view.Id));
+    //}
 }

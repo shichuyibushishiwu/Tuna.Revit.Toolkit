@@ -24,7 +24,7 @@
 			Rvt_25_Debug;Rvt_25_Release;
 			Rvt_26_Debug;Rvt_26_Release;
 		</Configurations>
-		
+		<RvtVersion>2014.0</RvtVersion>
 		<TunaVer>21</TunaVer>
 	</PropertyGroup>
 
