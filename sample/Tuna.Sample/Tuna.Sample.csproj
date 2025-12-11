@@ -6,6 +6,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Tuna.Revit.Extensions" Version="2024.0.21" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Update="Assets\Icon\compass.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
