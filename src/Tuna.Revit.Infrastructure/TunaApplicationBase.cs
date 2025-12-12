@@ -4,19 +4,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tuna.Revit.Extensions;
 using Tuna.Revit.Infrastructure.ApplicationServices;
 
 namespace Tuna.Revit.Infrastructure;
 
-public class TunaApplicationBase : IExternalApplication, ITunaApplication
+public abstract class TunaApplicationBase : IExternalApplication, ITunaApplication
 {
+    public IExternalEventService ExternalEventService => throw new NotImplementedException();
+
     public Result OnShutdown(UIControlledApplication application)
     {
-        throw new NotImplementedException();
+
+        return Result.Succeeded;
     }
 
     public Result OnStartup(UIControlledApplication application)
     {
-        throw new NotImplementedException();
+        return Result.Succeeded;
     }
 }

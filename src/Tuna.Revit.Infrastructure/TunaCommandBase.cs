@@ -8,15 +8,17 @@ using System.Threading.Tasks;
 
 namespace Tuna.Revit.Infrastructure;
 
-internal abstract class TunaCommand : IExternalCommand, IExternalCommandAvailability
+public abstract class TunaCommandBase : IExternalCommand, IExternalCommandAvailability
 {
     public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
     {
-        throw new NotImplementedException();
+
+        return Result.Succeeded;
     }
 
     public bool IsCommandAvailable(UIApplication applicationData, CategorySet selectedCategories)
     {
-        throw new NotImplementedException();
+
+        return true;
     }
 }

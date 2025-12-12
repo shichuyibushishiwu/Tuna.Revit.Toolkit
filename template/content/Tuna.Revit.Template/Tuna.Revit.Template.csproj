@@ -205,6 +205,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Tuna.Revit.Extensions" Version="$(RevitVersionPrefix).$(TunaVersion)" />
+		<PackageReference Include="Tuna.Revit.Infrastructure" Version="1.0.21" />
 	</ItemGroup>
 
 	<ItemGroup>

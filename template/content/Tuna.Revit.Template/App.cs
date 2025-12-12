@@ -1,4 +1,6 @@
 ﻿using Autodesk.Revit.UI;
+using Tuna.Revit.Infrastructure;
+using Tuna.Revit.Infrastructure.ApplicationServices;
 
 /// Power by shiwu
 namespace Tuna.Revit.Template
@@ -6,17 +8,9 @@ namespace Tuna.Revit.Template
     /// <summary>
     /// The revit application plugin
     /// </summary>
-    public class App : IExternalApplication
+    public class App : TunaApplicationBase
     {
-        public Result OnShutdown(UIControlledApplication application)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Result OnStartup(UIControlledApplication application)
-        {
-            throw new NotImplementedException();
-        }
+     
     }
 }
 
