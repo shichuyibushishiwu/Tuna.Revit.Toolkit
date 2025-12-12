@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>Tuna.TemplateWizard</AssemblyName>
+    <RootNamespace>Tuna.TemplateWizard</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.TemplateWizardInterface" Version="17.10.40170" />
+  </ItemGroup>
+</Project>

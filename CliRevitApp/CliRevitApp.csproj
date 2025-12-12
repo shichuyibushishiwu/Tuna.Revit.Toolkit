@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net48</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>preview</LangVersion>
+		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="Tuna.Revit.Extensions" Version="2024.0.21" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<Configurations>$(Configurations);Rvt_25_Debug;Rvt_25_Release;</Configurations>
+	</PropertyGroup>
+	<PropertyGroup>
+		<Configurations>$(Configurations);Rvt_26_Debug;Rvt_26_Release;</Configurations>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Folder Include="Commands\" />
+	  <Folder Include="ViewModels\" />
+	  <Folder Include="Views\" />
+	</ItemGroup>
+
+</Project>
