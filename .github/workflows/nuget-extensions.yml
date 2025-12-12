@@ -43,24 +43,11 @@ jobs:
         if (-not $map.ContainsKey($year)) { Write-Host "Unknown year: $year"; exit 0 }
         $rvtVersion = $map[$year]
         $props = [xml](Get-Content "Directory.Build.props")
-        $tunaVer = ($props.Project.PropertyGroup | Where-Object { $_.TunaVer } | Select-Object -ExpandProperty TunaVer)
-        $major = [int]($tunaVer.ToString().Split('.')[0])
-        $prevMajor = $major - 1
-        $pkgId = "Tuna.Revit.Extensions"
-        $index = "https://api.nuget.org/v3-flatcontainer/$pkgId/index.json"
-        $versions = @()
-        try {
-          $resp = Invoke-RestMethod -Uri $index -Method GET -ErrorAction Stop
-          $versions = $resp.versions
-        } catch {
-          Write-Host "Failed to fetch versions from nuget: $_"
-          $versions = @()
-        }
-        $targets = $versions | Where-Object { $_ -like "$rvtVersion.$prevMajor" -or $_ -like "$rvtVersion.$prevMajor.*" }
-        foreach ($v in $targets) {
-          Write-Host "Unlisting $pkgId $v"
-          dotnet nuget delete $pkgId $v -k "${{ secrets.NUGETKEY }}" -s https://api.nuget.org/v3/index.json --non-interactive || Write-Host "Skip: $pkgId $v"
-        }
+        $tunaVer = [int]($props.Project.PropertyGroup | Where-Object { $_.TunaVer } | Select-Object -ExpandProperty TunaVer)
+        $prev = $tunaVer - 1
+        $targetVersion = "$rvtVersion.$prev"
+        Write-Host "Unlisting Tuna.Revit.Extensions $targetVersion"
+        dotnet nuget delete Tuna.Revit.Extensions $targetVersion -k "${{ secrets.NUGETKEY }}" -s https://api.nuget.org/v3/index.json --non-interactive || Write-Host "Previous version not found or already unlisted: $targetVersion"
 
    
 
