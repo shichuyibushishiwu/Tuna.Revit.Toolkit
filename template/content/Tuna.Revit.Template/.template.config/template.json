@@ -4,11 +4,29 @@
   "classifications": [ "Tuna", "Windows", "Revit", "Add-In", "BIM", "WPF" ],
   "identity": "Tuna Revit Application",
   "name": "Tuna Revit Application",
+  "description": "A Tuna Revit add-in project template with multi-version selection",
   "shortName": "tuna-revit-app",
+  "icon": "Tuna.ico",
   "tags": {
     "language": "C#",
     "type": "project"
   },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            "[Content_Types].xml",
+            "_rels/**/*",
+            "package/**/*",
+            "*.nupkg",
+            "*.snupkg",
+            "*.nuspec"
+          ]
+        }
+      ]
+    }
+  ],
   "sourceName": "Tuna.Revit.Template",
   "symbols": {
     "appName": {

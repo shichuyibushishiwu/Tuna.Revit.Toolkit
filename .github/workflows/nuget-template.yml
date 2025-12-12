@@ -1,0 +1,51 @@
+name: tuna-template
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Template package version (optional, e.g., 1.0.3). If empty, uses tag or run number.'
+        required: false
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  nuget-template:
+    name: release template nuget
+    runs-on: windows-latest
+    steps:
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3.2.0
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Checkout
+        uses: actions/checkout@v4.0.0
+
+      - name: Resolve Version
+        shell: pwsh
+        run: |
+          $dispatchVersion = "${{ github.event.inputs.version }}".Trim()
+          $ref = "${{ github.ref }}"
+          $name = "${{ github.ref_name }}"
+          if (![string]::IsNullOrEmpty($dispatchVersion)) {
+            $version = $dispatchVersion
+          }
+          elseif ($ref.StartsWith("refs/tags/")) {
+            if ($name.StartsWith("v")) { $name = $name.Substring(1) }
+            $version = $name
+          }
+          else {
+            $version = "1.0.${{ github.run_number }}"
+          }
+          echo "VERSION=$version" >> $env:GITHUB_ENV
+
+      - name: Restore
+        run: dotnet restore template\pack\Tuna.Revit.Application.Template.csproj
+
+      - name: Pack Template
+        run: dotnet pack template\pack\Tuna.Revit.Application.Template.csproj --configuration Release -p:Version=${{ env.VERSION }}
+
+      - name: Publish NuGet
+        run: dotnet nuget push template\pack\bin\Release\*.nupkg -k ${{secrets.NUGETKEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate
+
