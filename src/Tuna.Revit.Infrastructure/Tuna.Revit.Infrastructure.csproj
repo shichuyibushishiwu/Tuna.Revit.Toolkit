@@ -17,8 +17,6 @@
 		<Version>1.1.$(TunaVer)</Version>
 	</PropertyGroup>
 
-
-
 	<ItemGroup Condition="'$(TargetFramework.Contains(net452))'">
 		<PackageReference Include="Tuna.Revit.Extensions" Version="2016.2.21">
 			<IncludeAssets>compile</IncludeAssets>
