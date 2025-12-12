@@ -8,7 +8,7 @@ using Tuna.Revit.Infrastructure.ApplicationServices;
 
 namespace Tuna.Revit.Infrastructure;
 
-internal class TunaApplicationBase : IExternalApplication, ITunaApplication
+public class TunaApplicationBase : IExternalApplication, ITunaApplication
 {
     public Result OnShutdown(UIControlledApplication application)
     {

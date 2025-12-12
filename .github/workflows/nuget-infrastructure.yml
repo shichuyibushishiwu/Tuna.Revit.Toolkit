@@ -1,0 +1,27 @@
+name: tuna-infrastructure
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  nuget:
+    name: release infrastructure nuget
+    runs-on: windows-latest
+    steps:
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3.2.0
+        with:
+          dotnet-version: 8.0.x
+
+      - name: checkout
+        uses: actions/checkout@v4.0.0
+
+      - name: Restore
+        run: dotnet restore src\Tuna.Revit.Infrastructure\Tuna.Revit.Infrastructure.csproj -p:Configuration=Release
+
+      - name: Build Infrastructure
+        run: dotnet build src\Tuna.Revit.Infrastructure\Tuna.Revit.Infrastructure.csproj --configuration Release
+
+      - name: Publish NuGet Infrastructure
+        run: dotnet nuget push src\Tuna.Revit.Infrastructure\bin\Release\*.nupkg -k ${{secrets.NUGETKEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate

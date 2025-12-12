@@ -13,7 +13,7 @@ namespace Tuna.Revit.Infrastructure;
 public interface ICommandContext
 {
     /// <summary>
-    /// 
+    /// 外部事件服务实例
     /// </summary>
     IExternalEventService ExternalEventService { get; }
 }
