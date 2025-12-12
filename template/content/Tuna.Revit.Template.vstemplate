@@ -11,6 +11,7 @@
     <ProvideDefaultName>true</ProvideDefaultName>
     <CustomParameters>
       <CustomParameter Name="ignoreProject" Value="true" />
+      <CustomParameter Name="appName" Value="$safeprojectname$" />
     </CustomParameters>
   </TemplateData>
   <WizardExtension>
@@ -20,6 +21,7 @@
   <TemplateContent>
     <Project File="Tuna.Revit.Template/Tuna.Revit.Template.csproj" TargetFileName="$safeprojectname$.csproj" ReplaceParameters="true" IgnoreProjectParameter="$ignoreProject$">
       <ProjectItem ReplaceParameters="true">App.cs</ProjectItem>
+      <ProjectItem TargetFileName="$safeprojectname$.addin" ReplaceParameters="true">Tuna.Revit.Template.addin</ProjectItem>
     </Project>
   </TemplateContent>
 </VSTemplate>

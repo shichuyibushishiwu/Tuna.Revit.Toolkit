@@ -64,6 +64,10 @@
       <Link>ProjectTemplates\App.cs</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\content\Tuna.Revit.Template\Tuna.Revit.Template.addin">
+      <Link>ProjectTemplates\Tuna.Revit.Template.addin</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\content\Tuna.Revit.Template\Tuna.Revit.Template.csproj">
       <Link>ProjectTemplates\Tuna.Revit.Template.csproj</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

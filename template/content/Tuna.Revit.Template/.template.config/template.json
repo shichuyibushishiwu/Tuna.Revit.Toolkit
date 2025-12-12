@@ -1,7 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "Shiwu",
-  "classifications": [ "Windows", "Revit", "Add-In", "BIM", "Tuna", "WPF" ],
+  "classifications": [ "Tuna", "Windows", "Revit", "Add-In", "BIM", "WPF" ],
   "identity": "Tuna Revit Application",
   "name": "Tuna Revit Application",
   "shortName": "tuna-revit-app",
@@ -11,6 +11,14 @@
   },
   "sourceName": "Tuna.Revit.Template",
   "symbols": {
+    "appName": {
+      "type": "parameter",
+      "datatype": "string",
+      "displayName": "应用名称",
+      "description": "用于 程序在 Revit 中 的显示名称",
+      "defaultValue": "TunaApp",
+      "replaces": "$appName$"
+    },
     "rvt16": {
       "type": "parameter",
       "datatype": "bool",
@@ -39,31 +47,31 @@
       "type": "parameter",
       "datatype": "bool",
       "displayName": "支持 Revit 2020",
-      "defaultValue": false
+      "defaultValue": true
     },
     "rvt21": {
       "type": "parameter",
       "datatype": "bool",
       "displayName": "支持 Revit 2021",
-      "defaultValue": false
+      "defaultValue": true
     },
     "rvt22": {
       "type": "parameter",
       "datatype": "bool",
       "displayName": "支持 Revit 2022",
-      "defaultValue": false
+      "defaultValue": true
     },
     "rvt23": {
       "type": "parameter",
       "datatype": "bool",
       "displayName": "支持 Revit 2023",
-      "defaultValue": false
+      "defaultValue": true
     },
     "rvt24": {
       "type": "parameter",
       "datatype": "bool",
       "displayName": "支持 Revit 2024",
-      "defaultValue": false
+      "defaultValue": true
     },
     "rvt25": {
       "type": "parameter",
@@ -75,7 +83,7 @@
       "type": "parameter",
       "datatype": "bool",
       "displayName": "支持 Revit 2026",
-      "defaultValue": false
+      "defaultValue": true
     }
   }
 }

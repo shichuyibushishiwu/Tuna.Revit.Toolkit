@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+	<AddIn Type="Application">
+		<Name>$appName$</Name>
+		<Assembly>$appName$\Tuna.Revit.Template.dll</Assembly>
+		<ClientId>CAA0E3F0-4330-44B4-8EB2-88D860995361</ClientId>
+		<FullClassName>Tuna.Revit.Template.App</FullClassName>
+		<VendorId>Shichuyibushishiwu</VendorId>
+		<VendorDescription>shichuyibushishiwu.top</VendorDescription>
+	</AddIn>
+</RevitAddIns>
