@@ -20,8 +20,16 @@ jobs:
       - name: Restore
         run: dotnet restore src\Tuna.Revit.Infrastructure\Tuna.Revit.Infrastructure.csproj -p:Configuration=Release
 
-      - name: Build Infrastructure
-        run: dotnet build src\Tuna.Revit.Infrastructure\Tuna.Revit.Infrastructure.csproj --configuration Release
+      - name: Build All Frameworks
+        shell: pwsh
+        run: |
+          $frameworks = @('net452','net46','net47','net48','net8.0-windows')
+          foreach ($f in $frameworks) {
+            dotnet build src\Tuna.Revit.Infrastructure\Tuna.Revit.Infrastructure.csproj --configuration Release --framework $f
+          }
+
+      - name: Pack Infrastructure
+        run: dotnet pack src\Tuna.Revit.Infrastructure\Tuna.Revit.Infrastructure.csproj --configuration Release
 
       - name: Publish NuGet Infrastructure
         run: dotnet nuget push src\Tuna.Revit.Infrastructure\bin\Release\*.nupkg -k ${{secrets.NUGETKEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate
