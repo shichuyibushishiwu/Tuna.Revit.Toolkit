@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tuna.Revit.Infrastructure;
 
-namespace Tuna.Revit.Template.Commands
+namespace Tuna.Revit.Template.ViewModels
 {
-    internal class Command : TunaCommandBase
+    internal class MainWindowViewModel
     {
-
     }
 }

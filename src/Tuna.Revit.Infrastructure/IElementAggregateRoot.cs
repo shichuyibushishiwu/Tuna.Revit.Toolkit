@@ -12,8 +12,19 @@ namespace Tuna.Revit.Infrastructure;
 /// </summary>
 public interface IElementAggregateRoot
 {
+    /// <summary>
+    /// 当前图元所在的文档
+    /// </summary>
     public Document Document { get; set; }
 
+    /// <summary>
+    /// 当前图元的Id
+    /// </summary>
     public ElementId ElementId { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string Name { get; set; }
 
 }

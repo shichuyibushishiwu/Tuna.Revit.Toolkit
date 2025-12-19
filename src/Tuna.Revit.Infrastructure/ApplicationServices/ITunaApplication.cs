@@ -16,4 +16,9 @@ public interface ITunaApplication
     /// 外部事件服务实例
     /// </summary>
     IExternalEventService ExternalEventService { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    ITunaApplicationIdentity ApplicationIdentity { get; }
 }

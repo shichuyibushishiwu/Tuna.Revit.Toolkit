@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,4 +16,15 @@ public interface ICommandContext
     /// 外部事件服务实例
     /// </summary>
     IExternalEventService ExternalEventService { get; }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public IDocumentContext? ActivedDocument { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public DocumentCollection DocumentCollection { get; }
 }
