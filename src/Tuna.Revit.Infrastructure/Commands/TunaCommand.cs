@@ -44,7 +44,7 @@ public abstract class TunaCommand : IExternalCommand, IExternalCommandAvailabili
         }
         catch (Exception)
         {
-
+       
 
         }
 
@@ -63,5 +63,6 @@ public abstract class TunaCommand : IExternalCommand, IExternalCommandAvailabili
     /// </summary>
     /// <returns></returns>
     public virtual bool CanExecute() => true;
+
 
 }

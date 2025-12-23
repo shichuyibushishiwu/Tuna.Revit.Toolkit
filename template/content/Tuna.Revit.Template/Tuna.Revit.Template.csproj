@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net48</TargetFramework>
@@ -8,16 +8,9 @@
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>true</UseWindowsForms>
 		<TunaVersion>21</TunaVersion>
+		<XamlDebuggingInformation>True</XamlDebuggingInformation>
 		<Authors>Shiwu</Authors>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<Page Update="Properties\DesignTimeResources.xaml">
-			<Generator>MSBuild:Compile</Generator>
-			<SubType>Designer</SubType>
-			<ContainsDesignTimeResources>true</ContainsDesignTimeResources>
-		</Page>
-	</ItemGroup>
 
 	<PropertyGroup>
 		<Configurations>
@@ -193,6 +186,7 @@
 		<RevitVersionPrefix>2025.0</RevitVersionPrefix>
 		<RevitVersion>2025</RevitVersion>
 		<TargetFramework>net8.0-windows</TargetFramework>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	</PropertyGroup>
 	<!--#endif-->
 	<!--#if (rvt26)-->
@@ -200,39 +194,48 @@
 		<RevitVersionPrefix>2026.0</RevitVersionPrefix>
 		<RevitVersion>2026</RevitVersion>
 		<TargetFramework>net8.0-windows</TargetFramework>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	</PropertyGroup>
 	<!--#endif-->
 
 	<ItemGroup>
 		<PackageReference Include="Tuna.Revit.Extensions" Version="$(RevitVersionPrefix).$(TunaVersion)" />
-		<PackageReference Include="Tuna.Revit.Infrastructure" Version="1.1.21" />
+		<PackageReference Include="Tuna.Revit.Infrastructure" Version="1.2.21" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Properties\Resources.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Resources.resx</DependentUpon>
-	  </Compile>
-	  <Compile Update="Properties\Settings.Designer.cs">
-	    <DesignTimeSharedInput>True</DesignTimeSharedInput>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Settings.settings</DependentUpon>
-	  </Compile>
+		<Page Update="Properties\DesignTimeResources.xaml">
+			<Generator>MSBuild:Compile</Generator>
+			<SubType>Designer</SubType>
+			<ContainsDesignTimeResources>true</ContainsDesignTimeResources>
+		</Page>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Update="Properties\Resources.resx">
-	    <Generator>ResXFileCodeGenerator</Generator>
-	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Properties\Settings.Designer.cs">
+			<DesignTimeSharedInput>True</DesignTimeSharedInput>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Settings.settings</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="Properties\Settings.settings">
-	    <Generator>SettingsSingleFileGenerator</Generator>
-	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-	  </None>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Properties\Settings.settings">
+			<Generator>SettingsSingleFileGenerator</Generator>
+			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
+		</None>
 	</ItemGroup>
 
 	<Target Name="CopyAddin" BeforeTargets="PostBuildEvent" Condition="'$(Configuration.Contains(Debug))'">
@@ -242,7 +245,7 @@
 		<Copy SourceFiles="$(ProjectDir)\Tuna.Revit.Template.addin" DestinationFolder="C:\ProgramData\Autodesk\Revit\Addins\$(RevitVersion)"></Copy>
 		<Copy SourceFiles="@(SourceFiles)" DestinationFiles="@(SourceFiles->'C:\ProgramData\Autodesk\Revit\Addins\$(RevitVersion)\$appName$\%(RecursiveDir)%(Filename)%(Extension)')"></Copy>
 	</Target>
-	
+
 	<Target Name="CleanApplication" AfterTargets="Clean">
 		<RemoveDir Directories="C:\ProgramData\Autodesk\Revit\Addins\$(RevitVersion)\$appName$"></RemoveDir>
 		<Delete Files="C:\ProgramData\Autodesk\Revit\Addins\$(RevitVersion)\Tuna.Revit.Template.addin" />

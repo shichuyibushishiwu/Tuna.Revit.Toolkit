@@ -8,5 +8,6 @@ namespace Tuna.Revit.Template.ViewModels
 {
     internal class MainWindowViewModel
     {
+
     }
 }

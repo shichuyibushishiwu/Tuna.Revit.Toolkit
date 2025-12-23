@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>net452;net46;net47;net48;net8.0-windows</TargetFrameworks>
+		<UseWPF>true</UseWPF>
 	</PropertyGroup>
 </Project>

@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Tuna.Revit.Infrastructure.Commands;
 
+/// <summary>
+/// 
+/// </summary>
 public interface ITunaCommand
 {
+    /// <summary>
+    /// 
+    /// </summary>
     ICommandContext CommandContext { get; }
 }

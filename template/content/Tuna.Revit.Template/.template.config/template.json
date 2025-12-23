@@ -102,6 +102,11 @@
       "datatype": "bool",
       "displayName": "支持 Revit 2026",
       "defaultValue": true
+    },
+    "clientId": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "$guid1$"
     }
   }
 }

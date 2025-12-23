@@ -4,6 +4,7 @@
 		<UseWindowsForms>true</UseWindowsForms>
 		<AssemblyName>Tuna.TemplateWizard</AssemblyName>
 		<RootNamespace>Tuna.TemplateWizard</RootNamespace>
+		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.VisualStudio.TemplateWizardInterface" Version="17.10.40170" />

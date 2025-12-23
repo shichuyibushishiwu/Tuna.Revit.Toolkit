@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Autodesk.Revit.DB;
+using Autodesk.Revit.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +13,26 @@ namespace Tuna.Revit.Infrastructure.Commands;
 /// </summary>
 public class CommandResult
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    public CommandResult()
+    {
+        Result = Result.Cancelled;
+    }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public Result Result { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string? Message { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public ElementSet? ElementSet { get; set; }
 }

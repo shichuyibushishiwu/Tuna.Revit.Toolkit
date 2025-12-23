@@ -1,10 +1,11 @@
-﻿using Autodesk.Revit.UI;
+using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tuna.Revit.Extensions;
+using Tuna.Runtime.Resources;
 
 namespace Tuna.Revit.Infrastructure.ApplicationServices;
 
@@ -46,6 +47,8 @@ public abstract class TunaApplication : TunaApplicationBase, IExternalApplicatio
             Host = HostApplication.Instance;
             Host.ApplicationContext = new HostApplicationContext(application);
             Host.Applications.Add(this);
+
+            ResourcesInjection.Initialize(applicationAssembly);
             InitailizeComponents();
             result = Result.Succeeded;
         }

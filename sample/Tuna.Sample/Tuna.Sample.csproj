@@ -3,6 +3,8 @@
 	<PropertyGroup>
 		<StartAction>Program</StartAction>
 		<StartProgram>C:\Program Files\Autodesk\Revit 2024\Revit.exe</StartProgram>
+		<Configurations>Debug;Release</Configurations>
+		<TargetFramework>net48</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>

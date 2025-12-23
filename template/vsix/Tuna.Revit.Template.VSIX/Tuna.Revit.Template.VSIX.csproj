@@ -87,8 +87,6 @@
     <ProjectReference Include="..\..\wizard\Tuna.TemplateWizard\Tuna.TemplateWizard.csproj">
       <Project>{32c6a3ca-4dfa-49be-8d0a-7459fe961803}</Project>
       <Name>Tuna.TemplateWizard</Name>
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
