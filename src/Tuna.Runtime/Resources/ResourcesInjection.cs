@@ -106,23 +106,23 @@ public class ResourcesInjection
         InjectIntoElement(element);
 
         // 订阅自身 Loaded，保证动态加入的元素也可注入
-        //element.Loaded -= OnFrameworkElementLoaded;
-        //element.Loaded += OnFrameworkElementLoaded;
+        element.Loaded -= OnFrameworkElementLoaded;
+        element.Loaded += OnFrameworkElementLoaded;
 
-        //// Frame 的实例级 CLR 事件订阅
-        //if (element is Frame frame)
-        //{
-        //    frame.Navigated -= OnFrameNavigated;
-        //    frame.Navigated += OnFrameNavigated;
+        // Frame 的实例级 CLR 事件订阅
+        if (element is Frame frame)
+        {
+           frame.Navigated -= OnFrameNavigated;
+           frame.Navigated += OnFrameNavigated;
 
-        //    frame.LoadCompleted -= OnFrameLoadCompleted;
-        //    frame.LoadCompleted += OnFrameLoadCompleted;
+           frame.LoadCompleted -= OnFrameLoadCompleted;
+           frame.LoadCompleted += OnFrameLoadCompleted;
 
-        //    if (frame.Content is FrameworkElement contentElement)
-        //    {
-        //        InjectIntoElement(contentElement);
-        //    }
-        //}
+           if (frame.Content is FrameworkElement contentElement)
+           {
+               InjectIntoElement(contentElement);
+           }
+        }
     }
 
     private static void InjectIntoElement(FrameworkElement element)
