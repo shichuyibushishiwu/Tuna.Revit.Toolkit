@@ -11,9 +11,6 @@
     mc:Ignorable="d">
     <Window.Resources />
     <Grid>
-
-
-
-        <Button Content="Say Hello" />
+        <TextBlock Text="{Binding Title}" />
     </Grid>
 </Window>

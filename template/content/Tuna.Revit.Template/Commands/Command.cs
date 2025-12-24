@@ -13,6 +13,10 @@ namespace Tuna.Revit.Template.Commands
     {
         public override CommandResult Execute()
         {
+            Views.MainWindow mainWindow = new Views.MainWindow();
+            mainWindow.DataContext =new ViewModels.MainWindowViewModel();
+            mainWindow.ShowDialog();
+           
             return new CommandResult();
         }
     }

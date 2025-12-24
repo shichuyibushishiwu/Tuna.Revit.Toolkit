@@ -8,6 +8,6 @@ namespace Tuna.Revit.Template.ViewModels
 {
     internal class MainWindowViewModel
     {
-
+        public string Title { get; set; } = "Hello World!!!";
     }
 }

@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using System.Windows.Media;
+using System.IO;
 
 namespace Tuna.Runtime.Resources;
 
@@ -32,8 +33,21 @@ public class ResourcesInjection
             throw new ArgumentNullException(nameof(assembly));
         }
 
-        Uri uri = GetResourceUri(assembly);
-        //TODO 检测uri 是否存在
+        string defaultSourcePath = "AppResources.xaml";
+
+        ApplicationSourceAttribute? applicationSourceAttribute = assembly.GetCustomAttribute<ApplicationSourceAttribute>();
+        if (applicationSourceAttribute != null)
+        {
+            defaultSourcePath = applicationSourceAttribute.Path;
+        }
+
+        Uri uri = GetResourceUri(assembly, defaultSourcePath);
+        var streamInfo = Application.GetResourceStream(uri);
+        if (streamInfo == null)
+        {
+            throw new FileNotFoundException($"The resource '{defaultSourcePath}' could not be found in assembly '{assembly.GetName().Name}'. Please ensure the file exists and the Build Action is set to 'Resource'.", defaultSourcePath);
+        }
+
 
         LoadAndMergeResource(ApplicationSource.Current.Resources, uri);
         EnableAutoInjectionForWindows();
@@ -44,12 +58,10 @@ public class ResourcesInjection
     /// </summary>
     /// <param name="assembly">程序集</param>
     /// <returns>资源 URI</returns>
-    private static Uri GetResourceUri(Assembly assembly)
+    private static Uri GetResourceUri(Assembly assembly, string path)
     {
         var assemblyName = assembly.GetName().Name;
-
-        // 假设资源文件名为 AppResources.xaml 且位于根目录
-        return new Uri($"pack://application:,,,/{assemblyName};component/AppResources.xaml", UriKind.Absolute);
+        return new Uri($"pack://application:,,,/{assemblyName};component/{path}", UriKind.Absolute);
     }
 
     private static void LoadAndMergeResource(ResourceDictionary targetDictionary, Uri uri)
@@ -81,15 +93,13 @@ public class ResourcesInjection
         _autoInjectionEnabled = true;
     }
 
-  
-
     /// <summary>
     /// 树级注入
     /// </summary>
     /// <param name="root"></param>
     private static void AttachHandlersRecursively(FrameworkElement root)
     {
-        SetupElementInjection(root);
+        InjectIntoElement(root);
 
         int count = VisualTreeHelper.GetChildrenCount(root);
         for (int i = 0; i < count; i++)
@@ -98,30 +108,6 @@ public class ResourcesInjection
             {
                 AttachHandlersRecursively(child);
             }
-        }
-    }
-
-    private static void SetupElementInjection(FrameworkElement element)
-    {
-        InjectIntoElement(element);
-
-        // 订阅自身 Loaded，保证动态加入的元素也可注入
-        element.Loaded -= OnFrameworkElementLoaded;
-        element.Loaded += OnFrameworkElementLoaded;
-
-        // Frame 的实例级 CLR 事件订阅
-        if (element is Frame frame)
-        {
-           frame.Navigated -= OnFrameNavigated;
-           frame.Navigated += OnFrameNavigated;
-
-           frame.LoadCompleted -= OnFrameLoadCompleted;
-           frame.LoadCompleted += OnFrameLoadCompleted;
-
-           if (frame.Content is FrameworkElement contentElement)
-           {
-               InjectIntoElement(contentElement);
-           }
         }
     }
 
@@ -148,22 +134,6 @@ public class ResourcesInjection
         if (sender is FrameworkElement element)
         {
             AttachHandlersRecursively(element);
-        }
-    }
-
-    private static void OnFrameNavigated(object sender, NavigationEventArgs e)
-    {
-        if (e.Content is FrameworkElement element)
-        {
-            InjectIntoElement(element);
-        }
-    }
-
-    private static void OnFrameLoadCompleted(object sender, NavigationEventArgs e)
-    {
-        if (e.Content is FrameworkElement element)
-        {
-            InjectIntoElement(element);
         }
     }
 }
