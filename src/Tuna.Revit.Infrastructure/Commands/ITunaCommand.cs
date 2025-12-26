@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tuna.Revit.Infrastructure.ApplicationServices;
 
 namespace Tuna.Revit.Infrastructure.Commands;
 
@@ -15,4 +16,14 @@ public interface ITunaCommand
     /// 
     /// </summary>
     ICommandContext CommandContext { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public ITunaApplication CurrentApplication { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public HostApplication Host { get; }
 }

@@ -29,6 +29,9 @@ public class HostApplicationContext
         UIApplication = GetUIApplication(uiControlledApplication);
         Application = UIApplication.Application;
         ControlledApplication = UIControlledApplication.ControlledApplication;
+
+        var app = HostApplication.Instance.ApplicationContext.Application;
+        Documents = new DocumentCollection(app);
     }
 
     /// <summary>
@@ -50,6 +53,11 @@ public class HostApplicationContext
     /// 
     /// </summary>
     public Application Application { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public DocumentCollection Documents { get; set; }
 
 
     /// <summary>

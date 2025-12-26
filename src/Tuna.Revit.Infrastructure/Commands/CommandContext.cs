@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Tuna.Revit.Extensions;
 using Tuna.Revit.Infrastructure.ApplicationServices;
 
-namespace Tuna.Revit.Infrastructure;
+namespace Tuna.Revit.Infrastructure.Commands;
 
 /// <summary>
 /// 命令上下文
@@ -15,27 +15,16 @@ namespace Tuna.Revit.Infrastructure;
 public class CommandContext : ICommandContext
 {
     /// <summary>
-    /// 
+    /// 初始化命令上下文
     /// </summary>
     public CommandContext()
     {
-        var uiDocument = HostApplication.Instance.ApplicationContext.UIApplication.ActiveUIDocument;
-        
-        DocumentCollection = new DocumentCollection();
+        ActivedDocument = HostApplication.Instance.ApplicationContext.Documents.ActivedDocument;
     }
 
-    /// <summary>
-    /// 外部事件服务实例
-    /// </summary>
+    /// <inheritdoc/>
     public IExternalEventService ExternalEventService { get; } = default!;
 
-    /// <summary>
-    /// 
-    /// </summary>
+    /// <inheritdoc/>
     public IDocumentContext? ActivedDocument { get; set; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public DocumentCollection DocumentCollection { get; set; }
 }

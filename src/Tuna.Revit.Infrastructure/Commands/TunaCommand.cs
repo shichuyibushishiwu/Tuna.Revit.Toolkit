@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tuna.Revit.Extensions;
+using Tuna.Revit.Infrastructure.ApplicationServices;
 
 namespace Tuna.Revit.Infrastructure.Commands;
 
@@ -13,26 +15,45 @@ namespace Tuna.Revit.Infrastructure.Commands;
 /// </summary>
 public abstract class TunaCommand : IExternalCommand, IExternalCommandAvailability, ITunaCommand
 {
-    /// <summary>
-    /// 
-    /// </summary>
+    /// <inheritdoc/>
     public ICommandContext CommandContext { get; private set; } = default!;
+
+    /// <inheritdoc/>
+    public ITunaApplication CurrentApplication { get; private set; } = default!;
+
+    /// <inheritdoc/>
+    public HostApplication Host { get; private set; } = default!;
 
     /// <inheritdoc/>
     public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
     {
+        Host = HostApplication.Instance;
+        CommandContext = new CommandContext();
+
         try
         {
-            CommandContext = new CommandContext();
             CommandResult commandResult = Execute();
+
+            if (!string.IsNullOrEmpty(commandResult.Message))
+            {
+                message = commandResult.Message!;
+            }
+
+            if (commandResult.ElementSet != null && !commandResult.ElementSet.IsEmpty)
+            {
+                foreach (Element element in commandResult.ElementSet)
+                {
+                    elements.Insert(element);
+                }
+            }
+            
+            return commandResult.Result;
         }
-        catch (Exception)
+        catch (Exception exception)
         {
-
-
+            message = exception.Message;
+            return Result.Failed;
         }
-
-        return Result.Succeeded;
     }
 
     /// <inheritdoc/>
@@ -44,10 +65,8 @@ public abstract class TunaCommand : IExternalCommand, IExternalCommandAvailabili
         }
         catch (Exception)
         {
-       
-
+            return false;
         }
-
 
         return true;
     }
@@ -63,6 +82,4 @@ public abstract class TunaCommand : IExternalCommand, IExternalCommandAvailabili
     /// </summary>
     /// <returns></returns>
     public virtual bool CanExecute() => true;
-
-
 }
