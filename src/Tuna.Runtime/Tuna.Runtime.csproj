@@ -1,7 +1,21 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
+		<!--<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Company>Tuna</Company>
+		<Authors>Shiwu</Authors>
+		<PackageIcon>Tuna.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageProjectUrl>https://github.com/shichuyibushishiwu/Tuna.Revit.Toolkit</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/shichuyibushishiwu/Tuna.Revit.Toolkit</RepositoryUrl>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>-->
 		<TargetFrameworks>net452;net46;net47;net48;net8.0-windows</TargetFrameworks>
 		<UseWPF>true</UseWPF>
 		<Version>1.0.0.1</Version>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\README.md" Pack="True" PackagePath="\" />
+		<None Include="..\..\Tuna.png" Pack="True" PackagePath="\" />
+	</ItemGroup>
 </Project>
