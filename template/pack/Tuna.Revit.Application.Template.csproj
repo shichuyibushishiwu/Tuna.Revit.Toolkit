@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
 		<PackageIcon>Tuna.png</PackageIcon>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
     <TargetFramework>net48</TargetFramework>
     <IsPackable>true</IsPackable>
     <NoBuild>true</NoBuild>
@@ -18,8 +18,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-		<None Include="..\..\README.md" Pack="True" PackagePath="\" />
 		<None Include="..\..\Tuna.png" Pack="True" PackagePath="\" />
+	</ItemGroup>
+
+  <ItemGroup>
+	  <None Update="readme.md" Pack="True" PackagePath="\" />
 	</ItemGroup>
 
   <ItemGroup>

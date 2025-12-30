@@ -5,7 +5,7 @@
 		<Company>Tuna</Company>
 		<Authors>Shiwu</Authors>
 		<PackageIcon>Tuna.png</PackageIcon>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<Description>This is an extensions package for revit api.</Description>
 		<PackageProjectUrl>https://github.com/shichuyibushishiwu/Tuna.Revit.Extensions/wiki</PackageProjectUrl>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -170,6 +170,7 @@
 
 	<PropertyGroup>
 		<Version>$(RvtVersion).$(TunaVer)</Version>
+		<PackageTags>Revit;ITuna</PackageTags>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Rvt_16_Release|AnyCPU'">
@@ -228,12 +229,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="..\..\README.md" Pack="True" PackagePath="\" />
 		<None Include="..\..\Tuna.png" Pack="True" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="readme.md" Pack="True" PackagePath="\" />
 	</ItemGroup>
 
 </Project>

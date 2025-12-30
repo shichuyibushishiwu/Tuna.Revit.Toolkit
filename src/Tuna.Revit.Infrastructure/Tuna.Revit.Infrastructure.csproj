@@ -4,7 +4,7 @@
 		<Company>Tuna</Company>
 		<Authors>Shiwu</Authors>
 		<PackageIcon>Tuna.png</PackageIcon>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<Description>Infrastructure abstractions and base implementations for Tuna Revit Toolkit</Description>
 		<PackageProjectUrl>https://github.com/shichuyibushishiwu/Tuna.Revit.Toolkit</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/shichuyibushishiwu/Tuna.Revit.Toolkit</RepositoryUrl>
@@ -53,7 +53,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="..\..\README.md" Pack="True" PackagePath="\" />
 		<None Include="..\..\Tuna.png" Pack="True" PackagePath="\" />
 	</ItemGroup>
 
@@ -63,6 +62,10 @@
 	  <ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj" SetTargetFramework="TargetFramework=net47" Condition="'$(TargetFramework)' == 'net47'" />
 	  <ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj" SetTargetFramework="TargetFramework=net48" Condition="'$(TargetFramework)' == 'net48'" />
 	  <ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj" SetTargetFramework="TargetFramework=net8.0-windows" Condition="'$(TargetFramework)' == 'net8.0-windows'" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="readme.md" Pack="True" PackagePath="\" />
 	</ItemGroup>
 
 
