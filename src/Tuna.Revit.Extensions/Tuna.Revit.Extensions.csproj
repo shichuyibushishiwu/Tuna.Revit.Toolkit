@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	
 	<PropertyGroup>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -80,6 +80,11 @@
 			<IncludeAssets>compile</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="System.Drawing.Common" Version="8.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="readme.md" Pack="True" PackagePath="\" />
+		<None Include="..\..\Tuna.png" Pack="True" PackagePath="\" />
 	</ItemGroup>
 
 

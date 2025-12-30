@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Company>Tuna</Company>
@@ -57,15 +57,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj" SetTargetFramework="TargetFramework=net452" Condition="'$(TargetFramework)' == 'net452'" />
-	  <ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj" SetTargetFramework="TargetFramework=net46" Condition="'$(TargetFramework)' == 'net46'" />
-	  <ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj" SetTargetFramework="TargetFramework=net47" Condition="'$(TargetFramework)' == 'net47'" />
-	  <ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj" SetTargetFramework="TargetFramework=net48" Condition="'$(TargetFramework)' == 'net48'" />
-	  <ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj" SetTargetFramework="TargetFramework=net8.0-windows" Condition="'$(TargetFramework)' == 'net8.0-windows'" />
+		<ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj"
+			SetTargetFramework="TargetFramework=net452" Condition="'$(TargetFramework)' == 'net452'" />
+		<ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj"
+			SetTargetFramework="TargetFramework=net46" Condition="'$(TargetFramework)' == 'net46'" />
+		<ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj"
+			SetTargetFramework="TargetFramework=net47" Condition="'$(TargetFramework)' == 'net47'" />
+		<ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj"
+			SetTargetFramework="TargetFramework=net48" Condition="'$(TargetFramework)' == 'net48'" />
+		<ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj"
+			SetTargetFramework="TargetFramework=net8.0-windows"
+			Condition="'$(TargetFramework)' == 'net8.0-windows'" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="readme.md" Pack="True" PackagePath="\" />
+		<None Include="readme.md" Pack="True" PackagePath="\" />
 	</ItemGroup>
 
 

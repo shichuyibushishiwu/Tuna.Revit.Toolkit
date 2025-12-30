@@ -9,56 +9,53 @@ using System.Threading.Tasks;
 namespace Tuna.Revit.Extensions;
 
 /// <summary>
-/// 事务的扩展
+/// 事务组的扩展
 /// </summary>
-public static class TransactionExtensions
+public static class TransactionGroupExtensions
 {
     /// <summary>
-    /// 事务的扩展
+    /// 事务组的扩展
     /// </summary>
     extension(Document document)
     {
         /// <summary>
-        /// 从当前文档开启一个事务，以便于执行对文档修改的操作
-        /// <para>Start a revit database transaction from the target document in order to modify document</para>
+        /// 用于在当前文档中开始一个事务组
+        /// <para>This is a function which used to start a document Transaction Group</para>
         /// </summary>
         /// <param name="action"></param>
         /// <param name="name"></param>
         /// <returns><see cref="TransactionResult"/></returns>
+        /// <exception cref="System.ArgumentNullException"></exception>
         [DebuggerStepThrough]
-        public TransactionResult NewTransaction(Action<FailureHandlingOptions> action, string name = "Default Transaction Name")
+        public TransactionResult NewTransactionGroup(Action<TransactionGroupOptions> action, string name = "Default Transaction Group Name")
         {
             ArgumentNullExceptionUtils.ThrowIfNullOrInvalid(document);
             ArgumentNullExceptionUtils.ThrowIfNull(action);
 
             TransactionResult result = new TransactionResult();
-            if (document.IsReadOnly)
+            TransactionGroupOptions options = new TransactionGroupOptions();
+
+            using (TransactionGroup tsg = new TransactionGroup(document, name))
             {
-                result.TransactionStatus = TransactionStatus.Error;
-                result.Message = $"{document} is read only";
-                return result;
-            }
-            
-            using (Transaction transaction = new Transaction(document))
-            {
-                result.TransactionStatus = transaction.Start(name);
+                tsg.IsFailureHandlingForcedModal = options.IsFailureHandlingForcedModal;
+
+                result.TransactionStatus = tsg.Start(name);
                 if (result.TransactionStatus != TransactionStatus.Started)
                 {
-                    result.Message = $"{transaction} is not started";
+                    result.Message = $"{tsg} is not started";
                     return result;
                 }
 
-                var options = transaction.GetFailureHandlingOptions();
                 try
                 {
                     action.Invoke(options);
-                    result.TransactionStatus = transaction.Commit(options);
+                    result.TransactionStatus = options.IsMerge ? tsg.Assimilate() : tsg.Commit();
                     return result;
                 }
                 catch (Exception exception)
                 {
                     result.Message = exception.Message;
-                    result.TransactionStatus = transaction.RollBack(options);
+                    result.TransactionStatus = tsg.RollBack();
                     if (exception.GetType() != typeof(TransactionRollbackException))
                     {
                         result.Exception = exception;
@@ -70,16 +67,20 @@ public static class TransactionExtensions
         }
 
         /// <summary>
-        /// 从当前文档开启一个事务，以便于执行对文档修改的操作
-        /// <para>Start a revit database transaction from the target document in order to modify document</para>
+        /// 用于在当前文档中开始一个事务组，并合并内部的所有事务
+        /// <para>This is a function which used to start a document Transaction Group</para>
         /// </summary>
         /// <param name="action"></param>
         /// <param name="name"></param>
-        /// <returns>If document is read only,return <see cref="Autodesk.Revit.DB.TransactionStatus.Error"/></returns>
+        /// <returns><see cref="TransactionResult"/></returns>
         [DebuggerStepThrough]
-        public TransactionResult NewTransaction(Action action, string name = "Default Transaction Name")
+        public TransactionResult NewTransactionGroup(Action action, string name = "Default Transaction Group Name")
         {
-            return document.NewTransaction(options => action(), name);
+            return document.NewTransactionGroup((option) =>
+            {
+                action();
+                option.Merge();
+            }, name);
         }
     }
 }

@@ -10,13 +10,13 @@ Tuna.Revit.Toolkit 是一套针对 Autodesk Revit API 的扩展与基础设施�
 ## 模块说明
 
 - Extensions：提供丰富且跨版本的 Revit API 扩展方法与工具函数  
-  详见模块文档：[`src/Tuna.Revit.Extensions/readme.md`](src/Tuna.Revit.Extensions/readme.md)
+  详见模块文档：[`Tuna Revit Extensions`](src/Tuna.Revit.Extensions/readme.md)
 - Infrastructure：提供插件应用与命令的抽象与基类，实现上下文、结果处理等基础设施  
-  详见模块文档：[`src/Tuna.Revit.Infrastructure/readme.md`](src/Tuna.Revit.Infrastructure/readme.md)
+  详见模块文档：[`Tuna Revit Infrastructure`](src/Tuna.Revit.Infrastructure/readme.md)
 - Runtime：提供 WPF 资源注入等运行时支持，辅助 UI 与资源管理  
-  详见模块文档：[`src/Tuna.Runtime/readme.md`](src/Tuna.Runtime/readme.md)
+  详见模块文档：[`Tuna Revit Runtime`](src/Tuna.Runtime/readme.md)
 - Template Pack：提供项目模板，便捷创建基于本工具包的 Revit 插件工程  
-  详见模块文档：[`template/pack/readme.md`](template/pack/readme.md)
+  详见模块文档：[`Tuna Revit Application Template`](template/pack/readme.md)
 
 ## 特性
 
@@ -25,20 +25,6 @@ Tuna.Revit.Toolkit 是一套针对 Autodesk Revit API 的扩展与基础设施�
 - 标准化的命令与应用框架
 - 运行时资源注入，统一 UI 资源管理
 - 支持多版本 Revit，兼容性良好
-
-## 支持的 Revit 版本
-
-- Revit 2016
-- Revit 2017
-- Revit 2018
-- Revit 2019
-- Revit 2020
-- Revit 2021
-- Revit 2022
-- Revit 2023
-- Revit 2024
-- Revit 2025
-- Revit 2026
 
 ## NuGet 包
 

@@ -9,24 +9,24 @@ using System.Threading.Tasks;
 namespace Tuna.Revit.Extensions;
 
 /// <summary>
-/// 事务的扩展
+/// 子事务的扩展
 /// </summary>
-public static class TransactionExtensions
+public static class SubTransactionExtensions
 {
     /// <summary>
-    /// 事务的扩展
+    /// 子事务的扩展
     /// </summary>
     extension(Document document)
     {
         /// <summary>
-        /// 从当前文档开启一个事务，以便于执行对文档修改的操作
-        /// <para>Start a revit database transaction from the target document in order to modify document</para>
+        /// 从当前文档启动一个子事务
+        /// <para>This is a function which used to start a document SubTransaction </para>
         /// </summary>
         /// <param name="action"></param>
-        /// <param name="name"></param>
         /// <returns><see cref="TransactionResult"/></returns>
+        /// <exception cref="System.ArgumentNullException"></exception>
         [DebuggerStepThrough]
-        public TransactionResult NewTransaction(Action<FailureHandlingOptions> action, string name = "Default Transaction Name")
+        public TransactionResult NewSubtransaction(Action action)
         {
             ArgumentNullExceptionUtils.ThrowIfNullOrInvalid(document);
             ArgumentNullExceptionUtils.ThrowIfNull(action);
@@ -38,48 +38,33 @@ public static class TransactionExtensions
                 result.Message = $"{document} is read only";
                 return result;
             }
-            
-            using (Transaction transaction = new Transaction(document))
+
+            using (SubTransaction transaction = new SubTransaction(document))
             {
-                result.TransactionStatus = transaction.Start(name);
+                result.TransactionStatus = transaction.Start();
                 if (result.TransactionStatus != TransactionStatus.Started)
                 {
                     result.Message = $"{transaction} is not started";
                     return result;
                 }
 
-                var options = transaction.GetFailureHandlingOptions();
                 try
                 {
-                    action.Invoke(options);
-                    result.TransactionStatus = transaction.Commit(options);
+                    action.Invoke();
+                    result.TransactionStatus = transaction.Commit();
                     return result;
                 }
                 catch (Exception exception)
                 {
                     result.Message = exception.Message;
-                    result.TransactionStatus = transaction.RollBack(options);
+                    result.TransactionStatus = transaction.RollBack();
                     if (exception.GetType() != typeof(TransactionRollbackException))
                     {
                         result.Exception = exception;
                     }
                 }
             }
-
             return result;
-        }
-
-        /// <summary>
-        /// 从当前文档开启一个事务，以便于执行对文档修改的操作
-        /// <para>Start a revit database transaction from the target document in order to modify document</para>
-        /// </summary>
-        /// <param name="action"></param>
-        /// <param name="name"></param>
-        /// <returns>If document is read only,return <see cref="Autodesk.Revit.DB.TransactionStatus.Error"/></returns>
-        [DebuggerStepThrough]
-        public TransactionResult NewTransaction(Action action, string name = "Default Transaction Name")
-        {
-            return document.NewTransaction(options => action(), name);
         }
     }
 }

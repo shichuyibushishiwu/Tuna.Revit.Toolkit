@@ -22,20 +22,6 @@ Tuna.Revit.Toolkit is a powerful extension package for the Autodesk Revit API, d
 Visit the official documentation for usage guides and API references:
 [Official Docs](https://shichuyibushishiwu.github.io/)
 
-## Supported Revit Versions
-
-* Revit 2016
-* Revit 2017
-* Revit 2018
-* Revit 2019
-* Revit 2020
-* Revit 2021
-* Revit 2022
-* Revit 2023
-* Revit 2024
-* Revit 2025
-* Revit 2026
-
 ## NuGet Packages
 
 | Package | Version | Downloads |

@@ -34,3 +34,20 @@ jobs:
       - name: Publish NuGet Infrastructure
         run: dotnet nuget push src\Tuna.Revit.Infrastructure\bin\Release\*.nupkg -k ${{secrets.NUGETKEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate
 
+      - name: Restore Runtime
+        run: dotnet restore src\Tuna.Runtime\Tuna.Runtime.csproj -p:Configuration=Release
+
+      - name: Build Runtime All Frameworks
+        shell: pwsh
+        run: |
+          $frameworks = @('net452','net46','net47','net48','net8.0-windows')
+          foreach ($f in $frameworks) {
+            dotnet build src\Tuna.Runtime\Tuna.Runtime.csproj --configuration Release --framework $f
+          }
+
+      - name: Pack Runtime
+        run: dotnet pack src\Tuna.Runtime\Tuna.Runtime.csproj --configuration Release
+
+      - name: Publish NuGet Runtime
+        run: dotnet nuget push src\Tuna.Runtime\bin\Release\*.nupkg -k ${{secrets.NUGETKEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate
+

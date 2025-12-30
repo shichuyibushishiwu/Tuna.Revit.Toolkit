@@ -43,11 +43,6 @@ namespace Samples
             UIApplication uiapp = commandData.Application;
             Document doc = uiapp.ActiveUIDocument.Document;
 
-            // 示例：选择器与集合操作（具体方法请参考源码与 IntelliSense）
-            // var walls = doc.Collector().OfClass(typeof(Wall)).ToElements();
-            // var activeView = doc.ActiveView();
-            // var bbox = activeView.GetBoundingBox();
-            // var length = someWall.GetLength();
 
             return Result.Succeeded;
         }

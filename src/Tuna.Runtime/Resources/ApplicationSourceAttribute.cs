@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Tuna.Runtime.Resources;
 
+/// <summary>
+/// 
+/// </summary>
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
 public class ApplicationSourceAttribute : Attribute
 {
