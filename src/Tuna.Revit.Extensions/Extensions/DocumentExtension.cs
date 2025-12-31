@@ -34,7 +34,7 @@ public static class DocumentExtension
     /// Is check element exist
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <param name="document"></param>
+    /// <param name="document">The <see cref="Autodesk.Revit.DB.Document"/>.</param>
     /// <param name="predicate"></param>
     /// <returns></returns>
     public static bool ElementExist<T>(this Document document, Func<T, bool> predicate) where T : Element
@@ -78,7 +78,7 @@ public static class DocumentExtension
     /// <summary>
     /// Get parameter filter element
     /// </summary>
-    /// <param name="document"></param>
+    /// <param name="document">The <see cref="Autodesk.Revit.DB.Document"/>.</param>
     /// <param name="name"></param>
     /// <param name="ids"></param>
     /// <param name="filterRule"></param>

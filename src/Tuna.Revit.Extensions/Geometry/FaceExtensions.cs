@@ -1,4 +1,4 @@
-﻿/************************************************************************************
+/************************************************************************************
    Author:十五
    CretaeTime:
    Mail:1012201478@qq.com
@@ -26,7 +26,7 @@ public static class FaceExtensions
     /// 从  <see cref="Autodesk.Revit.DB.FaceArray"/> 获取  <see cref="Autodesk.Revit.DB.Face"/> 列表
     /// <para>Get faces array from <see cref="Autodesk.Revit.DB.FaceArray"/></para>
     /// </summary>
-    /// <param name="faceArray"></param>
+    /// <param name="faceArray">The <see cref="Autodesk.Revit.DB.FaceArray"/>.</param>
     /// <returns></returns>
     public static Face[] ToArray(this FaceArray faceArray)
     {

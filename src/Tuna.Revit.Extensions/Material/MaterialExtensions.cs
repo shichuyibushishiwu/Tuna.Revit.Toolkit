@@ -1,4 +1,4 @@
-﻿/************************************************************************************
+/************************************************************************************
    Author:十五
    CretaeTime:2022/4/28 12:29:31
    Mail:1012201478@qq.com
@@ -33,7 +33,7 @@ namespace Tuna.Revit.Extensions
         /// <summary>
         /// Get generic material appearance color
         /// </summary>
-        /// <param name="material"></param>
+        /// <param name="material">The <see cref="Autodesk.Revit.DB.Material"/>.</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException"></exception>
         public static Color GetAppearanceColor(this Material material)
@@ -57,7 +57,7 @@ namespace Tuna.Revit.Extensions
         /// <summary>
         /// Set material appearance color
         /// </summary>
-        /// <param name="material"></param>
+        /// <param name="material">The <see cref="Autodesk.Revit.DB.Material"/>.</param>
         /// <param name="color"></param>
         /// <exception cref="System.ArgumentNullException"></exception>
         public static void SetAppearanceColor(this Material material, Color color)

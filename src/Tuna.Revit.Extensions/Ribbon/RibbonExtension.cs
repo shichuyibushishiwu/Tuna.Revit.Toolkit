@@ -1,4 +1,4 @@
-﻿using Autodesk.Revit.UI;
+using Autodesk.Revit.UI;
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -66,7 +66,7 @@ public static class RibbonExtension
     /// <summary>
     /// 创建Tab
     /// </summary>
-    /// <param name="application"></param>
+    /// <param name="application">The <see cref="Autodesk.Revit.UI.UIControlledApplication"/>.</param>
     /// <param name="title"></param>
     public static IRibbonTab AddRibbonTab(this UIControlledApplication application, string title)
     {

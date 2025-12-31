@@ -26,21 +26,21 @@ public static class RevitDefinitionAttributeExtension
     /// <param name="externalDefinitionAttribute">外部参数定义</param>
     /// <param name="element">参数所在的元素</param>
     /// <returns></returns>
-    /// <exception cref="ArgumentNullException">外部参数为null，或元素为空，或未在元素中找到指定外部参数</exception>
-    public static Parameter GetUniqueParameter(this ExternalDefinitionAttribute externalDefinitionAttribute, Element element)
+    /// <exception cref="System.ArgumentNullException">外部参数为null，或元素为空，或未在元素中找到指定外部参数</exception>
+    public static Parameter? GetUniqueParameter(this ExternalDefinitionAttribute externalDefinitionAttribute, Element element)
     {
-            ArgumentNullExceptionUtils.ThrowIfNullOrInvalid(element);
-            if (externalDefinitionAttribute == null)
-            {
-                throw new ArgumentNullException($"ExternalDefinitionAttribute is null");
-            }
-            var parameters = element.GetParameters(externalDefinitionAttribute.Name);
-            if (parameters.Count == 0)
-            {
-                throw new ArgumentNullException($"Element {element.Name} dose not have a parameter {externalDefinitionAttribute.Name}");
-            }
-            var parameter = parameters?.FirstOrDefault(x => externalDefinitionAttribute.Equal(x.Definition));
-            return parameter;
+        ArgumentNullExceptionUtils.ThrowIfNullOrInvalid(element);
+        if (externalDefinitionAttribute == null)
+        {
+            throw new ArgumentNullException($"ExternalDefinitionAttribute is null");
+        }
+        var parameters = element.GetParameters(externalDefinitionAttribute.Name);
+        if (parameters.Count == 0)
+        {
+            throw new ArgumentNullException($"Element {element.Name} dose not have a parameter {externalDefinitionAttribute.Name}");
+        }
+        var parameter = parameters?.FirstOrDefault(x => externalDefinitionAttribute.Equal(x.Definition));
+        return parameter;
     }
 
     /// <summary>
@@ -49,7 +49,7 @@ public static class RevitDefinitionAttributeExtension
     /// <param name="internalDefinitionAttribute">内部参数定义</param>
     /// <param name="element">参数所在的元素</param>
     /// <returns>参数</returns>
-    /// <exception cref="ArgumentNullException">内部参数为null，或元素为空，或未在元素中找到指定外部参数</exception>
+    /// <exception cref="System.ArgumentNullException">内部参数为null，或元素为空，或未在元素中找到指定外部参数</exception>
     /// <exception cref="Exception">无效的参数定义</exception>
     public static Parameter GetUniqueParameter(this InternalDefinitionAttribute internalDefinitionAttribute, Element element)
     {

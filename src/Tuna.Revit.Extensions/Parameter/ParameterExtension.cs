@@ -1,4 +1,4 @@
-﻿/************************************************************************************
+/************************************************************************************
    Author:Tony Stark
    CreateTime:2023/4/6 9:46:29
    Mail:2609639898@qq.com
@@ -59,7 +59,7 @@ public static class ParameterExtension
     /// Set parameter value based on StorageType
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <param name="parameter"></param>
+    /// <param name="parameter">The <see cref="Autodesk.Revit.DB.Parameter"/>.</param>
     /// <param name="value"></param>
     /// <returns></returns>
     /// <exception cref="System.ArgumentNullException"></exception>

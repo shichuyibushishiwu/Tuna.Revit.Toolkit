@@ -1,4 +1,4 @@
-﻿/************************************************************************************
+/************************************************************************************
    Author:十五
    CretaeTime:2025年5月5日 00点16分
    Mail:1012201478@qq.com
@@ -32,7 +32,7 @@ public static class AppearanceElementExtensions
     /// <summary>
     /// create a revit generic material appearance element
     /// </summary>
-    /// <param name="document"></param>
+    /// <param name="document">The <see cref="Autodesk.Revit.DB.Document"/>.</param>
     /// <param name="name"></param>
     /// <returns></returns>
     /// <exception cref="System.ArgumentNullException"></exception>
@@ -78,10 +78,11 @@ public static class AppearanceElementExtensions
 
 
     /// <summary>
-    ///    /// <exception cref="System.ArgumentNullException"></exception>
+    /// Get appearance asset element from material
     /// </summary>
-    /// <param name="material"></param>
+    /// <param name="material">The <see cref="Autodesk.Revit.DB.Material"/>.</param>
     /// <returns></returns>
+    /// <exception cref="System.ArgumentNullException"></exception>
     public static AppearanceAssetElement? GetAppearanceAssetElement(this Material material)
     {
         ArgumentNullExceptionUtils.ThrowIfNullOrInvalid(material);

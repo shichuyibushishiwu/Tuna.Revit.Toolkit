@@ -11,7 +11,7 @@ namespace Tuna.Revit.Template.Commands
 {
     [CommandButton(LargeImage = "gift32.png", Image = "gift16.png",Title = "Tuna Hello World")]
     [Transaction(TransactionMode.Manual)]
-    internal class Command : Infrastructure.Commands.TunaCommand
+    internal class Command : TunaCommand
     {
         public override CommandResult Execute()
         {

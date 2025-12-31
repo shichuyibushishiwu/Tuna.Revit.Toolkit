@@ -57,6 +57,7 @@ public class ResourcesInjection
     /// 获取资源的 Pack URI
     /// </summary>
     /// <param name="assembly">程序集</param>
+    /// <param name="path">资源文件相对路径</param>
     /// <returns>资源 URI</returns>
     private static Uri GetResourceUri(Assembly assembly, string path)
     {

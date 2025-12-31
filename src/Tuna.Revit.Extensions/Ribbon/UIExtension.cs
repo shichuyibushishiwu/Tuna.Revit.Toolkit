@@ -1,4 +1,4 @@
-﻿/************************************************************************************
+/************************************************************************************
    Author:十五
    CretaeTime:2022/4/20 13:16:40
    Mail:1012201478@qq.com
@@ -97,7 +97,7 @@ public static class UIExtension
     /// <summary>
     /// 在面板上创建一个下拉按钮
     /// </summary>
-    /// <param name="panel"></param>
+    /// <param name="panel">要添加按钮的面板</param>
     /// <param name="name"></param>
     /// <param name="text"></param>
     /// <param name="handle"></param>
@@ -165,7 +165,7 @@ public static class UIExtension
     /// 创建按压式按钮
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <param name="pulldownButton"></param>
+    /// <param name="pulldownButton">下拉按钮</param>
     /// <param name="handle"></param>
     /// <returns></returns>
     public static PushButton CreatePushButton<T>(this PulldownButton pulldownButton, Action<PushButtonData>? handle = null) where T : class, IExternalCommand, new()

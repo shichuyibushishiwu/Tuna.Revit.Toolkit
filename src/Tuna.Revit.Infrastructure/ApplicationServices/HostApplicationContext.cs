@@ -15,14 +15,14 @@ namespace Tuna.Revit.Infrastructure.ApplicationServices;
 public class HostApplicationContext
 {
     /// <summary>
-    /// internal method info of <see cref="UIControlledApplication"/>
+    ///Internal method info of <see cref="Autodesk.Revit.UI.UIControlledApplication"/>
     /// </summary>
     private static readonly MethodInfo _getUIApplicationMethod = typeof(UIControlledApplication).GetMethod("getUIApplication", BindingFlags.Instance | BindingFlags.NonPublic)!;
 
     /// <summary>
-    /// 
+    /// 初始化 <see cref="HostApplicationContext"/> 类的新实例
     /// </summary>
-    /// <param name="uiControlledApplication"></param>
+    /// <param name="uiControlledApplication">UI 受控应用程序</param>
     public HostApplicationContext(UIControlledApplication uiControlledApplication)
     {
         UIControlledApplication = uiControlledApplication;
@@ -34,37 +34,36 @@ public class HostApplicationContext
     }
 
     /// <summary>
-    /// 
+    /// 获取 UI 受控应用程序 <see cref="Autodesk.Revit.UI.UIControlledApplication"/> 
     /// </summary>
     public UIControlledApplication UIControlledApplication { get; }
 
     /// <summary>
-    /// 
+    /// 获取受控应用程序 <see cref="Autodesk.Revit.ApplicationServices.ControlledApplication"/> 
     /// </summary>
-    public ControlledApplication ControlledApplication { get; set; }
+    public ControlledApplication ControlledApplication { get;}
 
     /// <summary>
-    /// 
+    /// 获取 UI 应用程序 <see cref="Autodesk.Revit.UI.UIApplication"/> 
     /// </summary>
-    public UIApplication UIApplication { get; set; }
+    public UIApplication UIApplication { get; }
 
     /// <summary>
-    /// 
+    /// 获取应用程序 <see cref="Application"/> 
     /// </summary>
-    public Application Application { get; set; }
+    public Application Application { get; }
 
     /// <summary>
-    /// 
+    /// 获取文档集合
     /// </summary>
-    public DocumentCollection Documents { get; set; }
-
+    public DocumentCollection Documents { get;}
 
     /// <summary>
-    /// get the <see cref="Autodesk.Revit.UI.UIApplication" /> from <see cref="UIControlledApplication"/>
+    /// 从 <see cref="UIControlledApplication"/> 获取 <see cref="Autodesk.Revit.UI.UIApplication" />
     /// </summary>
-    /// <param name="application"></param>
-    /// <returns></returns>
-    /// <exception cref="System.ArgumentNullException"></exception>
+    /// <param name="application">受控应用程序</param>
+    /// <returns>UI 应用程序</returns>
+    /// <exception cref="System.ArgumentNullException">当反射获取失败时抛出</exception>
     private static UIApplication GetUIApplication(UIControlledApplication application)
     {
         return _getUIApplicationMethod.Invoke(application, []) as UIApplication ?? throw new ArgumentNullException("app reflection error");

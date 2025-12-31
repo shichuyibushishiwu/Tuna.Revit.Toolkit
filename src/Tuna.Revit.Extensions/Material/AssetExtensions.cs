@@ -1,4 +1,4 @@
-﻿/************************************************************************************
+/************************************************************************************
    Author:十五
    CretaeTime:2023/4/3 23:57:38
    Mail:1012201478@qq.com
@@ -45,7 +45,7 @@ public static class AssetExtensions
     /// <summary>
     /// set generic asset property transparency value 
     /// </summary>
-    /// <param name="asset"></param>
+    /// <param name="asset">The <see cref="Autodesk.Revit.DB.Visual.Asset"/>.</param>
     /// <param name="transparency"></param>
     public static void SetTransparency(this Asset asset, int transparency)
     {
@@ -70,7 +70,7 @@ public static class AssetExtensions
     /// <summary>
     /// set generic asset property glossiness value
     /// </summary>
-    /// <param name="asset"></param>
+    /// <param name="asset">The <see cref="Autodesk.Revit.DB.Visual.Asset"/>.</param>
     /// <param name="gloss"></param>
     public static void SetGlossiness(this Asset asset, int gloss)
     {
@@ -103,7 +103,7 @@ public static class AssetExtensions
     /// <summary>
     /// get generic asset property color value 
     /// </summary>
-    /// <param name="asset"></param>
+    /// <param name="asset">The <see cref="Autodesk.Revit.DB.Visual.Asset"/>.</param>
     /// <returns></returns>
     public static Color GetColor(this Asset asset)
     {

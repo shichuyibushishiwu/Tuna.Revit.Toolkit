@@ -1,4 +1,4 @@
-﻿/************************************************************************************
+/************************************************************************************
    Author:十五
    CretaeTime:2022/11/27 23:57:45
    Mail:1012201478@qq.com
@@ -356,7 +356,7 @@ public static class CollectorExtension
     /// <typeparam name="T1"></typeparam>
     /// <typeparam name="T2"></typeparam>
     /// <typeparam name="T3"></typeparam>
-    /// <param name="document"></param>
+    /// <param name="document">要查询的文档</param>
     /// <returns></returns>
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElements<T1, T2, T3>(this Document document) where T1 : Element where T2 : Element where T3 : Element

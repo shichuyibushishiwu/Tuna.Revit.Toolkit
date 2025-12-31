@@ -1,4 +1,4 @@
-﻿/************************************************************************************
+/************************************************************************************
    Author:十五
    CretaeTime:2023/3/3 21:46:09
    Mail:1012201478@qq.com
@@ -25,7 +25,7 @@ public static class ParameterFilterElementExtension
     /// <summary>
     /// Get parameter filter element's filter
     /// </summary>
-    /// <param name="element"></param>
+    /// <param name="element">The <see cref="Autodesk.Revit.DB.ParameterFilterElement"/>.</param>
     /// <returns></returns>
     public static ElementFilter GetElementFilter(this ParameterFilterElement element)
     {

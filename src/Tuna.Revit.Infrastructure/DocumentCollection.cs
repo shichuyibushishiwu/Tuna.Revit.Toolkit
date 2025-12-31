@@ -18,14 +18,14 @@ namespace Tuna.Revit.Infrastructure;
 /// <summary>
 /// 文档集合，提供当前打开的所有文档及激活文档
 /// </summary>
-public class DocumentCollection : IDocumentContextProvider, IEnumerable<IDocumentContext>
+public class DocumentCollection : RevitDocumentEvents, IDocumentContextProvider, IEnumerable<IDocumentContext>
 {
     private readonly List<IDocumentContext> _documents = new();
 
     /// <summary>
     /// 初始化文档集合，并构建当前打开的文档上下文列表
     /// </summary>
-    internal DocumentCollection(Application application)
+    internal DocumentCollection(Application application) : base(application)
     {
         foreach (Document doc in application.Documents)
         {
@@ -42,9 +42,6 @@ public class DocumentCollection : IDocumentContextProvider, IEnumerable<IDocumen
         {
             uiapp.ViewActivated += OnViewActivated;
         }
-
-        application.DocumentOpened += OnDocumentOpened;
-        application.DocumentClosing += OnDocumentClosing;
     }
 
     /// <summary>
@@ -99,7 +96,7 @@ public class DocumentCollection : IDocumentContextProvider, IEnumerable<IDocumen
     /// </summary>
     /// <param name="sender">事件源</param>
     /// <param name="e">文档打开事件参数</param>
-    protected void OnDocumentOpened(object? sender, DocumentOpenedEventArgs e)
+    protected override void OnDocumentOpened(object? sender, DocumentOpenedEventArgs e)
     {
         var doc = e.Document;
         if (doc == null)
@@ -120,7 +117,7 @@ public class DocumentCollection : IDocumentContextProvider, IEnumerable<IDocumen
     /// </summary>
     /// <param name="sender">事件源</param>
     /// <param name="e">文档关闭事件参数</param>
-    protected void OnDocumentClosing(object? sender, DocumentClosingEventArgs e)
+    protected override void OnDocumentClosing(object? sender, DocumentClosingEventArgs e)
     {
         var doc = e.Document;
         if (doc == null)

@@ -14,242 +14,237 @@ namespace Tuna.Revit.Infrastructure.Commands;
 public static class CommandResultExtensions
 {
     /// <summary>
-    /// 命令执行成功
+    /// 扩展命令的结果方法
     /// </summary>
-    /// <param name="command">Tuna 命令接口</param>
-    /// <returns>命令结果</returns>
-    public static CommandResult Succeeded(this ITunaCommand command)
+    extension(ITunaCommand command)
     {
-        if (command is null)
+        /// <summary>
+        /// 命令执行成功
+        /// </summary>
+        /// <returns>命令结果</returns>
+        public CommandResult Succeeded()
         {
-            throw new ArgumentNullException(nameof(command));
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+
+            return new CommandResult()
+            {
+                Result = Result.Succeeded
+            };
         }
 
-        return new CommandResult()
+        /// <summary>
+        /// 命令执行成功
+        /// </summary>
+        /// <param name="message">返回消息</param>
+        /// <returns>命令结果</returns>
+        public CommandResult Succeeded(string message)
         {
-            Result = Result.Succeeded
-        };
-    }
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
 
-    /// <summary>
-    /// 命令执行成功
-    /// </summary>
-    /// <param name="command">Tuna 命令接口</param>
-    /// <param name="message">返回消息</param>
-    /// <returns>命令结果</returns>
-    public static CommandResult Succeeded(this ITunaCommand command, string message)
-    {
-        if (command is null)
-        {
-            throw new ArgumentNullException(nameof(command));
+            return new CommandResult()
+            {
+                Result = Result.Succeeded,
+                Message = message
+            };
         }
 
-        return new CommandResult()
+        /// <summary>
+        /// 命令执行成功
+        /// </summary>
+        /// <param name="elements">返回元素集合</param>
+        /// <returns>命令结果</returns>
+        public CommandResult Succeeded(ElementSet elements)
         {
-            Result = Result.Succeeded,
-            Message = message
-        };
-    }
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
 
-    /// <summary>
-    /// 命令执行成功
-    /// </summary>
-    /// <param name="command">Tuna 命令接口</param>
-    /// <param name="elements">返回元素集合</param>
-    /// <returns>命令结果</returns>
-    public static CommandResult Succeeded(this ITunaCommand command, ElementSet elements)
-    {
-        if (command is null)
-        {
-            throw new ArgumentNullException(nameof(command));
+            return new CommandResult()
+            {
+                Result = Result.Succeeded,
+                ElementSet = elements
+            };
         }
 
-        return new CommandResult()
+        /// <summary>
+        /// 命令执行成功
+        /// </summary>
+        /// <param name="message">返回消息</param>
+        /// <param name="elements">返回元素集合</param>
+        /// <returns>命令结果</returns>
+        public CommandResult Succeeded(string message, ElementSet elements)
         {
-            Result = Result.Succeeded,
-            ElementSet = elements
-        };
-    }
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
 
-    /// <summary>
-    /// 命令执行成功
-    /// </summary>
-    /// <param name="command">Tuna 命令接口</param>
-    /// <param name="message">返回消息</param>
-    /// <param name="elements">返回元素集合</param>
-    /// <returns>命令结果</returns>
-    public static CommandResult Succeeded(this ITunaCommand command, string message, ElementSet elements)
-    {
-        if (command is null)
-        {
-            throw new ArgumentNullException(nameof(command));
+            return new CommandResult()
+            {
+                Result = Result.Succeeded,
+                Message = message,
+                ElementSet = elements
+            };
         }
 
-        return new CommandResult()
+        /// <summary>
+        /// 命令取消
+        /// </summary>
+        /// <returns>命令结果</returns>
+        public CommandResult Cancelled()
         {
-            Result = Result.Succeeded,
-            Message = message,
-            ElementSet = elements
-        };
-    }
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
 
-    /// <summary>
-    /// 命令取消
-    /// </summary>
-    /// <param name="command">Tuna 命令接口</param>
-    /// <returns>命令结果</returns>
-    public static CommandResult Cancelled(this ITunaCommand command)
-    {
-        if (command is null)
-        {
-            throw new ArgumentNullException(nameof(command));
+            return new CommandResult()
+            {
+                Result = Result.Cancelled
+            };
         }
 
-        return new CommandResult()
+        /// <summary>
+        /// 命令取消
+        /// </summary>
+        /// <param name="message">返回消息</param>
+        /// <returns>命令结果</returns>
+        public CommandResult Cancelled(string message)
         {
-            Result = Result.Cancelled
-        };
-    }
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
 
-    /// <summary>
-    /// 命令取消
-    /// </summary>
-    /// <param name="command">Tuna 命令接口</param>
-    /// <param name="message">返回消息</param>
-    /// <returns>命令结果</returns>
-    public static CommandResult Cancelled(this ITunaCommand command, string message)
-    {
-        if (command is null)
-        {
-            throw new ArgumentNullException(nameof(command));
+            return new CommandResult()
+            {
+                Result = Result.Cancelled,
+                Message = message
+            };
         }
 
-        return new CommandResult()
+        /// <summary>
+        /// 命令取消
+        /// </summary>
+        /// <param name="elements">返回元素集合</param>
+        /// <returns>命令结果</returns>
+        public CommandResult Cancelled(ElementSet elements)
         {
-            Result = Result.Cancelled,
-            Message = message
-        };
-    }
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
 
-    /// <summary>
-    /// 命令取消
-    /// </summary>
-    /// <param name="command">Tuna 命令接口</param>
-    /// <param name="elements">返回元素集合</param>
-    /// <returns>命令结果</returns>
-    public static CommandResult Cancelled(this ITunaCommand command, ElementSet elements)
-    {
-        if (command is null)
-        {
-            throw new ArgumentNullException(nameof(command));
+            return new CommandResult()
+            {
+                Result = Result.Cancelled,
+                ElementSet = elements
+            };
         }
 
-        return new CommandResult()
+        /// <summary>
+        /// 命令取消
+        /// </summary>
+        /// <param name="message">返回消息</param>
+        /// <param name="elements">返回元素集合</param>
+        /// <returns>命令结果</returns>
+        public CommandResult Cancelled(string message, ElementSet elements)
         {
-            Result = Result.Cancelled,
-            ElementSet = elements
-        };
-    }
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
 
-    /// <summary>
-    /// 命令取消
-    /// </summary>
-    /// <param name="command">Tuna 命令接口</param>
-    /// <param name="message">返回消息</param>
-    /// <param name="elements">返回元素集合</param>
-    /// <returns>命令结果</returns>
-    public static CommandResult Cancelled(this ITunaCommand command, string message, ElementSet elements)
-    {
-        if (command is null)
-        {
-            throw new ArgumentNullException(nameof(command));
+            return new CommandResult()
+            {
+                Result = Result.Cancelled,
+                Message = message,
+                ElementSet = elements
+            };
         }
 
-        return new CommandResult()
+        /// <summary>
+        /// 命令执行失败
+        /// </summary>
+        /// <param name="command">Tuna 命令接口</param>
+        /// <returns>命令结果</returns>
+        public CommandResult Failed()
         {
-            Result = Result.Cancelled,
-            Message = message,
-            ElementSet = elements
-        };
-    }
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
 
-    /// <summary>
-    /// 命令执行失败
-    /// </summary>
-    /// <param name="command">Tuna 命令接口</param>
-    /// <returns>命令结果</returns>
-    public static CommandResult Failed(this ITunaCommand command)
-    {
-        if (command is null)
-        {
-            throw new ArgumentNullException(nameof(command));
+            return new CommandResult()
+            {
+                Result = Result.Failed
+            };
         }
 
-        return new CommandResult()
+        /// <summary>
+        /// 命令执行失败
+        /// </summary>
+        /// <param name="message">返回消息</param>
+        /// <returns>命令结果</returns>
+        public CommandResult Failed(string message)
         {
-            Result = Result.Failed
-        };
-    }
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
 
-    /// <summary>
-    /// 命令执行失败
-    /// </summary>
-    /// <param name="command">Tuna 命令接口</param>
-    /// <param name="message">返回消息</param>
-    /// <returns>命令结果</returns>
-    public static CommandResult Failed(this ITunaCommand command, string message)
-    {
-        if (command is null)
-        {
-            throw new ArgumentNullException(nameof(command));
+            return new CommandResult()
+            {
+                Result = Result.Failed,
+                Message = message
+            };
         }
 
-        return new CommandResult()
+        /// <summary>
+        /// 命令执行失败
+        /// </summary>
+        /// <param name="elements">返回元素集合</param>
+        /// <returns>命令结果</returns>
+        public CommandResult Failed(ElementSet elements)
         {
-            Result = Result.Failed,
-            Message = message
-        };
-    }
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
 
-    /// <summary>
-    /// 命令执行失败
-    /// </summary>
-    /// <param name="command">Tuna 命令接口</param>
-    /// <param name="elements">返回元素集合</param>
-    /// <returns>命令结果</returns>
-    public static CommandResult Failed(this ITunaCommand command, ElementSet elements)
-    {
-        if (command is null)
-        {
-            throw new ArgumentNullException(nameof(command));
+            return new CommandResult()
+            {
+                Result = Result.Failed,
+                ElementSet = elements
+            };
         }
 
-        return new CommandResult()
+        /// <summary>
+        /// 命令执行失败
+        /// </summary>
+        /// <param name="message">返回消息</param>
+        /// <param name="elements">返回元素集合</param>
+        /// <returns>命令结果</returns>
+        public CommandResult Failed(string message, ElementSet elements)
         {
-            Result = Result.Failed,
-            ElementSet = elements
-        };
-    }
+            if (command is null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
 
-    /// <summary>
-    /// 命令执行失败
-    /// </summary>
-    /// <param name="command">Tuna 命令接口</param>
-    /// <param name="message">返回消息</param>
-    /// <param name="elements">返回元素集合</param>
-    /// <returns>命令结果</returns>
-    public static CommandResult Failed(this ITunaCommand command, string message, ElementSet elements)
-    {
-        if (command is null)
-        {
-            throw new ArgumentNullException(nameof(command));
+            return new CommandResult()
+            {
+                Result = Result.Failed,
+                Message = message,
+                ElementSet = elements
+            };
         }
-
-        return new CommandResult()
-        {
-            Result = Result.Failed,
-            Message = message,
-            ElementSet = elements
-        };
     }
 }

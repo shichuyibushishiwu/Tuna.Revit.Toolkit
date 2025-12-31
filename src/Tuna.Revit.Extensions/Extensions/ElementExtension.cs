@@ -56,7 +56,7 @@ public static class ElementExtension
     /// <para>Get element instances count in the document</para>
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <param name="document"></param>
+    /// <param name="document">要查询的文档</param>
     /// <returns></returns>
     public static IDictionary<ElementType, int> GetElementTypesAndInstancesCount<T>(this Document document) where T : HostObject
     {
@@ -111,7 +111,7 @@ public static class ElementExtension
     /// <para>Get the elements in the document whose has instances exist</para>
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <param name="document"></param>
+    /// <param name="document">要查询的文档</param>
     /// <returns>从文档中查询到的图元集合 <see cref="IEnumerable{T}"/></returns>
     public static IEnumerable<ElementType> GetElementTypesWhereHasInstances<T>(this Document document) where T : HostObject
     {

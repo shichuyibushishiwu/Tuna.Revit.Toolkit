@@ -1,4 +1,4 @@
-﻿/************************************************************************************
+/************************************************************************************
    Author:十五
    CretaeTime:2022/11/27 23:58:13
    Mail:1012201478@qq.com
@@ -86,7 +86,7 @@ public static class CollectorInViewExtension
     /// 根据内置类别过滤出视图中的图元对象
     /// <para>Get elements by <see cref="Autodesk.Revit.DB.BuiltInCategory"/></para> 
     /// </summary>
-    /// <param name="view"></param>
+    /// <param name="view">要查询的视图</param>
     /// <param name="category"></param>
     /// <returns>从文档中查询到的图元集合 <see cref="Autodesk.Revit.DB.FilteredElementCollector"/></returns>
     [DebuggerStepThrough]
@@ -100,7 +100,7 @@ public static class CollectorInViewExtension
     /// 根据内置类别过滤出视图中的图元对象
     /// <para>Get elements by <see cref="Autodesk.Revit.DB.BuiltInCategory"/></para> 
     /// </summary>
-    /// <param name="view">要查询的文档</param>
+    /// <param name="view">要查询的视图</param>
     /// <param name="category"></param>
     /// <param name="categories"></param>
     /// <returns>从文档中查询到的图元集合 <see cref="Autodesk.Revit.DB.FilteredElementCollector"/></returns>
@@ -121,7 +121,7 @@ public static class CollectorInViewExtension
     /// <c>[Slow Filter]</c>根据结构墙体实例参数 <b>「结构用途」</b> 过滤出视图中的结构墙体图元对象
     /// <para>Get elements by <see cref="Autodesk.Revit.DB.Structure.StructuralWallUsage"/></para> 
     /// </summary>
-    /// <param name="view"></param>
+    /// <param name="view">要查询的视图</param>
     /// <param name="structuralWallUsage"></param>
     /// <returns>从文档中查询到的图元集合 <see cref="Autodesk.Revit.DB.FilteredElementCollector"/></returns>
     [DebuggerStepThrough]
@@ -134,7 +134,7 @@ public static class CollectorInViewExtension
     /// <c>[Slow Filter]</c>根据结构族参数 <b>「用于模型行为的材质」</b> 过滤出视图中的结构图元对象
     ///<para> Get elements by <see cref="Autodesk.Revit.DB.Structure.StructuralMaterialType"/></para>
     /// </summary>
-    /// <param name="view"></param>
+    /// <param name="view">要查询的视图</param>
     /// <param name="structuralMaterialType"></param>
     /// <returns>从文档中查询到的图元集合 <see cref="Autodesk.Revit.DB.FilteredElementCollector"/></returns>
     [DebuggerStepThrough]
@@ -146,7 +146,7 @@ public static class CollectorInViewExtension
     /// <summary>
     /// <c>[Slow Filter]</c>根据结构图元的实例参数<b>「结构用途」</b> 过滤出当前视图中的结构图元对象
     /// </summary>
-    /// <param name="view"></param>
+    /// <param name="view">要查询的视图</param>
     /// <param name="structuralInstanceUsage"></param>
     /// <returns>从文档中查询到的图元集合 <see cref="Autodesk.Revit.DB.FilteredElementCollector"/></returns>
     [DebuggerStepThrough]
@@ -188,7 +188,7 @@ public static class CollectorInViewExtension
     /// <para>Get structural elements by <see cref="Autodesk.Revit.DB.Structure.StructuralType"/></para> 
     /// </summary>
     /// <remarks>同一个族类型从不同的按钮创建出来后的结构类型不同</remarks>
-    /// <param name="view"></param>
+    /// <param name="view">要查询的视图</param>
     /// <param name="structuralType"></param>
     /// <returns>从文档中查询到的图元集合 <see cref="Autodesk.Revit.DB.FilteredElementCollector"/></returns>
     [DebuggerStepThrough]
@@ -240,11 +240,7 @@ public static class CollectorInViewExtension
         return view.GetElements(new SelectableInViewFilter(view.Document, view.Id));
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="view"></param>
-    /// <returns></returns>
+
     //[DebuggerStepThrough]
     //public static FilteredElementCollector GetVisibleElements(this View view)
     //{

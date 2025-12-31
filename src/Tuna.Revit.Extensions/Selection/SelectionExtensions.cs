@@ -27,19 +27,19 @@ public static class SelectionExtensions
     /// <summary>
     /// Revit selection extensions
     /// </summary>
-    extension(UIDocument uiDocument)
-    {
+    
         /// <summary>
         /// 当前方法用于提示用户选择对象，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select one object , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="objectType">选择的对象类型</param>
         /// <param name="selectionFilter">选择过滤器</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         /// <exception cref="System.ArgumentNullException"></exception>
         [DebuggerStepThrough]
-        public SelectionResult<Reference> SelectObject(ObjectType objectType, ISelectionFilter? selectionFilter = null, string? prompt = null)
+        public static SelectionResult<Reference> SelectObject(this UIDocument uiDocument, ObjectType objectType, ISelectionFilter? selectionFilter = null, string? prompt = null)
         {
             ArgumentNullExceptionUtils.ThrowIfNullOrInvalid(uiDocument);
 
@@ -74,12 +74,13 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择对象，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select one object , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="objectType">选择的对象类型</param>
         /// <param name="elementPredicate">对要选择的图元进行筛选</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<Reference> SelectObject(ObjectType objectType, Func<Element, bool> elementPredicate, string? prompt = null)
+        public static SelectionResult<Reference> SelectObject(this UIDocument uiDocument, ObjectType objectType, Func<Element, bool> elementPredicate, string? prompt = null)
         {
             return uiDocument.SelectObject(objectType, new DefaultSelectionFilter(elementPredicate), prompt);
         }
@@ -88,12 +89,13 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择对象，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select one object , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="objectType">选择的对象类型</param>
         /// <param name="referencePredicate">对要选择的引用进行筛选</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<Reference> SelectObject(ObjectType objectType, Func<(Reference Reference, XYZ XYZ), bool> referencePredicate, string? prompt = null)
+        public static SelectionResult<Reference> SelectObject(this UIDocument uiDocument, ObjectType objectType, Func<(Reference Reference, XYZ XYZ), bool> referencePredicate, string? prompt = null)
         {
             return uiDocument.SelectObject(objectType, new DefaultSelectionFilter(referencePredicate: referencePredicate), prompt);
         }
@@ -102,13 +104,14 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择对象，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select one object , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="objectType">选择的对象类型</param>
         /// <param name="elementPredicate">对要选择的图元进行筛选</param>
         /// <param name="referencePredicate">对要选择的引用进行筛选</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<Reference> SelectObject(ObjectType objectType, Func<Element, bool> elementPredicate, Func<(Reference Reference, XYZ XYZ), bool>? referencePredicate, string? prompt = null)
+        public static SelectionResult<Reference> SelectObject(this UIDocument uiDocument, ObjectType objectType, Func<Element, bool> elementPredicate, Func<(Reference Reference, XYZ XYZ), bool>? referencePredicate, string? prompt = null)
         {
             return uiDocument.SelectObject(objectType, new DefaultSelectionFilter(elementPredicate, referencePredicate), prompt);
         }
@@ -117,11 +120,12 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择图元，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select one object , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="elementPredicate">对要选择的图元进行筛选</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<Element> SelectElement(Func<Element, bool> elementPredicate, string? prompt = null)
+        public static SelectionResult<Element> SelectElement(this UIDocument uiDocument, Func<Element, bool> elementPredicate, string? prompt = null)
         {
             SelectionResult<Reference> result = uiDocument.SelectObject(ObjectType.Element, elementPredicate, prompt);
             return new SelectionResult<Element>()
@@ -136,11 +140,12 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择图元，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select one object , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="builtInCategory">要选择的图元类别</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<Element> SelectElement(BuiltInCategory builtInCategory, string? prompt = null)
+        public static SelectionResult<Element> SelectElement(this UIDocument uiDocument, BuiltInCategory builtInCategory, string? prompt = null)
         {
             return uiDocument.SelectElement(new ElementId(builtInCategory), prompt);
         }
@@ -149,11 +154,12 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择图元，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select one object , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="builtInCategoryId">要选择的图元类别的 <see cref="Autodesk.Revit.DB.ElementId"/></param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<Element> SelectElement(ElementId? builtInCategoryId, string? prompt = null)
+        public static SelectionResult<Element> SelectElement(this UIDocument uiDocument, ElementId? builtInCategoryId, string? prompt = null)
         {
             return uiDocument.SelectElement(element => element.Category?.Id == builtInCategoryId, prompt);
         }
@@ -162,10 +168,11 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择图元，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select one object , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<Element> SelectElement(string? prompt = null)
+        public static SelectionResult<Element> SelectElement(this UIDocument uiDocument, string? prompt = null)
         {
             return uiDocument.SelectElement(_ => true, prompt);
         }
@@ -175,11 +182,12 @@ public static class SelectionExtensions
         /// <para>Prompts the user to select one object , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="elementPredicate">给用户的提示</param>
         /// <param name="prompt"></param>
         /// <returns></returns>
         [DebuggerStepThrough]
-        public SelectionResult<T> SelectElement<T>(Func<T, bool>? elementPredicate = null, string? prompt = null) where T : Element
+        public static SelectionResult<T> SelectElement<T>(this UIDocument uiDocument, Func<T, bool>? elementPredicate = null, string? prompt = null) where T : Element
         {
             SelectionResult<Element> result = uiDocument.SelectElement(element =>
             {
@@ -209,13 +217,14 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择多个对象，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select multiple objects , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="objectType">选择的对象类型</param>
         /// <param name="selectionFilter">选择过滤器</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         /// <exception cref="System.ArgumentNullException"></exception>
         [DebuggerStepThrough]
-        public SelectionResult<IList<Reference>> SelectObjects(ObjectType objectType, ISelectionFilter? selectionFilter = null, string? prompt = null)
+        public static SelectionResult<IList<Reference>> SelectObjects(this UIDocument uiDocument, ObjectType objectType, ISelectionFilter? selectionFilter = null, string? prompt = null)
         {
             ArgumentNullExceptionUtils.ThrowIfNullOrInvalid(uiDocument);
 
@@ -251,6 +260,7 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择多个对象，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select multiple objects , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="objectType">选择的对象类型</param>
         /// <param name="pPreSelected">预选择的对象</param>
         /// <param name="prompt">给用户的提示</param>
@@ -258,7 +268,7 @@ public static class SelectionExtensions
         /// <returns>用户选择的结果</returns>
         /// <exception cref="System.ArgumentNullException"></exception>
         [DebuggerStepThrough]
-        public SelectionResult<IList<Reference>> SelectObjects(ObjectType objectType, List<Reference> pPreSelected, string prompt, ISelectionFilter? selectionFilter = null)
+        public static SelectionResult<IList<Reference>> SelectObjects(this UIDocument uiDocument, ObjectType objectType, List<Reference> pPreSelected, string prompt, ISelectionFilter? selectionFilter = null)
         {
             ArgumentNullExceptionUtils.ThrowIfNullOrInvalid(uiDocument);
             ArgumentNullExceptionUtils.ThrowIfNull(pPreSelected);
@@ -292,13 +302,14 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择多个对象，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select multiple objects , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="objectType">选择的对象类型</param>
         /// <param name="elementPredicate">对要选择的图元进行筛选</param>
         /// <param name="referencePredicate">对要选择的引用进行筛选</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<IList<Reference>> SelectObjects(ObjectType objectType, Func<Element, bool> elementPredicate, Func<(Reference Reference, XYZ XYZ), bool>? referencePredicate, string? prompt = null)
+        public static SelectionResult<IList<Reference>> SelectObjects(this UIDocument uiDocument, ObjectType objectType, Func<Element, bool> elementPredicate, Func<(Reference Reference, XYZ XYZ), bool>? referencePredicate, string? prompt = null)
         {
             return uiDocument.SelectObjects(objectType, new DefaultSelectionFilter(elementPredicate, referencePredicate), prompt);
         }
@@ -307,12 +318,13 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择多个对象，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select multiple objects , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="objectType">选择的对象类型</param>
         /// <param name="elementPredicate">对要选择的图元进行筛选</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<IList<Reference>> SelectObjects(ObjectType objectType, Func<Element, bool> elementPredicate, string? prompt = null)
+        public static SelectionResult<IList<Reference>> SelectObjects(this UIDocument uiDocument, ObjectType objectType, Func<Element, bool> elementPredicate, string? prompt = null)
         {
             return uiDocument.SelectObjects(objectType, new DefaultSelectionFilter(elementPredicate), prompt);
         }
@@ -321,12 +333,13 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择多个对象，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select multiple objects , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="objectType">选择的对象类型</param>
         /// <param name="referencePredicate">对要选择的引用进行筛选</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<IList<Reference>> SelectObjects(ObjectType objectType, Func<(Reference Reference, XYZ XYZ), bool> referencePredicate, string? prompt = null)
+        public static SelectionResult<IList<Reference>> SelectObjects(this UIDocument uiDocument, ObjectType objectType, Func<(Reference Reference, XYZ XYZ), bool> referencePredicate, string? prompt = null)
         {
             return uiDocument.SelectObjects(objectType, new DefaultSelectionFilter(referencePredicate: referencePredicate), prompt);
         }
@@ -335,11 +348,12 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择多个图元，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select multiple objects , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="elementPredicate">对要选择的引用进行筛选</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<IEnumerable<Element>> SelectElements(Func<Element, bool> elementPredicate, string? prompt = null)
+        public static SelectionResult<IEnumerable<Element>> SelectElements(this UIDocument uiDocument, Func<Element, bool> elementPredicate, string? prompt = null)
         {
             SelectionResult<IList<Reference>> result = uiDocument.SelectObjects(ObjectType.Element, new DefaultSelectionFilter(elementPredicate), prompt);
             return new SelectionResult<IEnumerable<Element>>()
@@ -354,12 +368,13 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择多个图元，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select multiple objects , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="type">要选择的图元类型</param>
         /// <param name="elementPredicate">对要选择的引用进行筛选</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<IEnumerable<Element>> SelectElements(Type type, Func<Element, bool>? elementPredicate = null, string? prompt = null)
+        public static SelectionResult<IEnumerable<Element>> SelectElements(this UIDocument uiDocument, Type type, Func<Element, bool>? elementPredicate = null, string? prompt = null)
         {
             return uiDocument.SelectElements(e =>
             {
@@ -381,11 +396,12 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择多个图元，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select multiple objects , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="elementPredicate">对要选择的引用进行筛选</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<IEnumerable<T>> SelectElements<T>(Func<T, bool>? elementPredicate = null, string? prompt = null) where T : Element
+        public static SelectionResult<IEnumerable<T>> SelectElements<T>(this UIDocument uiDocument, Func<T, bool>? elementPredicate = null, string? prompt = null) where T : Element
         {
             SelectionResult<IEnumerable<Element>> result = uiDocument.SelectElements(element =>
             {
@@ -415,11 +431,12 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择多个图元，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select multiple objects , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="builtInCategory">要选择的图元类别</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<IEnumerable<Element>> SelectElements(BuiltInCategory builtInCategory, string? prompt = null)
+        public static SelectionResult<IEnumerable<Element>> SelectElements(this UIDocument uiDocument, BuiltInCategory builtInCategory, string? prompt = null)
         {
             return uiDocument.SelectElements(new ElementId(builtInCategory), prompt);
         }
@@ -428,11 +445,12 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择多个图元，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select multiple objects , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="builtInCategoryId">要选择的图元类别的<see cref="Autodesk.Revit.DB.ElementId"/></param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<IEnumerable<Element>> SelectElements(ElementId builtInCategoryId, string? prompt = null)
+        public static SelectionResult<IEnumerable<Element>> SelectElements(this UIDocument uiDocument, ElementId builtInCategoryId, string? prompt = null)
         {
             return uiDocument.SelectElements(element => element.Category?.Id == builtInCategoryId, prompt);
         }
@@ -441,10 +459,11 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择多个图元，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select multiple objects , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<IEnumerable<Element>> SelectElements(string? prompt = null)
+        public static SelectionResult<IEnumerable<Element>> SelectElements(this UIDocument uiDocument, string? prompt = null)
         {
             return uiDocument.SelectElements(_ => true, prompt);
         }
@@ -453,11 +472,12 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择一个项目中的点，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to pick a point on the active work plane , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="snapTypes">点的类型</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<XYZ> SelectPoint(ObjectSnapTypes snapTypes, string? prompt = null)
+        public static SelectionResult<XYZ> SelectPoint(this UIDocument uiDocument, ObjectSnapTypes snapTypes, string? prompt = null)
         {
             SelectionResult<XYZ> result = new SelectionResult<XYZ>();
             try
@@ -487,10 +507,11 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择一个项目中的点，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to pick a point on the active work plane , if the user cancels the operation (for example, through ESC), the method will return failed result. otherwise true</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<XYZ> SelectPoint(string? prompt = null)
+        public static SelectionResult<XYZ> SelectPoint(this UIDocument uiDocument, string? prompt = null)
         {
             SelectionResult<XYZ> result = new SelectionResult<XYZ>();
             try
@@ -520,11 +541,12 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择一个项目中的点，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select multiple elements by drawing a rectangle, if the user cancels the operation (for example, through ESC), the method will return failed result, otherwise true.</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="selectionFilter">选择过滤器</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<IList<Element>> SelectElementsByRectangle(ISelectionFilter? selectionFilter = null, string? prompt = null)
+        public static SelectionResult<IList<Element>> SelectElementsByRectangle(this UIDocument uiDocument, ISelectionFilter? selectionFilter = null, string? prompt = null)
         {
             SelectionResult<IList<Element>> selectionResult = new SelectionResult<IList<Element>>();
             try
@@ -557,11 +579,12 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择一个项目中的点，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select multiple elements by drawing a rectangle, if the user cancels the operation (for example, through ESC), the method will return failed result, otherwise true.</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="elementPredicate">对要选择的图元进行筛选</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<IList<Element>> SelectElementsByRectangle(Func<Element, bool> elementPredicate, string? prompt = null)
+        public static SelectionResult<IList<Element>> SelectElementsByRectangle(this UIDocument uiDocument, Func<Element, bool> elementPredicate, string? prompt = null)
         {
             return uiDocument.SelectElementsByRectangle(new DefaultSelectionFilter(elementPredicate), prompt);
         }
@@ -570,11 +593,12 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择一个项目中的点，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select multiple elements by drawing a rectangle, if the user cancels the operation (for example, through ESC), the method will return failed result, otherwise true.</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="builtInCategory">要选择的图元对象</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<IList<Element>> SelectElementsByRectangle(BuiltInCategory builtInCategory, string? prompt = null)
+        public static SelectionResult<IList<Element>> SelectElementsByRectangle(this UIDocument uiDocument, BuiltInCategory builtInCategory, string? prompt = null)
         {
             return uiDocument.SelectElementsByRectangle(new ElementId(builtInCategory), prompt);
         }
@@ -583,11 +607,12 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择一个项目中的点，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select multiple elements by drawing a rectangle, if the user cancels the operation (for example, through ESC), the method will return failed result, otherwise true.</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="builtInCategoryId">要选择的图元对象的 <see cref="Autodesk.Revit.DB.ElementId"/></param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<IList<Element>> SelectElementsByRectangle(ElementId builtInCategoryId, string? prompt = null)
+        public static SelectionResult<IList<Element>> SelectElementsByRectangle(this UIDocument uiDocument, ElementId builtInCategoryId, string? prompt = null)
         {
             return uiDocument.SelectElementsByRectangle(element => element.Category?.Id == builtInCategoryId, prompt);
         }
@@ -596,10 +621,11 @@ public static class SelectionExtensions
         /// 当前方法用于提示用户选择一个项目中的点，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// <para>Prompts the user to select multiple elements by drawing a rectangle, if the user cancels the operation (for example, through ESC), the method will return failed result, otherwise true.</para>
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<IList<Element>> SelectElementsByRectangle(string? prompt = null)
+        public static SelectionResult<IList<Element>> SelectElementsByRectangle(this UIDocument uiDocument, string? prompt = null)
         {
             return uiDocument.SelectElementsByRectangle(_ => true, prompt);
         }
@@ -607,11 +633,12 @@ public static class SelectionExtensions
         /// <summary>
         /// 当前方法用于提示用户进行框选确定选择框的范围，如果用户取消了操作（比如用户按下 ESC），那么将会返回一个失败的结果，即 <see cref="SelectionResult{T}"/> 的属性 Succeeded 将为false，反之，为true
         /// </summary>
+        /// <param name="uiDocument">The <see cref="Autodesk.Revit.UI.UIDocument"/>.</param>
         /// <param name="pickBoxStyle">盒子的类型</param>
         /// <param name="prompt">给用户的提示</param>
         /// <returns>用户选择的结果</returns>
         [DebuggerStepThrough]
-        public SelectionResult<PickedBox> SelectBox(PickBoxStyle pickBoxStyle = PickBoxStyle.Crossing, string? prompt = null)
+        public static SelectionResult<PickedBox> SelectBox(this UIDocument uiDocument, PickBoxStyle pickBoxStyle = PickBoxStyle.Crossing, string? prompt = null)
         {
             SelectionResult<PickedBox> selectionResult = new SelectionResult<PickedBox>();
             try
@@ -636,5 +663,5 @@ public static class SelectionExtensions
             
             return selectionResult;
         }
-    }
+    
 }

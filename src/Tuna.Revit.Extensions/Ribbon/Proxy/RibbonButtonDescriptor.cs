@@ -11,13 +11,13 @@ namespace Tuna.Revit.Extensions.Ribbon.Proxy;
 
 internal class RibbonButtonDescriptor
 {
-    public Action<RibbonButtonData> Handle { get; set; }
+    public Action<RibbonButtonData> Handle { get; private set; } = default!;
 
-    public Type CommandType { get; set; }
+    public Type CommandType { get; private set; } = default!;
 
-    public IRibbonButtonData RibbonButtonData { get; set; }
+    public IRibbonButtonData RibbonButtonData { get; private set; } = default!;
 
-    public PushButtonData PushButtonData { get; set; }
+    public PushButtonData PushButtonData { get; private set; } = default!;
 
     public static RibbonButtonDescriptor CreateRibbonButtonDescriptor(Action<PushButtonData>? handle, Type commandType)
     {
