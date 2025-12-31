@@ -8,7 +8,7 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <NoWarn>NU5128</NoWarn>
     <PackageId>Tuna.Revit.Application.Template</PackageId>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Authors>Shiwu</Authors>
     <Company>Tuna</Company>
     <Description>Project template for Revit add-ins using Tuna.Revit.Toolkit</Description>
