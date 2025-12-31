@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Company>Tuna</Company>
@@ -14,35 +14,35 @@
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(TargetFramework.Contains(net452))'">
-		<PackageReference Include="Tuna.Revit.Extensions" Version="2016.2.21">
+		<PackageReference Include="Tuna.Revit.Extensions" Version="2016.2.22">
 			<IncludeAssets>compile</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework.Contains(net46))'">
-		<PackageReference Include="Tuna.Revit.Extensions" Version="2018.2.21">
+		<PackageReference Include="Tuna.Revit.Extensions" Version="2018.2.22">
 			<IncludeAssets>compile</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework.Contains(net47))'">
-		<PackageReference Include="Tuna.Revit.Extensions" Version="2020.0.21">
+		<PackageReference Include="Tuna.Revit.Extensions" Version="2020.0.22">
 			<IncludeAssets>compile</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework.Contains(net48))'">
-		<PackageReference Include="Tuna.Revit.Extensions" Version="2024.0.21">
+		<PackageReference Include="Tuna.Revit.Extensions" Version="2024.0.22">
 			<IncludeAssets>compile</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework.Contains(net8.0-windows))'">
-		<PackageReference Include="Tuna.Revit.Extensions" Version="2026.0.21">
+		<PackageReference Include="Tuna.Revit.Extensions" Version="2026.0.22">
 			<IncludeAssets>compile</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
@@ -57,22 +57,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj"
-			SetTargetFramework="TargetFramework=net452" Condition="'$(TargetFramework)' == 'net452'" />
-		<ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj"
-			SetTargetFramework="TargetFramework=net46" Condition="'$(TargetFramework)' == 'net46'" />
-		<ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj"
-			SetTargetFramework="TargetFramework=net47" Condition="'$(TargetFramework)' == 'net47'" />
-		<ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj"
-			SetTargetFramework="TargetFramework=net48" Condition="'$(TargetFramework)' == 'net48'" />
-		<ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj"
-			SetTargetFramework="TargetFramework=net8.0-windows"
-			Condition="'$(TargetFramework)' == 'net8.0-windows'" />
+		<ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj" SetTargetFramework="TargetFramework=net452" Condition="'$(TargetFramework)' == 'net452'" />
+		<ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj" SetTargetFramework="TargetFramework=net46" Condition="'$(TargetFramework)' == 'net46'" />
+		<ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj" SetTargetFramework="TargetFramework=net47" Condition="'$(TargetFramework)' == 'net47'" />
+		<ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj" SetTargetFramework="TargetFramework=net48" Condition="'$(TargetFramework)' == 'net48'" />
+		<ProjectReference Include="..\Tuna.Runtime\Tuna.Runtime.csproj" SetTargetFramework="TargetFramework=net8.0-windows" Condition="'$(TargetFramework)' == 'net8.0-windows'" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="readme.md" Pack="True" PackagePath="\" />
 	</ItemGroup>
+
+
+
+
 
 
 </Project>

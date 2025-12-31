@@ -7,7 +7,7 @@
 		<LangVersion>preview</LangVersion>
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>true</UseWindowsForms>
-		<TunaVersion>21</TunaVersion>
+		<TunaVersion>23</TunaVersion>
 		<XamlDebuggingInformation>True</XamlDebuggingInformation>
 		<Authors>Shiwu</Authors>
 	</PropertyGroup>
@@ -232,6 +232,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Update="Assets\Icon\gift16.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Assets\Icon\gift32.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="Properties\Settings.settings">
 			<Generator>SettingsSingleFileGenerator</Generator>
 			<LastGenOutput>Settings.Designer.cs</LastGenOutput>

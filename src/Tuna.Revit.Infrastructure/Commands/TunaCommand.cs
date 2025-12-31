@@ -28,6 +28,7 @@ public abstract class TunaCommand : IExternalCommand, IExternalCommandAvailabili
     public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
     {
         Host = HostApplication.Instance;
+        
         CommandContext = new CommandContext();
 
         try

@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Tuna.Revit.Infrastructure.Commands;
 using Autodesk.Revit.Attributes;
+using Tuna.Revit.Extensions;
 
 namespace Tuna.Revit.Template.Commands
-{    
+{
+    [CommandButton(LargeImage = "gift32.png", Image = "gift16.png",Title = "Tuna Hello World")]
     [Transaction(TransactionMode.Manual)]
-    internal class Command : TunaCommand
+    internal class Command : Infrastructure.Commands.TunaCommand
     {
         public override CommandResult Execute()
         {

@@ -19,12 +19,16 @@ public class CommandContext : ICommandContext
     /// </summary>
     public CommandContext()
     {
-        ActivedDocument = HostApplication.Instance.ApplicationContext.Documents.ActivedDocument;
+        CurrentApplication = HostApplication.Instance.Applications.ActivedApplication;
+        ExternalEventService = CurrentApplication.ExternalEventService;
     }
+
+    /// <inheritdoc/>
+    public ITunaApplication CurrentApplication { get; }
 
     /// <inheritdoc/>
     public IExternalEventService ExternalEventService { get; } = default!;
 
     /// <inheritdoc/>
-    public IDocumentContext? ActivedDocument { get; set; }
+    public IDocumentContext? ActivedDocument => HostApplication.Instance.ApplicationContext.Documents.ActivedDocument;
 }

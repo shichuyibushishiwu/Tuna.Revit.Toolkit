@@ -30,8 +30,7 @@ public class HostApplicationContext
         Application = UIApplication.Application;
         ControlledApplication = UIControlledApplication.ControlledApplication;
 
-        var app = HostApplication.Instance.ApplicationContext.Application;
-        Documents = new DocumentCollection(app);
+        Documents = new DocumentCollection(Application);
     }
 
     /// <summary>

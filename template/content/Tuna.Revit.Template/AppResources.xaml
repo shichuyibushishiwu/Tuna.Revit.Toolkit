@@ -5,6 +5,8 @@
         <Setter Property="FontSize" Value="25" />
         <Setter Property="FontWeight" Value="Black" />
         <Setter Property="Foreground" Value="Black" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
 
 </ResourceDictionary>

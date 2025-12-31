@@ -40,7 +40,8 @@ public abstract class TunaApplication : TunaApplicationBase, IExternalApplicatio
     {
         var applicationAssembly = GetType().Assembly;
         ExternalEventService = new ExternalEventService();
-
+        ApplicationIdentity = new TunaApplicationIdentity(application.ActiveAddInId);
+         
         Result result;
         try
         {
