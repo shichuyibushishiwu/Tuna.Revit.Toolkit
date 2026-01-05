@@ -75,6 +75,12 @@ public class BuiltInCategories
     public static ElementId PipeInsulations { get; } = new ElementId(BuiltInCategory.OST_PipeInsulations);
 
     /// <summary>
+    /// 材质
+    /// <para><see cref="Autodesk.Revit.DB.BuiltInCategory.OST_Materials"/></para>
+    /// </summary>
+    public static ElementId Materials{ get; } = new ElementId(BuiltInCategory.OST_Materials);
+
+    /// <summary>
     /// 专用设备标记
     /// <para><see cref="Autodesk.Revit.DB.BuiltInCategory.OST_SpecialityEquipmentTags"/></para>
     /// </summary>

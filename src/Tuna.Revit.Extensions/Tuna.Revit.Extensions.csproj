@@ -245,8 +245,4 @@
 	  <None Update="readme.md" Pack="True" PackagePath="\" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Document\" />
-	</ItemGroup>
-
 </Project>
