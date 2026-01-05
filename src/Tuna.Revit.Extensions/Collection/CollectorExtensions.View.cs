@@ -22,7 +22,7 @@ namespace Tuna.Revit.Extensions;
 /// <summary>
 /// Revit element filters extension
 /// </summary>
-public static class CollectorInViewExtension
+public static class CollectorInViewExtensions
 {
     /// <summary>
     /// 根据视图获取视图中的所有图元对象
@@ -73,7 +73,7 @@ public static class CollectorInViewExtension
             throw new ArgumentException("type is not a subclass of element");
         }
 
-        if (CollectorExtension.FilterTypes.TryGetValue(type, out Type? filterType))
+        if (CollectorInDocumentExtensions.FilterTypes.TryGetValue(type, out Type? filterType))
         {
             return view.GetElements((Activator.CreateInstance(filterType) as ElementFilter)!);
         }

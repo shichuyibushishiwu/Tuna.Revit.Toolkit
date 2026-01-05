@@ -28,7 +28,7 @@ namespace Tuna.Revit.Extensions;
 /// <summary>
 /// revit document extension
 /// </summary>
-public static class DocumentExtension
+public static class DocumentExtensions
 {
     /// <summary>
     /// Is check element exist

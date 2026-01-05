@@ -24,7 +24,7 @@ namespace Tuna.Revit.Extensions;
 /// <summary>
 /// Revit element filters extension
 /// </summary>
-public static class CollectorExtension
+public static class CollectorInDocumentExtensions
 {
     /// <summary>
     /// Spatial element types
@@ -256,18 +256,57 @@ public static class CollectorExtension
     /// </summary>
     /// <param name="document">要查询的文档</param>
     /// <param name="categoryId">要查询的类别<see cref="Autodesk.Revit.DB.ElementId"/></param>
-    /// <param name="categories">要查询的其他类别<see cref="Autodesk.Revit.DB.ElementId"/></param>
+    /// <param name="categoryIds">要查询的其他类别<see cref="Autodesk.Revit.DB.ElementId"/></param>
     /// <returns></returns>
     [DebuggerStepThrough]
-    public static FilteredElementCollector GetElements(this Document document, ElementId categoryId, params ElementId[] categories)
+    public static FilteredElementCollector GetElements(this Document document, ElementId categoryId, params ElementId[] categoryIds)
     {
-        if (categories.Length == 0)
+        if (categoryIds.Length == 0)
         {
             return document.GetElements(categoryId);
         }
 
-        List<ElementId> allCategories = categories.ToList();
+        List<ElementId> allCategories = categoryIds.ToList();
         allCategories.Add(categoryId);
+
+        return document.GetElements(new ElementMulticategoryFilter(allCategories)).WhereElementIsNotElementType();
+    }
+
+    /// <summary>
+    /// <c>[Quick Filter]</c>
+    /// 根据内置类别的<see cref="Autodesk.Revit.DB.ElementId"/>过滤出文档中的图元对象,
+    /// 扩展包提供了常量类型<see cref="BuiltInCategories"/>可进行<c>Id</c>的调用
+    /// <para>Get elements in the document by element category id , you can used <see cref="BuiltInParameters"/> to get parameter id</para>
+    /// </summary>
+    /// <param name="document">要查询的文档</param>
+    /// <param name="category">要查询的类别<see cref="Autodesk.Revit.DB.Category"/></param>
+    /// <returns>从文档中查询到的图元集合 <see cref="Autodesk.Revit.DB.FilteredElementCollector"/></returns>
+    [DebuggerStepThrough]
+    public static FilteredElementCollector GetElements(this Document document, Category category)
+    {
+        return document.GetElements(new ElementCategoryFilter(category.Id)).WhereElementIsNotElementType();
+    }
+
+    /// <summary>
+    /// <c>[Quick Filter]</c>
+    /// 根据内置类别的<see cref="Autodesk.Revit.DB.ElementId"/>过滤出文档中的图元对象,
+    /// 扩展包提供了常量类型<see cref="BuiltInCategories"/>可进行<c>Id</c>的调用
+    /// <para>Get elements in the document by element category id , you can used <see cref="BuiltInParameters"/> to get parameter id</para>
+    /// </summary>
+    /// <param name="document">要查询的文档</param>
+    /// <param name="category">要查询的类别<see cref="Autodesk.Revit.DB.Category"/></param>
+    /// <param name="categories">要查询的其他类别<see cref="Autodesk.Revit.DB.Category"/></param>
+    /// <returns></returns>
+    [DebuggerStepThrough]
+    public static FilteredElementCollector GetElements(this Document document, Category category, params Category[] categories)
+    {
+        if (categories.Length == 0)
+        {
+            return document.GetElements(category);
+        }
+
+        List<ElementId> allCategories = categories.Select(c => c.Id).ToList();
+        allCategories.Add(category.Id);
 
         return document.GetElements(new ElementMulticategoryFilter(allCategories)).WhereElementIsNotElementType();
     }

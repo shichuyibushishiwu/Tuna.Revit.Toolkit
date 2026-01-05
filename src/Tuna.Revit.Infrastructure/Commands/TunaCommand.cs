@@ -28,13 +28,11 @@ public abstract class TunaCommand : IExternalCommand, IExternalCommandAvailabili
     public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
     {
         Host = HostApplication.Instance;
-        
         CommandContext = new CommandContext();
 
         try
         {
             CommandResult commandResult = Execute();
-
             if (!string.IsNullOrEmpty(commandResult.Message))
             {
                 message = commandResult.Message!;
@@ -62,6 +60,7 @@ public abstract class TunaCommand : IExternalCommand, IExternalCommandAvailabili
     {
         try
         {
+            CommandContext = new CommandContext();
             CanExecute();
         }
         catch (Exception)
