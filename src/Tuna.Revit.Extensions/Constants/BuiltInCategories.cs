@@ -78,7 +78,7 @@ public class BuiltInCategories
     /// 材质
     /// <para><see cref="Autodesk.Revit.DB.BuiltInCategory.OST_Materials"/></para>
     /// </summary>
-    public static ElementId Materials{ get; } = new ElementId(BuiltInCategory.OST_Materials);
+    public static ElementId Materials { get; } = new ElementId(BuiltInCategory.OST_Materials);
 
     /// <summary>
     /// 专用设备标记
@@ -1140,6 +1140,12 @@ public class BuiltInCategories
     /// <para><see cref="Autodesk.Revit.DB.BuiltInCategory.OST_RoomTags"/></para>
     /// </summary>
     public static ElementId RoomTags { get; } = new ElementId(BuiltInCategory.OST_RoomTags);
+
+    /// <summary>
+    /// 房间
+    /// <para><see cref="Autodesk.Revit.DB.BuiltInCategory.OST_Rooms"/></para>
+    /// </summary>
+    public static ElementId Rooms { get; } = new ElementId(BuiltInCategory.OST_Rooms);
 
     /// <summary>
     /// 导向轴网

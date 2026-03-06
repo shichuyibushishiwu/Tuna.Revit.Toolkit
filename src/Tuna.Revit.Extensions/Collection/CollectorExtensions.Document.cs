@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Tuna.Revit.Extensions;
+using static Tuna.Revit.Extensions.ElementFilterFactory;
 
 namespace Tuna.Revit.Extensions;
 
@@ -101,7 +102,7 @@ public static class CollectorInDocumentExtensions
             return document.GetElements((Activator.CreateInstance(filterType) as ElementFilter)!);
         }
 
-        return document.GetElements(new ElementClassFilter(type));
+        return document.GetElements(Class(type));
     }
 
     /// <summary>
@@ -122,8 +123,8 @@ public static class CollectorInDocumentExtensions
         }
 
         List<Type> allTypes = types.ToList();
-        allTypes.Add(type);
-        return document.GetElements(new ElementMulticlassFilter(allTypes));
+        allTypes.Insert(0, type);
+        return document.GetElements(Multiclass(allTypes));
     }
 
     /// <summary>
@@ -137,7 +138,7 @@ public static class CollectorInDocumentExtensions
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElements(this Document document, BuiltInCategory category)
     {
-        return document.GetElements(new ElementCategoryFilter(category)).WhereElementIsNotElementType();
+        return document.GetElements(Category(category)).WhereElementIsNotElementType();
     }
 
     /// <summary>
@@ -157,8 +158,8 @@ public static class CollectorInDocumentExtensions
             return document.GetElements(category);
         }
         List<BuiltInCategory> allCategories = categories.ToList();
-        allCategories.Add(category);
-        return document.GetElements(new ElementMulticategoryFilter(allCategories)).WhereElementIsNotElementType();
+        allCategories.Insert(0, category);
+        return document.GetElements(Multicategory(allCategories)).WhereElementIsNotElementType();
     }
 
     /// <summary>
@@ -172,7 +173,7 @@ public static class CollectorInDocumentExtensions
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElements(this Document document, StructuralWallUsage structuralWallUsage)
     {
-        return document.GetElements(new StructuralWallUsageFilter(structuralWallUsage));
+        return document.GetElements(StructuralWallUsage(structuralWallUsage));
     }
 
     /// <summary>
@@ -186,7 +187,7 @@ public static class CollectorInDocumentExtensions
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElements(this Document document, StructuralMaterialType structuralMaterialType)
     {
-        return document.GetElements(new StructuralMaterialTypeFilter(structuralMaterialType));
+        return document.GetElements(StructuralMaterialType(structuralMaterialType));
     }
 
     /// <summary>
@@ -200,7 +201,7 @@ public static class CollectorInDocumentExtensions
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElements(this Document document, StructuralInstanceUsage structuralInstanceUsage)
     {
-        return document.GetElements(new StructuralInstanceUsageFilter(structuralInstanceUsage));
+        return document.GetElements(StructuralInstanceUsage(structuralInstanceUsage));
     }
 
     /// <summary>
@@ -215,7 +216,7 @@ public static class CollectorInDocumentExtensions
     public static FilteredElementCollector GetElements(this Document document, FamilySymbol familySymbol)
     {
         ArgumentNullExceptionUtils.ThrowIfNullOrInvalid(familySymbol);
-        return document.GetElements(new FamilyInstanceFilter(document, familySymbol.Id));
+        return document.GetElements(FamilyInstance(document, familySymbol.Id));
     }
 
     /// <summary>
@@ -230,7 +231,7 @@ public static class CollectorInDocumentExtensions
     public static FilteredElementCollector GetElements(this Document document, Level level)
     {
         ArgumentNullExceptionUtils.ThrowIfNullOrInvalid(level);
-        return document.GetElements(new ElementLevelFilter(level.Id));
+        return document.GetElements(Level(level.Id));
     }
 
     /// <summary>
@@ -245,7 +246,7 @@ public static class CollectorInDocumentExtensions
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElements(this Document document, ElementId categoryId)
     {
-        return document.GetElements(new ElementCategoryFilter(categoryId)).WhereElementIsNotElementType();
+        return document.GetElements(Category(categoryId)).WhereElementIsNotElementType();
     }
 
     /// <summary>
@@ -267,9 +268,9 @@ public static class CollectorInDocumentExtensions
         }
 
         List<ElementId> allCategories = categoryIds.ToList();
-        allCategories.Add(categoryId);
+        allCategories.Insert(0, categoryId);
 
-        return document.GetElements(new ElementMulticategoryFilter(allCategories)).WhereElementIsNotElementType();
+        return document.GetElements(Multicategory(allCategories)).WhereElementIsNotElementType();
     }
 
     /// <summary>
@@ -284,7 +285,7 @@ public static class CollectorInDocumentExtensions
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElements(this Document document, Category category)
     {
-        return document.GetElements(new ElementCategoryFilter(category.Id)).WhereElementIsNotElementType();
+        return document.GetElements(Category(category.Id)).WhereElementIsNotElementType();
     }
 
     /// <summary>
@@ -306,9 +307,9 @@ public static class CollectorInDocumentExtensions
         }
 
         List<ElementId> allCategories = categories.Select(c => c.Id).ToList();
-        allCategories.Add(category.Id);
+        allCategories.Insert(0, category.Id);
 
-        return document.GetElements(new ElementMulticategoryFilter(allCategories)).WhereElementIsNotElementType();
+        return document.GetElements(Multicategory(allCategories)).WhereElementIsNotElementType();
     }
 
     /// <summary>
@@ -323,7 +324,7 @@ public static class CollectorInDocumentExtensions
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElements(this Document document, StructuralType structuralType)
     {
-        return document.GetElements(new ElementStructuralTypeFilter(structuralType));
+        return document.GetElements(ElementStructuralType(structuralType));
     }
 
     /// <summary>
@@ -335,9 +336,9 @@ public static class CollectorInDocumentExtensions
     /// <param name="curveElementType"></param>
     /// <returns>从文档中查询到的图元集合 <see cref="Autodesk.Revit.DB.FilteredElementCollector"/></returns>
     [DebuggerStepThrough]
-    public static FilteredElementCollector GetElements(this Document document, CurveElementType curveElementType)
+    public static IEnumerable<T> GetElements<T>(this Document document, CurveElementType curveElementType) where T : CurveElement
     {
-        return document.GetElements(new CurveElementFilter(curveElementType));
+        return document.GetElements(CurveElement(curveElementType)).Cast<T>();
     }
 
     /// <summary>
@@ -360,6 +361,35 @@ public static class CollectorInDocumentExtensions
     }
 
     /// <summary>
+    /// 按内置类别获取文档中的图元（并转换为指定类型）
+    /// <para>Get elements by <see cref="Autodesk.Revit.DB.BuiltInCategory"/> and cast to <typeparamref name="T"/></para>
+    /// </summary>
+    /// <typeparam name="T">图元类型（必须继承 <see cref="Autodesk.Revit.DB.Element"/>）</typeparam>
+    /// <param name="document">要查询的文档</param>
+    /// <param name="category">内置类别</param>
+    /// <returns>满足类别条件的图元序列 <see cref="IEnumerable{T}"/></returns>
+
+    [DebuggerStepThrough]
+    public static IEnumerable<T> GetElements<T>(this Document document, BuiltInCategory category) where T : Element
+    {
+        return document.GetElements<T>(Category(category)).Cast<T>();
+    }
+
+    /// <summary>
+    /// 按类别Id获取文档中的图元（并转换为指定类型）
+    /// <para>Get elements by category <see cref="Autodesk.Revit.DB.ElementId"/> and cast to <typeparamref name="T"/></para>
+    /// </summary>
+    /// <typeparam name="T">图元类型（必须继承 <see cref="Autodesk.Revit.DB.Element"/>）</typeparam>
+    /// <param name="document">要查询的文档</param>
+    /// <param name="categoryId">类别Id（通常可由 <see cref="BuiltInCategories"/> 获取）</param>
+    /// <returns>满足类别条件的图元序列 <see cref="IEnumerable{T}"/></returns>
+    [DebuggerStepThrough]
+    public static IEnumerable<T> GetElements<T>(this Document document, ElementId categoryId) where T : Element
+    {
+        return document.GetElements<T>(Category(categoryId)).Cast<T>();
+    }
+
+    /// <summary>
     /// 根据类型过滤出文档中的图元对象
     /// <para>Get the elements in the document which type is <typeparamref name="T"/></para>
     /// </summary>
@@ -368,10 +398,10 @@ public static class CollectorInDocumentExtensions
     /// <param name="elementFilter">集合过滤的条件</param>
     /// <returns>从文档中查询到的图元集合 <see cref="Autodesk.Revit.DB.FilteredElementCollector"/></returns>
     [DebuggerStepThrough]
-    public static FilteredElementCollector GetElements<T>(this Document document, ElementFilter elementFilter) where T : Element
+    public static IEnumerable<T> GetElements<T>(this Document document, ElementFilter elementFilter) where T : Element
     {
         ArgumentNullExceptionUtils.ThrowIfNull(elementFilter);
-        return document.GetElements(typeof(T)).WherePasses(elementFilter);
+        return document.GetElements(typeof(T)).WherePasses(elementFilter).Cast<T>();
     }
 
     /// <summary>
@@ -415,7 +445,7 @@ public static class CollectorInDocumentExtensions
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElementTypes(this Document document, ElementId categoryId)
     {
-        return document.GetElements(new ElementCategoryFilter(categoryId)).WhereElementIsElementType();
+        return document.GetElements(Category(categoryId)).WhereElementIsElementType();
     }
 
     /// <summary>
@@ -436,8 +466,8 @@ public static class CollectorInDocumentExtensions
             document.GetElements(categoryId);
         }
         List<ElementId> ids = categories.ToList();
-        ids.Add(categoryId);
-        return document.GetElements(new ElementMulticategoryFilter(ids)).WhereElementIsElementType();
+        ids.Insert(0, categoryId);
+        return document.GetElements(Multicategory(ids)).WhereElementIsElementType();
     }
 
     /// <summary>
@@ -451,7 +481,7 @@ public static class CollectorInDocumentExtensions
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElementTypes(this Document document, BuiltInCategory category)
     {
-        return document.GetElements(new ElementCategoryFilter(category)).WhereElementIsElementType();
+        return document.GetElements(Category(category)).WhereElementIsElementType();
     }
 
     /// <summary>
@@ -471,8 +501,8 @@ public static class CollectorInDocumentExtensions
             document.GetElements(category);
         }
         List<BuiltInCategory> categoriesList = categories.ToList();
-        categoriesList.Add(category);
-        return document.GetElements(new ElementMulticategoryFilter(categoriesList)).WhereElementIsElementType();
+        categoriesList.Insert(0, category);
+        return document.GetElements(Multicategory(categoriesList)).WhereElementIsElementType();
     }
 
     /// <summary>
@@ -499,7 +529,7 @@ public static class CollectorInDocumentExtensions
     [DebuggerStepThrough]
     public static IEnumerable<Family> GetStructualFamilies(this Document document, StructuralMaterialType structuralMaterialType)
     {
-        return document.GetElements(new FamilyStructuralMaterialTypeFilter(structuralMaterialType)).Cast<Family>();
+        return document.GetElements(FamilyStructuralMaterialType(structuralMaterialType)).Cast<Family>();
     }
 
     /// <summary>
@@ -512,7 +542,7 @@ public static class CollectorInDocumentExtensions
     [DebuggerStepThrough]
     public static IEnumerable<FamilySymbol> GetFamilySymbols(this Document document, ElementId familyId)
     {
-        return document.GetElements(new FamilySymbolFilter(familyId)).Cast<FamilySymbol>();
+        return document.GetElements(FamilySymbol(familyId)).Cast<FamilySymbol>();
     }
 
     /// <summary>
@@ -525,7 +555,7 @@ public static class CollectorInDocumentExtensions
     [DebuggerStepThrough]
     public static IEnumerable<Element> GetGraphicElements(this Document document, Func<Element, bool>? predicate = null)
     {
-        var elements = document.GetElements(new ElementIsElementTypeFilter(true))
+        var elements = document.GetElements(ElementIsElementType(true))
             .ToElements()
             .Where(element => element.Category != null && (element.Category.HasMaterialQuantities || IsSpecialElement(element.Category)));
 

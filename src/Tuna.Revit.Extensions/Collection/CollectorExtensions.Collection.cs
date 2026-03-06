@@ -98,9 +98,10 @@ public static class CollectorInListExtension
         {
             return document.GetElementsInCollector(elementIds, type);
         }
+
         List<Type> allTypes = types.ToList();
-        allTypes.Add(type);
-        return document.GetElementsInCollector(elementIds, new ElementMulticlassFilter(allTypes));
+        allTypes.Insert(0, type);
+        return document.GetElementsInCollector(elementIds, Multiclass(allTypes));
     }
 
     /// <summary>
@@ -114,7 +115,7 @@ public static class CollectorInListExtension
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElementsInCollector(this Document document, ICollection<ElementId> elementIds, BuiltInCategory builtInCategory)
     {
-        return document.GetElementsInCollector(elementIds, new ElementCategoryFilter(builtInCategory));
+        return document.GetElementsInCollector(elementIds, Category(builtInCategory));
     }
 
     /// <summary>
@@ -133,9 +134,10 @@ public static class CollectorInListExtension
         {
             return document.GetElementsInCollector(elementIds, builtInCategory);
         }
+
         List<BuiltInCategory> allCategories = categories.ToList();
-        allCategories.Add(builtInCategory);
-        return document.GetElementsInCollector(elementIds, new ElementMulticategoryFilter(allCategories));
+        allCategories.Insert(0,builtInCategory);
+        return document.GetElementsInCollector(elementIds, Multicategory(allCategories));
     }
 
     /// <summary>
@@ -149,7 +151,7 @@ public static class CollectorInListExtension
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElementsInCollector(this Document document, ICollection<ElementId> elementIds, StructuralWallUsage structuralWallUsage)
     {
-        return document.GetElementsInCollector(elementIds, new StructuralWallUsageFilter(structuralWallUsage));
+        return document.GetElementsInCollector(elementIds, StructuralWallUsage(structuralWallUsage));
     }
 
     /// <summary>
@@ -163,6 +165,6 @@ public static class CollectorInListExtension
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElementIntersectsInCollector(this Document document, ICollection<ElementId> elementIds, Element element)
     {
-        return document.GetElementsInCollector(elementIds, new ElementIntersectsElementFilter(element));
+        return document.GetElementsInCollector(elementIds, Intersects(element));
     }
 }

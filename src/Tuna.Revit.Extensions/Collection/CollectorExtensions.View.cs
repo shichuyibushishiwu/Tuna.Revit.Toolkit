@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using static Tuna.Revit.Extensions.ElementFilterFactory;
 
 namespace Tuna.Revit.Extensions;
 
@@ -78,7 +79,7 @@ public static class CollectorInViewExtensions
             return view.GetElements((Activator.CreateInstance(filterType) as ElementFilter)!);
         }
 
-        return view.GetElements(new ElementClassFilter(type));
+        return view.GetElements(Class(type));
     }
 
     /// <summary>
@@ -92,7 +93,7 @@ public static class CollectorInViewExtensions
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElements(this View view, BuiltInCategory category)
     {
-        return view.GetElements(new ElementCategoryFilter(category)).WhereElementIsNotElementType();
+        return view.GetElements(Category(category)).WhereElementIsNotElementType();
     }
 
     /// <summary>
@@ -114,7 +115,7 @@ public static class CollectorInViewExtensions
 
         List<BuiltInCategory> allCategories = categories.ToList();
         allCategories.Add(category);
-        return view.GetElements(new ElementMulticategoryFilter(allCategories)).WhereElementIsNotElementType();
+        return view.GetElements(Multicategory(allCategories)).WhereElementIsNotElementType();
     }
 
     /// <summary>
@@ -127,7 +128,7 @@ public static class CollectorInViewExtensions
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElements(this View view, StructuralWallUsage structuralWallUsage)
     {
-        return view.GetElements(new StructuralWallUsageFilter(structuralWallUsage));
+        return view.GetElements(StructuralWallUsage(structuralWallUsage));
     }
 
     /// <summary>
@@ -140,7 +141,7 @@ public static class CollectorInViewExtensions
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElements(this View view, StructuralMaterialType structuralMaterialType)
     {
-        return view.GetElements(new StructuralMaterialTypeFilter(structuralMaterialType));
+        return view.GetElements(StructuralMaterialType(structuralMaterialType));
     }
 
     /// <summary>
@@ -152,7 +153,7 @@ public static class CollectorInViewExtensions
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElements(this View view, StructuralInstanceUsage structuralInstanceUsage)
     {
-        return view.GetElements(new StructuralInstanceUsageFilter(structuralInstanceUsage));
+        return view.GetElements(StructuralInstanceUsage(structuralInstanceUsage));
     }
 
     /// <summary>
@@ -165,7 +166,7 @@ public static class CollectorInViewExtensions
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElements(this View view, FamilySymbol familySymbol)
     {
-        return view.GetElements(new FamilyInstanceFilter(view.Document, familySymbol.Id));
+        return view.GetElements(FamilyInstance(view.Document, familySymbol.Id));
     }
 
     /// <summary>
@@ -179,7 +180,7 @@ public static class CollectorInViewExtensions
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElements(this View view, ElementId categoryId)
     {
-        return view.GetElements(new ElementCategoryFilter(categoryId)).WhereElementIsNotElementType();
+        return view.GetElements(Category(categoryId)).WhereElementIsNotElementType();
     }
 
     /// <summary>
@@ -194,7 +195,7 @@ public static class CollectorInViewExtensions
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElements(this View view, StructuralType structuralType)
     {
-        return view.GetElements(new ElementStructuralTypeFilter(structuralType));
+        return view.GetElements(ElementStructuralType(structuralType));
     }
 
     /// <summary>
@@ -207,7 +208,7 @@ public static class CollectorInViewExtensions
     [DebuggerStepThrough]
     public static FilteredElementCollector GetElements(this View view, CurveElementType curveElementType)
     {
-        return view.GetElements(new CurveElementFilter(curveElementType));
+        return view.GetElements(CurveElement(curveElementType));
     }
 
     /// <summary>
@@ -230,20 +231,18 @@ public static class CollectorInViewExtensions
     }
 
     /// <summary>
-    /// 
+    /// 获取当前视图中「可被选择」的图元集合
+    /// <para>Get selectable elements in the current <see cref="Autodesk.Revit.DB.View"/></para>
     /// </summary>
-    /// <param name="view"></param>
-    /// <returns></returns>
+    /// <remarks>
+    /// 该方法使用选择性过滤器（由 <see cref="ElementFilterFactory.SelectableInView(Document, ElementId)"/> 创建），
+    /// 用于排除在当前视图中不可被用户选择的图元（如被裁剪/隐藏/不可见等导致不可选的情况）。
+    /// </remarks>
+    /// <param name="view">宿主视图</param>
+    /// <returns>可选择图元的查询器 <see cref="Autodesk.Revit.DB.FilteredElementCollector"/></returns>
     [DebuggerStepThrough]
     public static FilteredElementCollector GetSelectableElements(this View view)
     {
-        return view.GetElements(new SelectableInViewFilter(view.Document, view.Id));
+        return view.GetElements(SelectableInView(view.Document, view.Id));
     }
-
-
-    //[DebuggerStepThrough]
-    //public static FilteredElementCollector GetVisibleElements(this View view)
-    //{
-    //    return view.GetElements(new VisibleInViewFilter(view.Document, view.Id));
-    //}
 }
