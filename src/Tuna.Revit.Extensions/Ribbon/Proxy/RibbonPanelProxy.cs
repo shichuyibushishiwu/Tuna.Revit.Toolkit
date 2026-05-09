@@ -28,7 +28,7 @@ internal class RibbonPanelProxy : RibbonElementProxy<RibbonPanel>, IRibbonPanel
         return this;
     }
 
-    public IRibbonPanel AddPushButton<TCommand>(Action<RibbonButtonData> handle = null) where TCommand : class, IExternalCommand, new()
+    public IRibbonPanel AddPushButton<TCommand>(Action<RibbonButtonData>? handle = null) where TCommand : class, IExternalCommand, new()
     {
         Type commandType = typeof(TCommand);
         if (!_items.Any(item => item.Name == $"btn_{commandType}"))
@@ -45,7 +45,7 @@ internal class RibbonPanelProxy : RibbonElementProxy<RibbonPanel>, IRibbonPanel
             }, commandType);
 
 
-            var ribbonButton = this.OriginalObject.AddItem(descriptor.PushButtonData) as PushButton;
+            var ribbonButton = (PushButton)this.OriginalObject.AddItem(descriptor.PushButtonData);
 
             ribbonButtonProxy.OriginalObject = ribbonButton;
             ribbonButtonProxy.Title = ribbonButton.ItemText;
@@ -56,7 +56,7 @@ internal class RibbonPanelProxy : RibbonElementProxy<RibbonPanel>, IRibbonPanel
         return this;
     }
 
-    public IRibbonPanel AddPulldownButton(string title, Action<IRibbonPulldownButton> handle = null)
+    public IRibbonPanel AddPulldownButton(string title, Action<IRibbonPulldownButton>? handle = null)
     {
         RibbonPulldownButtonProxy pulldownButtonProxy = new();
         handle?.Invoke(pulldownButtonProxy);
@@ -71,7 +71,7 @@ internal class RibbonPanelProxy : RibbonElementProxy<RibbonPanel>, IRibbonPanel
         return this;
     }
 
-    public IRibbonPanel AddSplitButton(string title, Action<IRibbonSplitButton> handle = null)
+    public IRibbonPanel AddSplitButton(string title, Action<IRibbonSplitButton>? handle = null)
     {
         SplitButton splitButton = this.OriginalObject.CreateSplitButton(title, title);
 
@@ -81,14 +81,14 @@ internal class RibbonPanelProxy : RibbonElementProxy<RibbonPanel>, IRibbonPanel
             Name = splitButton.Name
         };
 
-        handle.Invoke(splitButtonProxy);
+        handle?.Invoke(splitButtonProxy);
 
         _items.Add(splitButtonProxy);
 
         return this;
     }
 
-    public IRibbonPanel AddComboBox(string name, Action<IRibbonComboBox> handle = null)
+    public IRibbonPanel AddComboBox(string name, Action<IRibbonComboBox>? handle = null)
     {
         ComboBox comboBox = this.OriginalObject.InternalCreateComboBox(name);
 
@@ -97,7 +97,7 @@ internal class RibbonPanelProxy : RibbonElementProxy<RibbonPanel>, IRibbonPanel
             Title = comboBox.Name,
         };
 
-        handle.Invoke(comboBoxProxy);
+        handle?.Invoke(comboBoxProxy);
 
         _items.Add(comboBoxProxy);
 

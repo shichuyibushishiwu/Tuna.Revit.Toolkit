@@ -88,6 +88,18 @@ public static class UnitExtension
     [DebuggerStepThrough, Obsolete]
     public static double ConvertToFeet(this float value) => ConvertToFeet(doubleValue: value);
 
+
+
+
+
+
+
+
+
+
+
+
+
     /// <summary>
     /// 判断两个数值在允许的公差范围内是否相等
     /// </summary>
@@ -95,16 +107,11 @@ public static class UnitExtension
     /// <param name="otherValue">要比较的另一个数值</param>
     /// <param name="tolerance">公差 默认值（1e-9）</param>
     /// <returns>返回 <see cref="bool"/> 值，当为 ture 时表示数值相等，false表示不相等</returns>
-    [DebuggerStepThrough, Obsolete]
+    [DebuggerStepThrough]
     public static bool AlmostEquals(this double value, double otherValue, double tolerance = 1E-09)
     {
         return Math.Abs(value - otherValue) <= tolerance;
     }
-
-
-
-
-
 
     /// <summary>
     /// 将值的单位从 (英尺) 转为 (毫米)
@@ -378,10 +385,6 @@ public static class UnitExtension
     [DebuggerStepThrough]
     public static double MetersToFeet(this float value) => MetersToFeet(doubleValue: value);
 
-
-
-   
-
     /// <summary>
     /// 将值的单位从 (平方英尺) 转为 (平方毫米)
     /// <para>Convert square feet to square millimeters</para>
@@ -585,12 +588,6 @@ public static class UnitExtension
     /// <returns>单位为平方英尺的值</returns>
     [DebuggerStepThrough]
     public static double SquareMetersToSquareFeet(this float value) => SquareMetersToSquareFeet(doubleValue: value);
-
-
-
-
-
-
 
     /// <summary>
     /// 将值的单位从 (立方英尺) 转为 (立方米)

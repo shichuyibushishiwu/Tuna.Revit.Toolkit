@@ -11,7 +11,7 @@ namespace Tuna.Revit.Extensions;
 /// <summary>
 /// 对UI的扩展
 /// </summary>
-public static class RibbonExtension
+public static class RibbonExtensions
 {
     /// <summary>
     /// internal method info of <see cref="UIControlledApplication"/>

@@ -26,11 +26,11 @@ namespace Tuna.Sample.Commands
 
             var element = uiDocument.SelectElement().Value;
             //get solids before get faces
-            var solids = GeometryExtensions.ResolveSolids(element, (option) => { 
+            var solids = GeometryExtensions.ResolveSolids(element!, (option) => { 
                option.DetailLevel=ViewDetailLevel.Fine;
             });
             //get faces from solids 
-            var faces = GeometryExtensions.ResolveFaces(element, (option) => {
+            var faces = GeometryExtensions.ResolveFaces(element!, (option) => {
                 option.DetailLevel = ViewDetailLevel.Fine;
                 option.GeometryType=GeometryType.Symbol;
             });

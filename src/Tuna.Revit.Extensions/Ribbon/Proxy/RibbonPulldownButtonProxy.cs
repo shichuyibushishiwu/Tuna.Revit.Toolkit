@@ -9,7 +9,7 @@ namespace Tuna.Revit.Extensions.Ribbon.Proxy;
 internal class RibbonPulldownButtonProxy : RibbonElementProxy<PulldownButton>, IRibbonPulldownButton
 {
     private readonly List<IRibbonItem> _items = new();
-    private readonly List<Tuple<RibbonItemType, RibbonButtonDescriptor>> _components = new();
+    private readonly List<Tuple<RibbonItemType, RibbonButtonDescriptor?>> _components = new();
 
     public RibbonPulldownButtonProxy() => RibbonButtonData = new RibbonButtonData();
 
@@ -17,7 +17,7 @@ internal class RibbonPulldownButtonProxy : RibbonElementProxy<PulldownButton>, I
 
     public string Name => Title;
 
-    public IRibbonPulldownButton AddPushButton<TCommand>(Action<RibbonButtonData> handle = null) where TCommand : class, IExternalCommand, new()
+    public IRibbonPulldownButton AddPushButton<TCommand>(Action<RibbonButtonData>? handle = null) where TCommand : class, IExternalCommand, new()
     {
         RibbonButtonDescriptor descriptor = RibbonButtonDescriptor.CreateRibbonButtonDescriptor(btn =>
         {
@@ -35,7 +35,7 @@ internal class RibbonPulldownButtonProxy : RibbonElementProxy<PulldownButton>, I
 
     public IRibbonPulldownButton AddSeparator()
     {
-        _components.Add(new(RibbonItemType.Separator, default));
+        _components.Add(new(RibbonItemType.Separator, null));
         return this;
     }
 
@@ -57,7 +57,7 @@ internal class RibbonPulldownButtonProxy : RibbonElementProxy<PulldownButton>, I
             switch (item.Item1)
             {
                 case RibbonItemType.PushButton:
-                    RibbonButtonDescriptor descriptor = item.Item2;
+                    RibbonButtonDescriptor? descriptor = item.Item2;
                     RibbonButtonProxy ribbonButtonProxy = new();
 
                     RibbonButton ribbonButton = this.OriginalObject.AddPushButton(descriptor.PushButtonData);

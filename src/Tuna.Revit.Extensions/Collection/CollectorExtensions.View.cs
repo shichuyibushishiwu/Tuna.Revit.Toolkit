@@ -235,7 +235,7 @@ public static class CollectorInViewExtensions
     /// <para>Get selectable elements in the current <see cref="Autodesk.Revit.DB.View"/></para>
     /// </summary>
     /// <remarks>
-    /// 该方法使用选择性过滤器（由 <see cref="ElementFilterFactory.SelectableInView(Document, ElementId)"/> 创建），
+    /// 该方法使用选择性过滤器（由 <see cref="Autodesk.Revit.UI.Selection.SelectableInViewFilter"/> 创建），
     /// 用于排除在当前视图中不可被用户选择的图元（如被裁剪/隐藏/不可见等导致不可选的情况）。
     /// </remarks>
     /// <param name="view">宿主视图</param>

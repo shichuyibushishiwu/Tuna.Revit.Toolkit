@@ -8,11 +8,11 @@ internal class RibbonTabProxy : IRibbonTab
 {
     private readonly List<RibbonPanelProxy> _items = new();
 
-    public string Title { get; internal set; }
+    public string Title { get; internal set; } = default!;
 
-    public string AppPath { get; set; }
+    public string AppPath { get; set; } = default!;
 
-    public UIApplication Application { get; internal set; }
+    public UIApplication Application { get; internal set; } = default!;
 
     public IRibbonPanel AddRibbonPanel(string name, Action<IRibbonPanel> handle)
     {

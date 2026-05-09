@@ -29,7 +29,7 @@ internal static class ArgumentNullExceptionUtils
     /// </summary>
     /// <param name="parameter"></param>
     [DebuggerStepThrough]
-    public static void ThrowIfNull(object parameter)
+    public static void ThrowIfNull(object? parameter)
     {
         if (parameter == null)
         {

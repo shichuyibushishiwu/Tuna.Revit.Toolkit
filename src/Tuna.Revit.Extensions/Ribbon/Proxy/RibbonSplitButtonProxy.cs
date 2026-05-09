@@ -11,7 +11,7 @@ internal class RibbonSplitButtonProxy : RibbonElementProxy<SplitButton>, IRibbon
 {
     private List<IRibbonItem> _items = new();
 
-    public string Name { get; set; }
+    public string Name { get; set; } = default!;
 
     public RibbonItemType Type => RibbonItemType.SplitButton;
 
@@ -23,7 +23,7 @@ internal class RibbonSplitButtonProxy : RibbonElementProxy<SplitButton>, IRibbon
 
     public IEnumerable<IRibbonItem> GetItems() => _items;
 
-    public IRibbonSplitButton AddPushButton<T>(Action<RibbonButtonData> handle = null) where T : class, IExternalCommand, new()
+    public IRibbonSplitButton AddPushButton<T>(Action<RibbonButtonData>? handle = null) where T : class, IExternalCommand, new()
     {
         RibbonButtonProxy ribbonButtonProxy = new();
         handle?.Invoke(ribbonButtonProxy.RibbonButtonData);

@@ -12,16 +12,8 @@
 using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using Tuna.Revit.Extensions.Ribbon.Proxy;
 
 
@@ -34,35 +26,48 @@ public static class UIExtension
 {
     internal static void SetPushButtonData(ButtonData buttonData, IRibbonButtonData buttonDataProxy)
     {
-        if (!string.IsNullOrWhiteSpace(buttonDataProxy.Title) && !EqualityComparer<string>.Default.Equals(buttonData.Text, buttonDataProxy.Title))
+        ArgumentNullExceptionUtils.ThrowIfNull(buttonData);
+        ArgumentNullExceptionUtils.ThrowIfNull(buttonDataProxy);
+
+        if (!string.IsNullOrWhiteSpace(buttonDataProxy.Title) && !EqualityComparer<string>.Default.Equals(buttonData.Text, buttonDataProxy.Title!))
         {
             buttonData.Text = buttonDataProxy.Title;
         }
 
-        var image = RibbonImageResovler.Resolve(buttonDataProxy.Image);
-        if (buttonDataProxy.Image != null && !EqualityComparer<ImageSource>.Default.Equals(buttonData.Image, image))
+
+        if (buttonDataProxy.Image != null)
         {
-            buttonData.Image = image;
+            var image = RibbonImageResovler.Resolve(buttonDataProxy.Image);
+            if (image != null && !EqualityComparer<ImageSource>.Default.Equals(buttonData.Image, image))
+            {
+                buttonData.Image = image;
+            }
         }
 
-        var largeImage = RibbonImageResovler.Resolve(buttonDataProxy.LargeImage);
-        if (buttonDataProxy.LargeImage != null && !EqualityComparer<ImageSource>.Default.Equals(buttonData.LargeImage, largeImage))
+        if (buttonDataProxy.LargeImage != null)
         {
-            buttonData.LargeImage = largeImage;
+            var largeImage = RibbonImageResovler.Resolve(buttonDataProxy.LargeImage);
+            if (largeImage != null && !EqualityComparer<ImageSource>.Default.Equals(buttonData.LargeImage, largeImage))
+            {
+                buttonData.LargeImage = largeImage;
+            }
         }
 
-        var toolTipImage = RibbonImageResovler.Resolve(buttonDataProxy.ToolTipImage);
-        if (toolTipImage != null && !EqualityComparer<ImageSource>.Default.Equals(buttonData.ToolTipImage, toolTipImage))
+        if (buttonDataProxy.ToolTipImage != null)
         {
-            buttonData.ToolTipImage = toolTipImage;
+            var toolTipImage = RibbonImageResovler.Resolve(buttonDataProxy.ToolTipImage);
+            if (toolTipImage != null && !EqualityComparer<ImageSource>.Default.Equals(buttonData.ToolTipImage, toolTipImage))
+            {
+                buttonData.ToolTipImage = toolTipImage;
+            }
         }
 
-        if (buttonDataProxy.ToolTip != null && !EqualityComparer<string>.Default.Equals(buttonData.ToolTip, buttonDataProxy.ToolTip))
+        if (!string.IsNullOrEmpty(buttonDataProxy.ToolTip) && !EqualityComparer<string>.Default.Equals(buttonData.ToolTip, buttonDataProxy.ToolTip!))
         {
             buttonData.ToolTip = buttonDataProxy.ToolTip;
         }
 
-        if (buttonDataProxy.LongDescription != null && !EqualityComparer<string>.Default.Equals(buttonData.LongDescription, buttonDataProxy.LongDescription))
+        if (!string.IsNullOrEmpty(buttonDataProxy.LongDescription) && !EqualityComparer<string>.Default.Equals(buttonData.LongDescription, buttonDataProxy.LongDescription!))
         {
             buttonData.LongDescription = buttonDataProxy.LongDescription;
         }
@@ -85,13 +90,13 @@ public static class UIExtension
     /// <param name="panel">要添加按钮的面板</param>
     /// <param name="handle">对按钮的参数进行赋值</param>
     /// <returns>创建的按钮</returns>
-    public static PushButton CreatePushButton<T>(this RibbonPanel panel, Action<PushButtonData> handle = null) where T : class, IExternalCommand, new()
+    public static PushButton CreatePushButton<T>(this RibbonPanel panel, Action<PushButtonData>? handle = null) where T : class, IExternalCommand, new()
     {
         ArgumentNullExceptionUtils.ThrowIfNull(panel);
 
         RevitApplicationContext.Instance.Assembly = Assembly.GetCallingAssembly();
-      
-        return panel.AddItem(CreatePushButtonData<T>(handle)) as PushButton;
+
+        return (PushButton)panel.AddItem(CreatePushButtonData<T>(handle));
     }
 
     /// <summary>
@@ -102,7 +107,7 @@ public static class UIExtension
     /// <param name="text"></param>
     /// <param name="handle"></param>
     /// <returns></returns>
-    public static PulldownButton CreatePulldownButton(this RibbonPanel panel, string name, string text, Action<PulldownButtonData> handle = null)
+    public static PulldownButton CreatePulldownButton(this RibbonPanel panel, string name, string text, Action<PulldownButtonData>? handle = null)
     {
         ArgumentNullExceptionUtils.ThrowIfNull(panel);
 
@@ -112,7 +117,7 @@ public static class UIExtension
 
         RevitApplicationContext.Instance.Assembly = Assembly.GetCallingAssembly();
 
-        return panel.AddItem(data) as PulldownButton;
+        return (PulldownButton)panel.AddItem(data);
     }
 
     /// <summary>
@@ -123,7 +128,7 @@ public static class UIExtension
     /// <param name="text"></param>
     /// <param name="handle"></param>
     /// <returns></returns>
-    public static SplitButton CreateSplitButton(this RibbonPanel panel, string name, string text, Action<SplitButtonData> handle = null)
+    public static SplitButton CreateSplitButton(this RibbonPanel panel, string name, string text, Action<SplitButtonData>? handle = null)
     {
         ArgumentNullExceptionUtils.ThrowIfNull(panel);
 
@@ -143,13 +148,15 @@ public static class UIExtension
     /// <param name="name"></param>
     /// <param name="handle"></param>
     /// <returns></returns>
-    public static ComboBox CreateComboBox(this RibbonPanel panel, string name, Action<ComboBoxData> handle = null)
+    public static ComboBox CreateComboBox(this RibbonPanel panel, string name, Action<ComboBoxData>? handle = null)
     {
+        ArgumentNullExceptionUtils.ThrowIfNull(panel);
+
         RevitApplicationContext.Instance.Assembly = Assembly.GetCallingAssembly();
         return InternalCreateComboBox(panel, name, handle);
     }
 
-    internal static ComboBox InternalCreateComboBox(this RibbonPanel panel, string name, Action<ComboBoxData> handle = null)
+    internal static ComboBox InternalCreateComboBox(this RibbonPanel panel, string name, Action<ComboBoxData>? handle = null)
     {
         ArgumentNullExceptionUtils.ThrowIfNull(panel);
 
@@ -170,6 +177,8 @@ public static class UIExtension
     /// <returns></returns>
     public static PushButton CreatePushButton<T>(this PulldownButton pulldownButton, Action<PushButtonData>? handle = null) where T : class, IExternalCommand, new()
     {
+        ArgumentNullExceptionUtils.ThrowIfNull(pulldownButton);
+
         RevitApplicationContext.Instance.Assembly = Assembly.GetCallingAssembly();
 
         return CreatePushButton(pulldownButton, typeof(T), handle);

@@ -17,7 +17,7 @@ public interface IRibbonPushButtonContainer<T>: IRibbonItem, IRibbonItemsCollect
     /// 添加按钮
     /// </summary>
     /// <typeparam name="TCommand"></typeparam>
-    T AddPushButton<TCommand>(Action<RibbonButtonData> handle = null) where TCommand : class, IExternalCommand, new();
+    T AddPushButton<TCommand>(Action<RibbonButtonData>? handle = null) where TCommand : class, IExternalCommand, new();
 
     /// <summary>
     /// 添加分割线

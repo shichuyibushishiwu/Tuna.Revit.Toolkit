@@ -30,7 +30,7 @@ public interface IRibbonPanel : IRibbonPushButtonContainer<IRibbonPanel>
     /// <param name="title"></param>
     /// <param name="handle"></param>
     /// <returns>当前面板</returns>
-    IRibbonPanel AddPulldownButton(string title, Action<IRibbonPulldownButton> handle = null);
+    IRibbonPanel AddPulldownButton(string title, Action<IRibbonPulldownButton>? handle = null);
 
     /// <summary>
     /// 添加下拉按钮
@@ -38,7 +38,7 @@ public interface IRibbonPanel : IRibbonPushButtonContainer<IRibbonPanel>
     /// <param name="title"></param>
     /// <param name="handle"></param>
     /// <returns>当前面板</returns>
-    IRibbonPanel AddSplitButton(string title, Action<IRibbonSplitButton> handle = null);
+    IRibbonPanel AddSplitButton(string title, Action<IRibbonSplitButton>? handle = null);
 
     /// <summary>
     /// 添加堆叠式按钮
@@ -62,5 +62,5 @@ public interface IRibbonPanel : IRibbonPushButtonContainer<IRibbonPanel>
     /// 添加下拉框
     /// </summary>
     /// <returns>当前面板</returns>
-    IRibbonPanel AddComboBox(string name, Action<IRibbonComboBox> handle = null);
+    IRibbonPanel AddComboBox(string name, Action<IRibbonComboBox>? handle = null);
 }

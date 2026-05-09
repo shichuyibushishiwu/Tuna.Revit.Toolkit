@@ -173,7 +173,6 @@ public static class CommandResultExtensions
         /// <summary>
         /// 命令执行失败
         /// </summary>
-        /// <param name="command">Tuna 命令接口</param>
         /// <returns>命令结果</returns>
         public CommandResult Failed()
         {

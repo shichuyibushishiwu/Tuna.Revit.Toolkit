@@ -71,7 +71,7 @@ namespace Tuna.Revit.Extensions
                 using (AppearanceAssetEditScope scope = new AppearanceAssetEditScope(material.Document))
                 {
                     Asset asset = scope.Start(appearanceAssetId);
-                    AssetPropertyDoubleArray4d genericDiffuseColor = (AssetPropertyDoubleArray4d)asset?.FindByName("generic_diffuse");
+                    AssetPropertyDoubleArray4d? genericDiffuseColor = (AssetPropertyDoubleArray4d)asset.FindByName("generic_diffuse");
                     genericDiffuseColor?.SetValueAsColor(color);
                     scope.Commit(true);
                 }

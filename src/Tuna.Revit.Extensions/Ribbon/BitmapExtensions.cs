@@ -24,7 +24,7 @@ namespace Tuna.Revit.Extensions;
 /// <summary>
 /// system bitmap extension
 /// </summary>
-public static class BitmapExtension
+public static class BitmapExtensions
 {
     /// <summary>
     /// 将 <see cref="System.Drawing.Bitmap"/> 转换为 <see cref="BitmapSource"/>

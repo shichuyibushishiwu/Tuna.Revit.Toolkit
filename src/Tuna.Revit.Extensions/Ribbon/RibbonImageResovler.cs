@@ -29,7 +29,7 @@ namespace Tuna.Revit.Extensions;
 
 internal class RibbonImageResovler
 {
-    public static ImageSource Resolve(object source)
+    public static ImageSource? Resolve(object source)
     {
         switch (source)
         {
@@ -51,8 +51,10 @@ internal class RibbonImageResovler
                     }
                 }
                 return default;
-            case Bitmap bitmap: return bitmap.ConvertToBitmapSource();
-            case ImageSource imageSource: return imageSource;
+            case Bitmap bitmap: 
+                return bitmap.ConvertToBitmapSource();
+            case ImageSource imageSource: 
+                return imageSource;
             case Uri uri:
                 return new BitmapImage(uri);
             default: return default;

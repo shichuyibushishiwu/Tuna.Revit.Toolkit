@@ -16,9 +16,9 @@ internal class RibbonButtonProxy : RibbonElementProxy<RibbonButton>, IRibbonButt
 
     public RibbonItemType Type => RibbonItemType.PushButton;
 
-    public string Name { get; set; }
+    public string Name { get; set; } = default!;
 
-    public void Configurate(Action<RibbonButtonData> config)
+    public void Configurate(Action<RibbonButtonData>? config)
     {
         config?.Invoke(RibbonButtonData);
     }

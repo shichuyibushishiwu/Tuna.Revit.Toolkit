@@ -9,10 +9,10 @@ namespace Tuna.Revit.Extensions.Ribbon.Proxy;
 
 internal class RibbonComboBoxProxy : RibbonElementProxy<ComboBox>, IRibbonComboBox
 {
-    Action<Autodesk.Revit.UI.Events.ComboBoxCurrentChangedEventArgs> _handle;
+    Action<Autodesk.Revit.UI.Events.ComboBoxCurrentChangedEventArgs>? _handle;
     public RibbonItemType Type => RibbonItemType.ComboBox;
 
-    public string Name { get; set; }
+    public string Name { get; set; } = default!;
 
     public RibbonComboBoxProxy(ComboBox comboBox)
     {

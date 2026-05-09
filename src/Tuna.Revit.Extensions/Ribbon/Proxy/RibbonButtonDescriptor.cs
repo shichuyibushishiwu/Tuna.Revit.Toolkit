@@ -15,7 +15,7 @@ internal class RibbonButtonDescriptor
 
     public Type CommandType { get; private set; } = default!;
 
-    public IRibbonButtonData RibbonButtonData { get; private set; } = default!;
+    public IRibbonButtonData? RibbonButtonData { get; private set; }
 
     public PushButtonData PushButtonData { get; private set; } = default!;
 
@@ -44,7 +44,7 @@ internal class RibbonButtonDescriptor
         if (typeof(IRibbonButtonData).IsAssignableFrom(commandType))
         {
             ribbonButtonData = Activator.CreateInstance(commandType) as IRibbonButtonData;
-            UIExtension.SetPushButtonData(pushButtonData, ribbonButtonData);
+            UIExtension.SetPushButtonData(pushButtonData, ribbonButtonData!);
         }
 
         //方式一，通过回调进行配置，优先级第一

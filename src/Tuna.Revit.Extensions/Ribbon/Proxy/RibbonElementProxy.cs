@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Tuna.Revit.Extensions.Ribbon.Proxy;
 
-internal abstract class RibbonElementProxy<T> 
+internal abstract class RibbonElementProxy<T>
 {
-    public T OriginalObject { get; set; }
+    public T OriginalObject { get; set; } = default!;
 
-    public string Title { get; set; }
+    public string Title { get; set; } = default!;
 }
