@@ -151,6 +151,7 @@ public class ElementFilterFactory
         return new ElementMulticategoryFilter(categoryIds);
     }
 
+#if !Rvt_16 && !Rvt_17 && !Rvt_18 && !Rvt_19 && !Rvt_20 
     /// <summary>
     /// <c>[Quick Filter]</c>
     /// 创建一个元素Id集合过滤器，用于过滤指定Id集合中的元素
@@ -163,6 +164,22 @@ public class ElementFilterFactory
         ArgumentNullExceptionUtils.ThrowIfNull(elementIds);
         return new ElementIdSetFilter(elementIds);
     }
+
+    /// <summary>
+    /// <c>[Quick Filter]</c>
+    /// 创建一个视图可见性过滤器，用于过滤在指定视图中可见的元素
+    /// <para>Create a <see cref="Autodesk.Revit.DB.VisibleInViewFilter"/> for a view</para>
+    /// </summary>
+    /// <param name="document">文档</param>
+    /// <param name="viewId">视图Id</param>
+    /// <returns><see cref="Autodesk.Revit.DB.VisibleInViewFilter"/></returns>
+    public static VisibleInViewFilter VisibleInView(Document document, ElementId viewId)
+    {
+        ArgumentNullExceptionUtils.ThrowIfNullOrInvalid(document);
+        ArgumentNullExceptionUtils.ThrowIfNull(viewId);
+        return new VisibleInViewFilter(document, viewId);
+    }
+#endif
 
     /// <summary>
     /// <c>[Quick Filter]</c>
@@ -215,20 +232,6 @@ public class ElementFilterFactory
         return new ElementOwnerViewFilter(viewId);
     }
 
-    /// <summary>
-    /// <c>[Quick Filter]</c>
-    /// 创建一个视图可见性过滤器，用于过滤在指定视图中可见的元素
-    /// <para>Create a <see cref="Autodesk.Revit.DB.VisibleInViewFilter"/> for a view</para>
-    /// </summary>
-    /// <param name="document">文档</param>
-    /// <param name="viewId">视图Id</param>
-    /// <returns><see cref="Autodesk.Revit.DB.VisibleInViewFilter"/></returns>
-    public static VisibleInViewFilter VisibleInView(Document document, ElementId viewId)
-    {
-        ArgumentNullExceptionUtils.ThrowIfNullOrInvalid(document);
-        ArgumentNullExceptionUtils.ThrowIfNull(viewId);
-        return new VisibleInViewFilter(document, viewId);
-    }
 
     /// <summary>
     /// <c>[Slow Filter]</c>
@@ -344,7 +347,7 @@ public class ElementFilterFactory
         ArgumentNullExceptionUtils.ThrowIfNull(viewId);
         return new Autodesk.Revit.UI.Selection.SelectableInViewFilter(document, viewId);
 
-     
+
     }
 
     /// <summary>

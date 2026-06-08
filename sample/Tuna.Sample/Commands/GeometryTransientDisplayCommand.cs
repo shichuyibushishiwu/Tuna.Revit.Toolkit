@@ -45,7 +45,7 @@ namespace Tuna.Sample.Commands
                 document.NewTransaction(() =>
                 {
                     var subcategory = categories.NewSubcategory(genericModel, "Test");
-                    subcategory.LineColor = new Color(0, 127, 0);
+                    subcategory.LineColor = new Autodesk.Revit.DB.Color(0, 127, 0);
                 });
             }
 

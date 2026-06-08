@@ -245,4 +245,9 @@
 	  <None Update="readme.md" Pack="True" PackagePath="\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="DockablePane\" />
+	  <Folder Include="Menu\" />
+	</ItemGroup>
+
 </Project>

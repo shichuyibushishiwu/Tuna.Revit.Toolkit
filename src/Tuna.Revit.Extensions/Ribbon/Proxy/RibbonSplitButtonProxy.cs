@@ -17,7 +17,7 @@ internal class RibbonSplitButtonProxy : RibbonElementProxy<SplitButton>, IRibbon
 
     public IRibbonSplitButton AddSeparator()
     {
-        this.OriginalObject.AddSeparator();
+        this.RevitRibbonObject.AddSeparator();
         return this;
     }
 
@@ -28,10 +28,10 @@ internal class RibbonSplitButtonProxy : RibbonElementProxy<SplitButton>, IRibbon
         RibbonButtonProxy ribbonButtonProxy = new();
         handle?.Invoke(ribbonButtonProxy.RibbonButtonData);
 
-        RibbonButton ribbonButton = this.OriginalObject.CreatePushButton<T>(btn => UIExtension.SetPushButtonData(btn, ribbonButtonProxy.RibbonButtonData));
+        RibbonButton ribbonButton = this.RevitRibbonObject.CreatePushButton<T>(btn => RibbonButtonData.MapTo(ribbonButtonProxy.RibbonButtonData,btn));
 
 
-        ribbonButtonProxy.OriginalObject = ribbonButton;
+        ribbonButtonProxy.RevitRibbonObject = ribbonButton;
         ribbonButtonProxy.Title = ribbonButton.Name;
         ribbonButtonProxy.Name = ribbonButton.Name;
 

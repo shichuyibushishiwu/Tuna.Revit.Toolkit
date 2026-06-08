@@ -1,3 +1,8 @@
+param(
+    [Parameter(Position = 0)]
+    [int]$RevitVersion
+)
+
 $ErrorActionPreference = "Stop"
 $rootDir = $PSScriptRoot
 $nupkgsDir = Join-Path $rootDir "nupkgs"
@@ -22,61 +27,23 @@ dotnet pack "$rootDir/src/Tuna.Runtime/Tuna.Runtime.csproj" -c Release --no-buil
 if ($LASTEXITCODE -ne 0) { throw "Failed to pack Tuna.Runtime" }
 
 # 3. Pack Extensions (Multiple Revit versions)
-# Build first to ensure binaries exist, then pack without build
-Write-Host "`n[3/7] Packing Tuna.Revit.Extensions (Rvt 16)..." -ForegroundColor Green
-dotnet build "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_16_Release
-dotnet pack "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_16_Release --no-build -o $nupkgsDir
-if ($LASTEXITCODE -ne 0) { throw "Failed to pack Tuna.Revit.Extensions" }
-
-Write-Host "`n[3/7] Packing Tuna.Revit.Extensions (Rvt 17)..." -ForegroundColor Green
-dotnet build "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_17_Release
-dotnet pack "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_17_Release --no-build -o $nupkgsDir
-if ($LASTEXITCODE -ne 0) { throw "Failed to pack Tuna.Revit.Extensions" }
-
-Write-Host "`n[3/7] Packing Tuna.Revit.Extensions (Rvt 18)..." -ForegroundColor Green
-dotnet build "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_18_Release
-dotnet pack "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_18_Release --no-build -o $nupkgsDir
-if ($LASTEXITCODE -ne 0) { throw "Failed to pack Tuna.Revit.Extensions" }
-
-Write-Host "`n[3/7] Packing Tuna.Revit.Extensions (Rvt 19)..." -ForegroundColor Green
-dotnet build "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_19_Release
-dotnet pack "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_19_Release --no-build -o $nupkgsDir
-if ($LASTEXITCODE -ne 0) { throw "Failed to pack Tuna.Revit.Extensions" }
-
-Write-Host "`n[3/7] Packing Tuna.Revit.Extensions (Rvt 20)..." -ForegroundColor Green
-dotnet build "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_20_Release
-dotnet pack "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_20_Release --no-build -o $nupkgsDir
-if ($LASTEXITCODE -ne 0) { throw "Failed to pack Tuna.Revit.Extensions" }
-
-Write-Host "`n[3/7] Packing Tuna.Revit.Extensions (Rvt 21)..." -ForegroundColor Green
-dotnet build "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_21_Release
-dotnet pack "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_21_Release --no-build -o $nupkgsDir
-if ($LASTEXITCODE -ne 0) { throw "Failed to pack Tuna.Revit.Extensions" }
-
-Write-Host "`n[3/7] Packing Tuna.Revit.Extensions (Rvt 22)..." -ForegroundColor Green
-dotnet build "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_22_Release
-dotnet pack "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_22_Release --no-build -o $nupkgsDir
-if ($LASTEXITCODE -ne 0) { throw "Failed to pack Tuna.Revit.Extensions" }
-
-Write-Host "`n[3/7] Packing Tuna.Revit.Extensions (Rvt 23)..." -ForegroundColor Green
-dotnet build "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_23_Release
-dotnet pack "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_23_Release --no-build -o $nupkgsDir
-if ($LASTEXITCODE -ne 0) { throw "Failed to pack Tuna.Revit.Extensions" }
-
-Write-Host "`n[3/7] Packing Tuna.Revit.Extensions (Rvt 24)..." -ForegroundColor Green
-dotnet build "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_24_Release
-dotnet pack "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_24_Release --no-build -o $nupkgsDir
-if ($LASTEXITCODE -ne 0) { throw "Failed to pack Tuna.Revit.Extensions" }
-
-Write-Host "`n[3/7] Packing Tuna.Revit.Extensions (Rvt 25)..." -ForegroundColor Green
-dotnet build "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_25_Release
-dotnet pack "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_25_Release --no-build -o $nupkgsDir
-if ($LASTEXITCODE -ne 0) { throw "Failed to pack Tuna.Revit.Extensions" }
-
-Write-Host "`n[3/7] Packing Tuna.Revit.Extensions (Rvt 26)..." -ForegroundColor Green
-dotnet build "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_26_Release
-dotnet pack "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj" -c Rvt_26_Release --no-build -o $nupkgsDir
-if ($LASTEXITCODE -ne 0) { throw "Failed to pack Tuna.Revit.Extensions" }
+$extensionsProject = "$rootDir/src/Tuna.Revit.Extensions/Tuna.Revit.Extensions.csproj"
+$revitVersions = if ($PSBoundParameters.ContainsKey("RevitVersion")) {
+    if ($RevitVersion -lt 16 -or $RevitVersion -gt 26) {
+        throw "Invalid RevitVersion: $RevitVersion. Allowed range: 16..27"
+    }
+    @($RevitVersion)
+} else {
+    16..26
+}
+foreach ($revitVersion in $revitVersions) {
+    $configuration = "Rvt_${revitVersion}_Release"
+    Write-Host "`n[3/7] Packing Tuna.Revit.Extensions (Rvt $revitVersion)..." -ForegroundColor Green
+    dotnet build $extensionsProject -c $configuration
+    if ($LASTEXITCODE -ne 0) { throw "Failed to build Tuna.Revit.Extensions ($configuration)" }
+    dotnet pack $extensionsProject -c $configuration --no-build -o $nupkgsDir
+    if ($LASTEXITCODE -ne 0) { throw "Failed to pack Tuna.Revit.Extensions ($configuration)" }
+}
 
 # 4. Pack Infrastructure
 Write-Host "`n[4/7] Packing Tuna.Revit.Infrastructure..." -ForegroundColor Green

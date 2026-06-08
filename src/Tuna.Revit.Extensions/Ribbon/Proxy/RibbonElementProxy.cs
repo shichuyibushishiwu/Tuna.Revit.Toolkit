@@ -10,7 +10,7 @@ namespace Tuna.Revit.Extensions.Ribbon.Proxy;
 
 internal abstract class RibbonElementProxy<T>
 {
-    public T OriginalObject { get; set; } = default!;
+    public T RevitRibbonObject { get; set; } = default!;
 
     public string Title { get; set; } = default!;
 }

@@ -618,4 +618,25 @@ public static class CollectorInDocumentExtensions
 
         return document.GetElements(familySymbol);
     }
+
+
+    /// <summary>
+    /// Retrieves a collection of worksets from the specified document, optionally filtered by a predicate.
+    /// </summary>
+    /// <param name="document">The document from which to retrieve worksets. Cannot be null.</param>
+    /// <param name="predicate">An optional function to filter the returned worksets. If null, all worksets are returned.</param>
+    /// <returns>An enumerable collection of worksets from the document. The collection may be filtered based on the specified
+    /// predicate.</returns>
+    [DebuggerStepThrough]
+    public static IEnumerable<Workset> GetWorksets(this Document document, Func<Workset, bool>? predicate = null)
+    {
+        FilteredWorksetCollector elementWorksetFilter = new FilteredWorksetCollector(document);
+        IEnumerable<Workset> worksets = elementWorksetFilter.ToWorksets();
+        if (predicate != null)
+        {
+            worksets = worksets.Where(predicate);
+        }
+
+        return worksets;
+    }
 }

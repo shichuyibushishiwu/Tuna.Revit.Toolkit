@@ -1,35 +1,98 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+		<TargetFramework>net48</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>preview</LangVersion>
+		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
+		<TunaVersion>23</TunaVersion>
+		<XamlDebuggingInformation>True</XamlDebuggingInformation>
+		<Authors>Shiwu</Authors>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Configurations>
+			$(Configurations);
+			Rvt_24_Debug;Rvt_24_Release;
+		</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_24))'">
 		<StartAction>Program</StartAction>
 		<StartProgram>C:\Program Files\Autodesk\Revit 2024\Revit.exe</StartProgram>
-		<Configurations>Debug;Release</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_24))'">
+		<RevitVersionPrefix>2024.0</RevitVersionPrefix>
+		<RevitVersion>2024</RevitVersion>
 		<TargetFramework>net48</TargetFramework>
-		<TunaVersion>23</TunaVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Tuna.Revit.Extensions" Version="2024.0.$(TunaVersion)" />
+		<Page Update="Properties\DesignTimeResources.xaml">
+			<Generator>MSBuild:Compile</Generator>
+			<SubType>Designer</SubType>
+			<ContainsDesignTimeResources>true</ContainsDesignTimeResources>
+		</Page>
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="Assets\Icon\compass.png">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Properties\Settings.Designer.cs">
+			<DesignTimeSharedInput>True</DesignTimeSharedInput>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Settings.settings</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Update="Assets\Icon\gift16.png">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="Assets\Icon\gift32.png">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Properties\Settings.settings">
+			<Generator>SettingsSingleFileGenerator</Generator>
+			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
 		</None>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Commands\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\src\Tuna.Revit.Extensions\Tuna.Revit.Extensions.csproj" />
+	  <ProjectReference Include="..\..\src\Tuna.Revit.Infrastructure\Tuna.Revit.Infrastructure.csproj" />
+	</ItemGroup>
 
 	<Target Name="CopyAddin" BeforeTargets="PostBuildEvent" Condition="'$(Configuration.Contains(Debug))'">
 		<ItemGroup>
 			<SourceFiles Include="$(ProjectDir)$(OutDir)\**\*.*"></SourceFiles>
 		</ItemGroup>
-		<Copy SourceFiles="$(ProjectDir)\Tuna.addin" DestinationFolder="C:\ProgramData\Autodesk\Revit\Addins\2024"></Copy>
-		<Copy SourceFiles="@(SourceFiles)" DestinationFiles="@(SourceFiles->'C:\ProgramData\Autodesk\Revit\Addins\2024\Tuna\%(RecursiveDir)%(Filename)%(Extension)')"></Copy>
+		<Copy SourceFiles="$(ProjectDir)\Tuna.Sample.addin" 
+			  DestinationFolder="C:\ProgramData\Autodesk\Revit\Addins\$(RevitVersion)"></Copy>
+		<Copy SourceFiles="@(SourceFiles)" 
+			  DestinationFiles="@(SourceFiles->'C:\ProgramData\Autodesk\Revit\Addins\$(RevitVersion)\TunaApp\%(RecursiveDir)%(Filename)%(Extension)')"></Copy>
 	</Target>
+
+	<Target Name="CleanApplication" AfterTargets="Clean">
+		<RemoveDir Directories="C:\ProgramData\Autodesk\Revit\Addins\$(RevitVersion)\TunaApp"></RemoveDir>
+		<Delete Files="C:\ProgramData\Autodesk\Revit\Addins\$(RevitVersion)\Tuna.Sample.addin" />
+	</Target>
+
 </Project>

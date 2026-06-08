@@ -10,7 +10,10 @@ namespace Tuna.Revit.Extensions.Ribbon.Proxy;
 
 internal class RibbonButtonProxy : RibbonElementProxy<RibbonButton>, IRibbonButton
 {
-    public RibbonButtonProxy() => RibbonButtonData = new RibbonButtonData();
+    public RibbonButtonProxy()
+    {
+        RibbonButtonData = new RibbonButtonData();
+    }
 
     public RibbonButtonData RibbonButtonData { get; set; }
 
@@ -25,6 +28,6 @@ internal class RibbonButtonProxy : RibbonElementProxy<RibbonButton>, IRibbonButt
 
     public static implicit operator RibbonButton(RibbonButtonProxy ribbonButton)
     {
-        return ribbonButton.OriginalObject;
+        return ribbonButton.RevitRibbonObject;
     }
 }

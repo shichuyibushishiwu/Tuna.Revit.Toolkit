@@ -2,22 +2,23 @@
 using Tuna.Revit.Infrastructure.ApplicationServices;
 
 
-namespace Tuna.Revit.Template
+namespace Tuna.Revit.Template;
+
+/// <summary>
+/// The revit application plugin
+/// </summary>
+public class App : TunaApplication
 {
-    /// <summary>
-    /// The revit application plugin
-    /// </summary>
-    public class App : TunaApplication
+    public override void InitailizeComponents()
     {
-        public override void InitailizeComponents()
-        {
-            this.Host.ApplicationContext.UIControlledApplication
-                .AddRibbonTab("Tuna")
-                .AddRibbonPanel("Commands", panel =>
-                {
-                    panel.AddPushButton<Commands.Command>();
-                });
-        }
+        this.Host.ApplicationContext.UIControlledApplication
+            .AddRibbonTab("$appName$")
+            .AddRibbonPanel("Commands", panel =>
+            {
+                panel.AddPushButton<Commands.Command>();
+            });
+   
+
     }
 }
 

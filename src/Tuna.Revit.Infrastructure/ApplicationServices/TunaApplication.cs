@@ -1,6 +1,7 @@
 using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,11 @@ public abstract class TunaApplication : TunaApplicationBase, IExternalApplicatio
     /// </summary>
     public HostApplication Host { get; private set; } = default!;
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    public ITunaApplicationUI ApplicationUI { get; private set; } = default!;
+
     /// <inheritdoc/>
     public Result OnShutdown(UIControlledApplication application)
     {
@@ -41,20 +47,23 @@ public abstract class TunaApplication : TunaApplicationBase, IExternalApplicatio
         var applicationAssembly = GetType().Assembly;
         ExternalEventService = new ExternalEventService();
         ApplicationIdentity = new TunaApplicationIdentity(application.ActiveAddInId);
-         
+
         Result result;
         try
         {
             Host = HostApplication.Instance;
             Host.ApplicationContext = new HostApplicationContext(application);
             Host.Applications.Add(this);
+            ApplicationUI = new TunaApplicationUI();
 
             ResourcesInjection.Initialize(applicationAssembly);
             InitailizeComponents();
             result = Result.Succeeded;
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            TaskDialog.Show("Failed", "Tuna Initailize Components Failed");
+            Trace.WriteLine(e);
             result = Result.Failed;
         }
 

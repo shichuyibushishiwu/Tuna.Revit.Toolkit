@@ -16,14 +16,14 @@ internal class RibbonComboBoxProxy : RibbonElementProxy<ComboBox>, IRibbonComboB
 
     public RibbonComboBoxProxy(ComboBox comboBox)
     {
-        this.OriginalObject = comboBox;
-        this.OriginalObject.CurrentChanged += OriginalObject_CurrentChanged;
+        this.RevitRibbonObject = comboBox;
+        this.RevitRibbonObject.CurrentChanged += OriginalObject_CurrentChanged;
     }
 
     public IRibbonComboBox AddItem(string title)
     {
         ComboBoxMemberData comboBoxMemberData = new ComboBoxMemberData(title, title);
-        this.OriginalObject.AddItem(comboBoxMemberData);
+        this.RevitRibbonObject.AddItem(comboBoxMemberData);
 
         return this;
     }
@@ -39,7 +39,7 @@ internal class RibbonComboBoxProxy : RibbonElementProxy<ComboBox>, IRibbonComboB
 
     public IRibbonComboBox AddSeparator()
     {
-        this.OriginalObject.AddSeparator();
+        this.RevitRibbonObject.AddSeparator();
         return this;
     }
 

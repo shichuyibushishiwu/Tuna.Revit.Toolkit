@@ -23,7 +23,7 @@ public interface IRibbonTab : IRibbonItemsCollector
     /// </summary>
     /// <param name="title">面板的标题</param>
     /// <param name="handle">添加面板的元素</param>
-    IRibbonPanel AddRibbonPanel(string title, Action<IRibbonPanel> handle);
+    IRibbonPanel AddRibbonPanel(string title, Action<IRibbonPanel>? handle = null);
 
     /// <summary>
     /// 获取面板

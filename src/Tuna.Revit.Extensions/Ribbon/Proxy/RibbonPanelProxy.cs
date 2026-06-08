@@ -6,7 +6,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Tuna.Revit.Extensions.Ribbon.Abstraction;
 
 namespace Tuna.Revit.Extensions.Ribbon.Proxy;
 
@@ -20,11 +19,11 @@ internal class RibbonPanelProxy : RibbonElementProxy<RibbonPanel>, IRibbonPanel
 
     public string Name => Title;
 
-    public void AddSlideOut() => OriginalObject.AddSlideOut();
+    public void AddSlideOut() => RevitRibbonObject.AddSlideOut();
 
     public IRibbonPanel AddSeparator()
     {
-        OriginalObject.AddSeparator();
+        RevitRibbonObject.AddSeparator();
         return this;
     }
 
@@ -36,18 +35,18 @@ internal class RibbonPanelProxy : RibbonElementProxy<RibbonPanel>, IRibbonPanel
             RibbonButtonProxy ribbonButtonProxy = new RibbonButtonProxy();
             ribbonButtonProxy.Configurate(handle);
 
-            RibbonButtonDescriptor descriptor = RibbonButtonDescriptor.CreateRibbonButtonDescriptor(btn =>
+            RibbonButtonDescriptor descriptor = RibbonButtonDescriptor.Setup(commandType, revitButton =>
             {
                 if (handle != null)
                 {
-                    UIExtension.SetPushButtonData(btn, ribbonButtonProxy.RibbonButtonData);
+                    RibbonButtonData.MapTo(ribbonButtonProxy.RibbonButtonData, revitButton);
                 }
-            }, commandType);
+            });
 
 
-            var ribbonButton = (PushButton)this.OriginalObject.AddItem(descriptor.PushButtonData);
+            var ribbonButton = (PushButton)this.RevitRibbonObject.AddItem(descriptor.PushButtonData);
 
-            ribbonButtonProxy.OriginalObject = ribbonButton;
+            ribbonButtonProxy.RevitRibbonObject = ribbonButton;
             ribbonButtonProxy.Title = ribbonButton.ItemText;
             ribbonButtonProxy.Name = ribbonButton.Name;
 
@@ -58,12 +57,12 @@ internal class RibbonPanelProxy : RibbonElementProxy<RibbonPanel>, IRibbonPanel
 
     public IRibbonPanel AddPulldownButton(string title, Action<IRibbonPulldownButton>? handle = null)
     {
-        RibbonPulldownButtonProxy pulldownButtonProxy = new();
+        RibbonPulldownButtonProxy pulldownButtonProxy = new RibbonPulldownButtonProxy();
         handle?.Invoke(pulldownButtonProxy);
 
-        PulldownButton pulldownButton = this.OriginalObject.CreatePulldownButton(title, title, btn => UIExtension.SetPushButtonData(btn, pulldownButtonProxy.RibbonButtonData));
+        PulldownButton pulldownButton = this.RevitRibbonObject.CreatePulldownButton(title, title, btn => RibbonButtonData.MapTo(pulldownButtonProxy.RibbonButtonData, btn));
 
-        pulldownButtonProxy.OriginalObject = pulldownButton;
+        pulldownButtonProxy.RevitRibbonObject = pulldownButton;
         pulldownButtonProxy.InitializeComponent();
 
         _items.Add(pulldownButtonProxy);
@@ -73,11 +72,11 @@ internal class RibbonPanelProxy : RibbonElementProxy<RibbonPanel>, IRibbonPanel
 
     public IRibbonPanel AddSplitButton(string title, Action<IRibbonSplitButton>? handle = null)
     {
-        SplitButton splitButton = this.OriginalObject.CreateSplitButton(title, title);
-
+        SplitButton splitButton = this.RevitRibbonObject.CreateSplitButton(title, title);
+      
         RibbonSplitButtonProxy splitButtonProxy = new()
         {
-            OriginalObject = splitButton,
+            RevitRibbonObject = splitButton,
             Name = splitButton.Name
         };
 
@@ -90,7 +89,7 @@ internal class RibbonPanelProxy : RibbonElementProxy<RibbonPanel>, IRibbonPanel
 
     public IRibbonPanel AddComboBox(string name, Action<IRibbonComboBox>? handle = null)
     {
-        ComboBox comboBox = this.OriginalObject.InternalCreateComboBox(name);
+        ComboBox comboBox = this.RevitRibbonObject.CreateComboBox(name);
 
         RibbonComboBoxProxy comboBoxProxy = new(comboBox)
         {

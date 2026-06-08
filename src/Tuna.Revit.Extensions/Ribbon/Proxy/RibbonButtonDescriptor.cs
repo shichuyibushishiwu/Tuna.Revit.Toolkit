@@ -11,43 +11,40 @@ namespace Tuna.Revit.Extensions.Ribbon.Proxy;
 
 internal class RibbonButtonDescriptor
 {
-    public Action<RibbonButtonData> Handle { get; private set; } = default!;
-
     public Type CommandType { get; private set; } = default!;
 
     public IRibbonButtonData? RibbonButtonData { get; private set; }
 
     public PushButtonData PushButtonData { get; private set; } = default!;
 
-    public static RibbonButtonDescriptor CreateRibbonButtonDescriptor(Action<PushButtonData>? handle, Type commandType)
+    public static RibbonButtonDescriptor Setup(Type commandType, Action<PushButtonData>? handle = null)
     {
-        //按钮的名称
-        string name = commandType.Name;
+        string commandName = commandType.Name;
+        string buttonName = $"tuna_btn_{commandName}";
+        string assembly = commandType.Assembly.Location;
+        string commandFullName = commandType.FullName!;
 
-        //实例化一个按钮的数据
-        PushButtonData pushButtonData = new($"btn_{name}", name ?? name, commandType.Assembly.Location, commandType.FullName);
-
-        //如果命令实现了 IExternalCommandAvailability 接口
+        PushButtonData pushButtonData = new PushButtonData(buttonName, commandName, assembly, commandFullName);
         if (typeof(IExternalCommandAvailability).IsAssignableFrom(commandType))
         {
-            pushButtonData.AvailabilityClassName = commandType.FullName;
+            pushButtonData.AvailabilityClassName = commandFullName;
         }
 
         //方式三，通过属性进行配置，优先级第三
         IRibbonButtonData? ribbonButtonData = commandType.GetCustomAttribute<CommandButtonAttribute>();
         if (ribbonButtonData != null)
         {
-            UIExtension.SetPushButtonData(pushButtonData, ribbonButtonData);
+            Extensions.RibbonButtonData.MapTo(ribbonButtonData, pushButtonData);
         }
 
         //方式二，通过接口进行配置，优先级第二
         if (typeof(IRibbonButtonData).IsAssignableFrom(commandType))
         {
             ribbonButtonData = Activator.CreateInstance(commandType) as IRibbonButtonData;
-            UIExtension.SetPushButtonData(pushButtonData, ribbonButtonData!);
+            Extensions.RibbonButtonData.MapTo(ribbonButtonData!, pushButtonData);
         }
 
-        //方式一，通过回调进行配置，优先级第一
+        //方式一，通过回调函数进行配置，优先级第一
         handle?.Invoke(pushButtonData);
 
         return new RibbonButtonDescriptor()

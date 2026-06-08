@@ -51,7 +51,7 @@ public class ElementFilterCommand : IExternalCommand
 
         document.GetElements(StructuralType.Column);
 
-        document.GetElements(CurveElementType.ModelCurve);
+        //document.GetElements(CurveElementType.ModelCurve);
 
         document.GetElements(document.GetFamilySymbols(document.GetElements(typeof(Family)).FirstElementId()).FirstOrDefault());
 

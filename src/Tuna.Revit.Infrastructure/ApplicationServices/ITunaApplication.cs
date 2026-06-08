@@ -21,4 +21,10 @@ public interface ITunaApplication
     /// 
     /// </summary>
     ITunaApplicationIdentity ApplicationIdentity { get; }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    ITunaApplicationUI ApplicationUI { get; }
 }

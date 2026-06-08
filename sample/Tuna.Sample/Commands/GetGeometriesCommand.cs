@@ -35,9 +35,9 @@ namespace Tuna.Sample.Commands
                 option.GeometryType=GeometryType.Symbol;
             });
             //show result solids count
-            MessageBox.Show(solids.Count().ToString());
+            System.Windows.MessageBox.Show(solids.Count().ToString());
             //show result faces count
-            MessageBox.Show(faces.Count().ToString());
+            System.Windows.MessageBox.Show(faces.Count().ToString());
 
 
             return Result.Succeeded;

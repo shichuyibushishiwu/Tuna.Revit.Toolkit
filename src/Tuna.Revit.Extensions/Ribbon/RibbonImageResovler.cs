@@ -12,7 +12,7 @@
 
         > 对于路径的解析：
             - 如果用户给的是绝对路径指向资源位置，则直接返回资源对象
-            - 如果用户给的是相对路径，则默认按照在启动文件的相对路径 [\Assets\Icon/\] 文件夹下进行读取
+            - 如果用户给的是相对路径，则默认按照在启动文件的相对路径 [\Assets\Icon\] 文件夹下进行读取
             - 如果用户通过 [.Addin] 进行配置(指定的属性为Resource) 则相对路径修改为用户指定的路径
         
 
@@ -21,7 +21,6 @@
 using System;
 using System.Drawing;
 using System.IO;
-using System.Reflection;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -29,34 +28,57 @@ namespace Tuna.Revit.Extensions;
 
 internal class RibbonImageResovler
 {
-    public static ImageSource? Resolve(object source)
+    public static ImageSource? Resolve(object source, string? rootPath)
     {
         switch (source)
         {
             case string path:
-                Uri.CheckSchemeName("pack");
-                if (File.Exists(path))
+                path = path.Trim();
+                if (string.IsNullOrWhiteSpace(path))
                 {
-                    return new BitmapImage(new Uri(path));
+                    return default;
                 }
-                else
+
+                if (Uri.TryCreate(path, UriKind.Absolute, out var uri))
                 {
-                    if (RevitApplicationContext.Instance.IsVaild)
+                    if (uri.Scheme.Equals("pack", StringComparison.OrdinalIgnoreCase))
                     {
-                        path = @$"{RevitApplicationContext.Instance.InstallPath}\{path}";
-                        if (File.Exists(path))
-                        {
-                            return new BitmapImage(new Uri(path));
-                        }
+                        return new BitmapImage(uri);
+                    }
+
+                    if (!uri.IsFile)
+                    {
+                        return new BitmapImage(uri);
+                    }
+
+                    if (File.Exists(uri.LocalPath))
+                    {
+                        return new BitmapImage(uri);
                     }
                 }
+
+                if (Path.IsPathRooted(path) && File.Exists(path))
+                {
+                    return new BitmapImage(new Uri(Path.GetFullPath(path)));
+                }
+
+                if (!string.IsNullOrWhiteSpace(rootPath))
+                {
+                    string iconRootPath = ResourceManager.Instance.GetResourcePath(rootPath);
+                    string resolvedPath = Path.Combine(iconRootPath, path);
+                    if (File.Exists(resolvedPath))
+                    {
+                        return new BitmapImage(new Uri(Path.GetFullPath(resolvedPath)));
+                    }
+                }
+
                 return default;
-            case Bitmap bitmap: 
+            case Bitmap bitmap:
                 return bitmap.ConvertToBitmapSource();
-            case ImageSource imageSource: 
+            case ImageSource imageSource:
                 return imageSource;
-            case Uri uri:
-                return new BitmapImage(uri);
+            case Uri uris:
+                return new BitmapImage(uris);
             default: return default;
         }
     }

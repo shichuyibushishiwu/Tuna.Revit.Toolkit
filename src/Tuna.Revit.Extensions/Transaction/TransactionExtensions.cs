@@ -16,7 +16,6 @@ public static class TransactionExtensions
     /// <summary>
     /// 事务的扩展
     /// </summary>
-
     /// <summary>
     /// 从当前文档开启一个事务，以便于执行对文档修改的操作
     /// <para>Start a revit database transaction from the target document in order to modify document</para>

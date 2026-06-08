@@ -56,7 +56,7 @@ public class CommandButtonAttribute : Attribute, IRibbonButtonData
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
-    ContextualHelp IRibbonButtonData.ContextualHelp => (!string.IsNullOrEmpty(Help) && HelpType != ContextualHelpType.None) ? new ContextualHelp(HelpType, Help) : default;
+    ContextualHelp? IRibbonButtonData.ContextualHelp => (!string.IsNullOrEmpty(Help) && HelpType != ContextualHelpType.None) ? new ContextualHelp(HelpType, Help) : default;
 
     /// <summary>
     /// <inheritdoc/>

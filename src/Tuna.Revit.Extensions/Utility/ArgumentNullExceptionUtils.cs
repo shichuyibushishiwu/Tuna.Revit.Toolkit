@@ -53,6 +53,21 @@ internal static class ArgumentNullExceptionUtils
     }
 
     /// <summary>
+    /// Throw null exception if element is null or invalid
+    /// </summary>
+    /// <param name="elementId"></param>
+    /// <exception cref="System.ArgumentNullException"></exception>
+    [DebuggerStepThrough]
+    public static void ThrowIfNullOrInvalid(ElementId elementId)
+    {
+        ThrowIfNull(elementId);
+        if (elementId == ElementId.InvalidElementId)
+        {
+            throw new System.ArgumentNullException(nameof(elementId), $"elementId must be a valid element id");
+        }
+    }
+
+    /// <summary>
     /// Throw null exception if document is null or invalid
     /// </summary>
     /// <param name="document"></param>

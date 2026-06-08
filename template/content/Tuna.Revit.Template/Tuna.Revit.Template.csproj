@@ -248,8 +248,10 @@
 		<ItemGroup>
 			<SourceFiles Include="$(ProjectDir)$(OutDir)\**\*.*"></SourceFiles>
 		</ItemGroup>
-		<Copy SourceFiles="$(ProjectDir)\Tuna.Revit.Template.addin" DestinationFolder="C:\ProgramData\Autodesk\Revit\Addins\$(RevitVersion)"></Copy>
-		<Copy SourceFiles="@(SourceFiles)" DestinationFiles="@(SourceFiles->'C:\ProgramData\Autodesk\Revit\Addins\$(RevitVersion)\$appName$\%(RecursiveDir)%(Filename)%(Extension)')"></Copy>
+		<Copy SourceFiles="$(ProjectDir)\Tuna.Revit.Template.addin" 
+			  DestinationFolder="C:\ProgramData\Autodesk\Revit\Addins\$(RevitVersion)"></Copy>
+		<Copy SourceFiles="@(SourceFiles)" 
+			  DestinationFiles="@(SourceFiles->'C:\ProgramData\Autodesk\Revit\Addins\$(RevitVersion)\$appName$\%(RecursiveDir)%(Filename)%(Extension)')"></Copy>
 	</Target>
 
 	<Target Name="CleanApplication" AfterTargets="Clean">

@@ -13,6 +13,7 @@ namespace Tuna.Sample.Commands;
 internal class ExternalEventTestCommand : IExternalCommand, IExternalEventHandler
 {
     private ExternalEvent externalEvent;
+
     public ExternalEventTestCommand()
     {
         externalEvent = ExternalEvent.Create(this);

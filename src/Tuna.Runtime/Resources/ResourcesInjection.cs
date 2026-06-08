@@ -42,6 +42,7 @@ public class ResourcesInjection
         }
 
         Uri uri = GetResourceUri(assembly, defaultSourcePath);
+     
         var streamInfo = Application.GetResourceStream(uri);
         if (streamInfo == null)
         {

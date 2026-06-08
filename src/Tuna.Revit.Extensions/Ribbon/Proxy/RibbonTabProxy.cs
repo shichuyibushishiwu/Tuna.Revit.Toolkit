@@ -14,18 +14,28 @@ internal class RibbonTabProxy : IRibbonTab
 
     public UIApplication Application { get; internal set; } = default!;
 
-    public IRibbonPanel AddRibbonPanel(string name, Action<IRibbonPanel> handle)
+    public void AddDockablePanel()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void AddMenuItem()
+    {
+        throw new NotImplementedException();
+    }
+
+    public IRibbonPanel AddRibbonPanel(string name, Action<IRibbonPanel>? handle = null)
     {
         RibbonPanelProxy ribbonPanelProxy = new()
         {
             Parent = this,
             Title = name,
-            OriginalObject = Application.CreateRibbonPanel(Title, name)
+            RevitRibbonObject = Application.CreateRibbonPanel(Title, name)
         };
 
         _items.Add(ribbonPanelProxy);
 
-        handle.Invoke(ribbonPanelProxy);
+        handle?.Invoke(ribbonPanelProxy);
 
         return ribbonPanelProxy;
     }

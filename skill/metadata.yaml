@@ -1,0 +1,35 @@
+name: tuna-revit-toolkit
+version: 1.0.0
+owner:
+  project: Tuna.Revit.Toolkit
+  contact: shichuyibushishiwu
+language:
+  - zh-CN
+  - en
+scope:
+  repo: d:\Work\GitHub\Shiwu\Tuna.Revit.Toolkit
+triggers:
+  keywords:
+    - Tuna.Revit.Toolkit
+    - Tuna.Revit.Extensions
+    - Tuna.Revit.Infrastructure
+    - TunaCommand
+    - TunaApplication
+    - Ribbon
+    - CommandButton
+    - Selection
+    - Transaction
+    - Document.GetElements
+  invoke_when:
+    - user asks how to query elements (Document.GetElements / FilteredElementCollector) with Tuna
+    - user asks how to build ribbon tabs/panels/buttons using Tuna extensions
+    - user asks how to write commands, selection flows, or transactions in TunaCommand
+outputs:
+  expectations:
+    - minimal working steps first
+    - paste-ready code snippets
+    - mention pitfalls and multi-version notes when relevant
+dependencies:
+  nuget:
+    - Tuna.Revit.Extensions
+    - Tuna.Revit.Infrastructure

@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Tuna.Sample": {
-      "commandName": "Project",
-      "nativeDebugging": false
-    }
-  }
-}
