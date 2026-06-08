@@ -14,13 +14,13 @@
 
 ## 配置相对路径图标根目录 / Configure icon folder
 
-默认 `IconRelativePath` 为 `Assets\\Icon`，可在启动前通过 AppContext 配置：
+默认 `IconRelativePath` 为 `Assets\\Icon`，可在启动前通过 `AppDomain.CurrentDomain` 配置：
 
 ```csharp
 using System;
 using Tuna.Revit.Extensions;
 
-AppContext.SetData(
+AppDomain.CurrentDomain.SetData(
     ResourceManager.TunaRevitApplicationResourceIconPath,
     @"Assets\MyIcons");
 ```

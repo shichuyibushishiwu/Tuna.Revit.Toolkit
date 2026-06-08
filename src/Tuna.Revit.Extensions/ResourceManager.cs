@@ -17,7 +17,7 @@ public class ResourceManager
 
     private ResourceManager()
     {
-        var configuredValue = AppContext.GetData(TunaRevitApplicationResourceIconPath);
+        var configuredValue = AppDomain.CurrentDomain.GetData(TunaRevitApplicationResourceIconPath);
         var iconRelativePath = configuredValue as string ?? configuredValue?.ToString();
         IconRelativePath = NormalizeRelativePath(string.IsNullOrWhiteSpace(iconRelativePath) ? DefaultIconPath : iconRelativePath);
     }
