@@ -13,7 +13,7 @@ internal class RibbonPanelProxy : RibbonElementProxy<RibbonPanel>, IRibbonPanel
 {
     private readonly List<IRibbonItem> _items = new();
 
-    public RibbonTabProxy Parent { get; internal set; }
+    public RibbonTabProxy? Parent { get; internal set; }
 
     public RibbonItemType Type => RibbonItemType.RibbonPanel;
 

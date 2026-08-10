@@ -11,7 +11,7 @@ namespace Tuna.Sample
     {
         public override void InitailizeComponents()
         {
-            IRibbonTab tab = this.ApplicationUI.AddRibbonTab("tuna");
+            IRibbonTab tab = this.Host.ApplicationContext.UIControlledApplication.AddRibbonTab("tuna");
             tab.AddRibbonPanel("archi", panel =>
             {
                 panel.AddPushButton<Commands.CommandA>()

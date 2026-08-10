@@ -18,18 +18,21 @@
 		<PackageReference Include="Revit_All_Main_Versions_API_x64" Version="2016.0.2">
 			<IncludeAssets>compile</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration.StartsWith(Rvt_17))'">
 		<PackageReference Include="Revit_All_Main_Versions_API_x64" Version="2017.0.2">
 			<IncludeAssets>compile</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration.StartsWith(Rvt_18))'">
 		<PackageReference Include="Revit_All_Main_Versions_API_x64" Version="2018.0.2">
 			<IncludeAssets>compile</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration.StartsWith(Rvt_19))'">
@@ -82,6 +85,12 @@
 		<PackageReference Include="System.Drawing.Common" Version="8.0.3" />
 	</ItemGroup>
 
+	<ItemGroup Condition="'$(Configuration.StartsWith(Rvt_27))'">
+		<PackageReference Include="Revit_All_Main_Versions_API_x64" Version="2027.0.2">
+			<IncludeAssets>compile</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
 	<ItemGroup>
 		<None Include="readme.md" Pack="True" PackagePath="\" />
 		<None Include="..\..\Tuna.png" Pack="True" PackagePath="\" />
@@ -102,6 +111,7 @@
 			Rvt_24_Debug;Rvt_24_Release;
 			Rvt_25_Debug;Rvt_25_Release;
 			Rvt_26_Debug;Rvt_26_Release;
+			Rvt_27_Debug;Rvt_27_Release;
 		</Configurations>
 	</PropertyGroup>
 
@@ -173,6 +183,12 @@
 		<TargetFramework>net8.0-windows</TargetFramework>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_27))'">
+		<RvtVersion>2027.0</RvtVersion>
+		<DefineConstants>Rvt_27</DefineConstants>
+		<TargetFramework>net10.0-windows</TargetFramework>
+	</PropertyGroup>
+
 	<PropertyGroup>
 		<Version>$(RvtVersion).$(TunaVer)</Version>
 		<PackageTags>Revit;ITuna</PackageTags>
@@ -226,6 +242,10 @@
 		<Optimize>True</Optimize>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Rvt_27_Release|AnyCPU'">
+		<Optimize>True</Optimize>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<Compile Remove="Properties\**" />
 		<EmbeddedResource Remove="Properties\**" />
@@ -233,17 +253,17 @@
 		<Page Remove="Properties\**" />
 	</ItemGroup>
 
-	<ItemGroup>
+	<!--<ItemGroup>
 		<None Include="..\..\Tuna.png" Pack="True" PackagePath="\" />
-	</ItemGroup>
+	</ItemGroup>-->
 
-	<ItemGroup>
+	<!--<ItemGroup>
 		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
-	</ItemGroup>
+	</ItemGroup>-->
 
-	<ItemGroup>
+	<!--<ItemGroup>
 	  <None Update="readme.md" Pack="True" PackagePath="\" />
-	</ItemGroup>
+	</ItemGroup>-->
 
 	<ItemGroup>
 	  <Folder Include="DockablePane\" />

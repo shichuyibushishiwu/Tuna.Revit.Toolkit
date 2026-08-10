@@ -85,7 +85,7 @@ public static class AssetExtensions
     /// <param name="texturePath"></param>
     public static void AddTexturePath(AssetProperty asset, string texturePath)
     {
-        Asset connectedAsset = null;
+        Asset? connectedAsset = null;
         if (asset.NumberOfConnectedProperties == 0) asset.AddConnectedAsset("UnifiedBitmapSchema");
 
         connectedAsset = (Asset)asset.GetConnectedProperty(0);
@@ -100,14 +100,23 @@ public static class AssetExtensions
     }
 #endif
 
+#if Rvt_16 || Rvt_17
+    /// <summary>
+    /// get generic asset property color value 
+    /// </summary>
+    /// <param name="asset">The <see cref="Autodesk.Revit.Utility.Asset"/>.</param>
+    /// <returns></returns>
+#else
     /// <summary>
     /// get generic asset property color value 
     /// </summary>
     /// <param name="asset">The <see cref="Autodesk.Revit.DB.Visual.Asset"/>.</param>
     /// <returns></returns>
-    public static Color GetColor(this Asset asset)
+#endif
+
+    public static Color? GetColor(this Asset asset)
     {
-        Color color = Color.InvalidColorValue;
+        Color? color = Color.InvalidColorValue;
 
 #if Rvt_16 || Rvt_17
         var assetProperty = asset["generic_diffuse"];

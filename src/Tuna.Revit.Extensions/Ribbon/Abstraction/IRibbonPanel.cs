@@ -39,10 +39,7 @@ public interface IRibbonPanel : IRibbonPushButtonContainer<IRibbonPanel>
     /// <returns>当前面板</returns>
     IRibbonPanel AddSplitButton(string title, Action<IRibbonSplitButton>? handle = null);
 
-    /// <summary>
-    /// 添加堆叠式按钮
-    /// </summary>
-    /// <returns>当前面板</returns>
+
     //IRibbonPanel AddStackPanel(Action<IRibbonStackedPanel> handle = null);
 
     /// <summary>

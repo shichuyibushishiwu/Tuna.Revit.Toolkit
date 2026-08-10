@@ -60,7 +60,7 @@ internal class RibbonPulldownButtonProxy : RibbonElementProxy<PulldownButton>, I
                     RibbonButtonDescriptor? descriptor = item.Item2;
                     RibbonButtonProxy ribbonButtonProxy = new();
 
-                    RibbonButton ribbonButton = this.RevitRibbonObject.AddPushButton(descriptor.PushButtonData);
+                    RibbonButton ribbonButton = this.RevitRibbonObject.AddPushButton(descriptor?.PushButtonData);
 
                     ribbonButtonProxy.RevitRibbonObject = ribbonButton;
                     ribbonButtonProxy.Title = ribbonButton.Name;

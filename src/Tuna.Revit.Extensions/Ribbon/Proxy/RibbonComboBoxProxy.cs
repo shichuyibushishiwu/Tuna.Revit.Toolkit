@@ -48,7 +48,7 @@ internal class RibbonComboBoxProxy : RibbonElementProxy<ComboBox>, IRibbonComboB
         _handle = handle;
     }
 
-    private void OriginalObject_CurrentChanged(object sender, Autodesk.Revit.UI.Events.ComboBoxCurrentChangedEventArgs e)
+    private void OriginalObject_CurrentChanged(object? sender, Autodesk.Revit.UI.Events.ComboBoxCurrentChangedEventArgs e)
     {
         _handle?.Invoke(e);
     }

@@ -90,6 +90,15 @@ public static class RibbonExtensions
         return (PushButton)panel.AddItem(CreatePushButtonData(typeof(T), handle));
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T1"></typeparam>
+    /// <typeparam name="T2"></typeparam>
+    /// <param name="panel"></param>
+    /// <param name="handle1"></param>
+    /// <param name="handle2"></param>
+    /// <returns></returns>
     public static IList<RibbonItem> CreatePushButton<T1, T2>(this RibbonPanel panel, Action<PushButtonData>? handle1 = null, Action<PushButtonData>? handle2 = null)
         where T1 : class, IExternalCommand, new()
         where T2 : class, IExternalCommand, new()
@@ -100,6 +109,17 @@ public static class RibbonExtensions
         return panel.AddStackedItems(buttonT1, buttonT2);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T1"></typeparam>
+    /// <typeparam name="T2"></typeparam>
+    /// <typeparam name="T3"></typeparam>
+    /// <param name="panel"></param>
+    /// <param name="handle1"></param>
+    /// <param name="handle2"></param>
+    /// <param name="handle3"></param>
+    /// <returns></returns>
     public static IList<RibbonItem> CreatePushButton<T1, T2, T3>(this RibbonPanel panel, Action<PushButtonData>? handle1 = null, Action<PushButtonData>? handle2 = null, Action<PushButtonData>? handle3 = null)
     where T1 : class, IExternalCommand, new()
     where T2 : class, IExternalCommand, new()

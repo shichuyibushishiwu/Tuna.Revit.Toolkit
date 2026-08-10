@@ -18,8 +18,13 @@ public class ResourceManager
     private ResourceManager()
     {
         var configuredValue = AppDomain.CurrentDomain.GetData(TunaRevitApplicationResourceIconPath);
-        var iconRelativePath = configuredValue as string ?? configuredValue?.ToString();
-        IconRelativePath = NormalizeRelativePath(string.IsNullOrWhiteSpace(iconRelativePath) ? DefaultIconPath : iconRelativePath);
+        if (configuredValue is string iconRelativePath && !string.IsNullOrWhiteSpace(iconRelativePath))
+        {
+            IconRelativePath = iconRelativePath;
+            return;
+        }
+
+        IconRelativePath = DefaultIconPath;
     }
 
     /// <summary>
@@ -40,20 +45,10 @@ public class ResourceManager
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="path"></param>
-    /// <returns></returns>
-    private static string NormalizeRelativePath(string path)
-    {
-        return path.Trim().TrimStart(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
     /// <param name="rootPath"></param>
     /// <returns></returns>
     /// <exception cref="System. ArgumentException"></exception>
-    public string GetResourcePath(string rootPath)
+    public string GetResourcePath(string? rootPath)
     {
         if (string.IsNullOrWhiteSpace(rootPath))
         {

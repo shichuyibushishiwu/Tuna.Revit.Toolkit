@@ -1,35 +1,148 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net48</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<LangVersion>preview</LangVersion>
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>true</UseWindowsForms>
-		<TunaVersion>23</TunaVersion>
+		<TunaVersion>24</TunaVersion>
 		<XamlDebuggingInformation>True</XamlDebuggingInformation>
 		<Authors>Shiwu</Authors>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<Configurations>
-			$(Configurations);
+			Rvt_16_Debug;Rvt_16_Release;
+			Rvt_17_Debug;Rvt_17_Release;
+			Rvt_18_Debug;Rvt_18_Release;
+			Rvt_19_Debug;Rvt_19_Release;
+			Rvt_20_Debug;Rvt_20_Release;
+			Rvt_21_Debug;Rvt_21_Release;
+			Rvt_22_Debug;Rvt_22_Release;
+			Rvt_23_Debug;Rvt_23_Release;
 			Rvt_24_Debug;Rvt_24_Release;
+			Rvt_25_Debug;Rvt_25_Release;
+			Rvt_26_Debug;Rvt_26_Release;
+			Rvt_27_Debug;Rvt_27_Release;
 		</Configurations>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_16))'">
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2016\Revit.exe</StartProgram>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_17))'">
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2017\Revit.exe</StartProgram>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_18))'">
+		<StartAction>Program</StartAction>
+		<StartProgram>D:\Autodesk\Revit\2018\Revit 2018\Revit.exe</StartProgram>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_19))'">
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2019\Revit.exe</StartProgram>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_20))'">
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2020\Revit.exe</StartProgram>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_21))'">
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2021\Revit.exe</StartProgram>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_22))'">
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2022\Revit.exe</StartProgram>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_23))'">
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2023\Revit.exe</StartProgram>
+	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_24))'">
 		<StartAction>Program</StartAction>
 		<StartProgram>C:\Program Files\Autodesk\Revit 2024\Revit.exe</StartProgram>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_25))'">
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2025\Revit.exe</StartProgram>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_26))'">
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2026\Revit.exe</StartProgram>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_27))'">
+		<StartAction>Program</StartAction>
+		<StartProgram>C:\Program Files\Autodesk\Revit 2027\Revit.exe</StartProgram>
+	</PropertyGroup>
 
+
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_16))'">
+		<RevitVersionPrefix>2016.2</RevitVersionPrefix>
+		<RevitVersion>2016</RevitVersion>
+		<TargetFramework>net452</TargetFramework>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_17))'">
+		<RevitVersionPrefix>2017.2</RevitVersionPrefix>
+		<RevitVersion>2017</RevitVersion>
+		<TargetFramework>net46</TargetFramework>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_18))'">
+		<RevitVersionPrefix>2018.2</RevitVersionPrefix>
+		<RevitVersion>2018</RevitVersion>
+		<TargetFramework>net46</TargetFramework>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_19))'">
+		<RevitVersionPrefix>2019.0</RevitVersionPrefix>
+		<RevitVersion>2019</RevitVersion>
+		<TargetFramework>net47</TargetFramework>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_20))'">
+		<RevitVersionPrefix>2020.0</RevitVersionPrefix>
+		<RevitVersion>2020</RevitVersion>
+		<TargetFramework>net47</TargetFramework>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_21))'">
+		<RevitVersionPrefix>2021.0</RevitVersionPrefix>
+		<RevitVersion>2021</RevitVersion>
+		<TargetFramework>net48</TargetFramework>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_22))'">
+		<RevitVersionPrefix>2022.0</RevitVersionPrefix>
+		<RevitVersion>2022</RevitVersion>
+		<TargetFramework>net48</TargetFramework>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_23))'">
+		<RevitVersionPrefix>2023.0</RevitVersionPrefix>
+		<RevitVersion>2023</RevitVersion>
+		<TargetFramework>net48</TargetFramework>
+	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_24))'">
 		<RevitVersionPrefix>2024.0</RevitVersionPrefix>
 		<RevitVersion>2024</RevitVersion>
 		<TargetFramework>net48</TargetFramework>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_25))'">
+		<RevitVersionPrefix>2025.0</RevitVersionPrefix>
+		<RevitVersion>2025</RevitVersion>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_26))'">
+		<RevitVersionPrefix>2026.0</RevitVersionPrefix>
+		<RevitVersion>2026</RevitVersion>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration.StartsWith(Rvt_27))'">
+		<RevitVersionPrefix>2027.0</RevitVersionPrefix>
+		<RevitVersion>2027</RevitVersion>
+		<TargetFramework>net10.0-windows</TargetFramework>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	</PropertyGroup>
+	
 	<ItemGroup>
 		<Page Update="Properties\DesignTimeResources.xaml">
 			<Generator>MSBuild:Compile</Generator>
@@ -72,12 +185,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Commands\" />
+		<PackageReference Include="Tuna.Revit.Extensions" Version="$(RevitVersionPrefix).$(TunaVersion)" />
+		<PackageReference Include="Tuna.Revit.Infrastructure" Version="1.3.$(TunaVersion)" />
 	</ItemGroup>
 
+
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\Tuna.Revit.Extensions\Tuna.Revit.Extensions.csproj" />
-	  <ProjectReference Include="..\..\src\Tuna.Revit.Infrastructure\Tuna.Revit.Infrastructure.csproj" />
+	  <Folder Include="Commands\" />
 	</ItemGroup>
 
 	<Target Name="CopyAddin" BeforeTargets="PostBuildEvent" Condition="'$(Configuration.Contains(Debug))'">

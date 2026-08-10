@@ -72,7 +72,7 @@ public static class TransientElementExtensions
         return elementId;
     }
 
-    private static void Document_DocumentClosing(object sender, Autodesk.Revit.DB.Events.DocumentClosingEventArgs e)
+    private static void Document_DocumentClosing(object? sender, Autodesk.Revit.DB.Events.DocumentClosingEventArgs e)
     {
         if (_transientElementIds.ContainsKey(e.Document))
         {

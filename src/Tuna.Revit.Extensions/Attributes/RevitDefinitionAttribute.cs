@@ -1,4 +1,4 @@
-﻿///************************************************************************************
+﻿/************************************************************************************
 ///   Author:Tony Stark
 ///   CreateTime:2023/3/22 10:31:20
 ///   Mail:2609639898@qq.com
@@ -6,7 +6,7 @@
 ///
 ///   Description:
 ///
-///************************************************************************************
+************************************************************************************/
 
 using System;
 using Autodesk.Revit.DB;
@@ -22,7 +22,7 @@ public class ExternalDefinitionAttribute : Attribute
     /// <summary>
     /// 参数的名称
     /// </summary>
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     /// <summary>
     /// 参数所在组
@@ -30,15 +30,28 @@ public class ExternalDefinitionAttribute : Attribute
 #if Rvt_16 || Rvt_17 || Rvt_18 || Rvt_19 || Rvt_20 || Rvt_21 || Rvt_22 
     public BuiltInParameterGroup ParameterGroup { get; set; } = BuiltInParameterGroup.INVALID;
 #else
-    public ForgeTypeId ParameterGroup { get; set; }
+    public ForgeTypeId? ParameterGroup { get; set; }
 #endif
 
 
 #if Rvt_16 || Rvt_17 || Rvt_18 || Rvt_19 || Rvt_20
+    /// <summary>
+    /// 
+    /// </summary>
     public ParameterType ParameterType { get; set; }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public UnitType UnitType { get; set; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="builtInParameterGroup"></param>
+    /// <param name="parameterType"></param>
+    /// <param name="unitType"></param>
     public ExternalDefinitionAttribute(string name, BuiltInParameterGroup builtInParameterGroup, ParameterType parameterType, UnitType unitType = UnitType.UT_Number)
     {
         Name = name;
@@ -47,12 +60,22 @@ public class ExternalDefinitionAttribute : Attribute
         UnitType = unitType;
     }
 #elif Rvt_21|| Rvt_22
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="builtInParameterGroup"></param>
     public ExternalDefinitionAttribute(string name, BuiltInParameterGroup builtInParameterGroup)
     {
         Name = name; 
         ParameterGroup = builtInParameterGroup;
     }
 #elif Rvt_23 || Rvt_24|| Rvt_25
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="builtInParameterGroup"></param>
     public ExternalDefinitionAttribute(string name, ForgeTypeId builtInParameterGroup)
     {
         Name = name;
@@ -93,6 +116,10 @@ public class ExternalDefinitionAttribute : Attribute
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 public class InternalDefinitionAttribute : Attribute
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="builtInParameter"></param>
     public InternalDefinitionAttribute(BuiltInParameter builtInParameter)
     {
         BuiltInParameter = builtInParameter;

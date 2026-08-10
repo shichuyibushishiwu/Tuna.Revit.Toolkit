@@ -27,7 +27,7 @@ public static class ParameterFilterElementExtension
     /// </summary>
     /// <param name="element">The <see cref="Autodesk.Revit.DB.ParameterFilterElement"/>.</param>
     /// <returns></returns>
-    public static ElementFilter GetElementFilter(this ParameterFilterElement element)
+    public static ElementFilter? GetElementFilter(this ParameterFilterElement element)
     {
 #if Rvt_16 || Rvt_17 || Rvt_18
         var rules = element.GetRules();

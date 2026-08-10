@@ -36,16 +36,16 @@ namespace Tuna.Revit.Extensions
         /// <param name="material">The <see cref="Autodesk.Revit.DB.Material"/>.</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException"></exception>
-        public static Color GetAppearanceColor(this Material material)
+        public static Color? GetAppearanceColor(this Material material)
         {
             ArgumentNullExceptionUtils.ThrowIfNullOrInvalid(material);
 
-            Color color = Color.InvalidColorValue;
+            Color? color = Color.InvalidColorValue;
 
             AppearanceAssetElement? appearanceAssetElement = material.GetAppearanceAssetElement();
             if (appearanceAssetElement != null)
             {
-                Asset asset = appearanceAssetElement.GetRenderingAsset();
+                Asset? asset = appearanceAssetElement.GetRenderingAsset();
                 color = asset.GetColor();
             }
           
