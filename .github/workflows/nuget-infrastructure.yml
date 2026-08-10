@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - main
+  workflow_run:
+    workflows: ["tuna-extensions"]
+    types:
+      - completed
 
 jobs:
   nuget:
@@ -12,7 +16,9 @@ jobs:
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3.2.0
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: |
+            8.0.x
+            10.0.x
 
       - name: checkout
         uses: actions/checkout@v4.0.0
@@ -23,7 +29,7 @@ jobs:
       - name: Build All Frameworks
         shell: pwsh
         run: |
-          $frameworks = @('net452','net46','net47','net48','net8.0-windows')
+          $frameworks = @('net452','net46','net47','net48','net8.0-windows','net10.0-windows')
           foreach ($f in $frameworks) {
             dotnet build src\Tuna.Revit.Infrastructure\Tuna.Revit.Infrastructure.csproj --configuration Release --framework $f
           }
@@ -40,7 +46,7 @@ jobs:
       - name: Build Runtime All Frameworks
         shell: pwsh
         run: |
-          $frameworks = @('net452','net46','net47','net48','net8.0-windows')
+          $frameworks = @('net452','net46','net47','net48','net8.0-windows','net10.0-windows')
           foreach ($f in $frameworks) {
             dotnet build src\Tuna.Runtime\Tuna.Runtime.csproj --configuration Release --framework $f
           }
